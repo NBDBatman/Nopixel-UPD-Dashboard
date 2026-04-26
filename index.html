@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UPD Dashboard</title>
+<link rel="icon" href="./assets/UPD_Placeholder.webp" type="image/webp">
+<link rel="shortcut icon" href="./assets/UPD_Placeholder.webp" type="image/webp">
+<script src="./StreetGuesser/database.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="./styles.css?v=31">
+</head>
+<body>
+
+<!-- ═══════════ SIDEBAR ═══════════ -->
+<aside id="sidebar">
+  <div class="sb-logo">
+    <div class="sb-badge"><img src="./assets/UPD_Placeholder.webp" alt="UPD logo"></div>
+    <div class="sb-title">UPD Dashboard<span>NoPixel Reference</span><span>UPD Cheat Sheet</span></div>
+  </div>
+  <nav class="sb-nav">
+    <div class="sb-section">Reference</div>
+    <div class="nav-item active" onclick="showPage('home',this)"><span class="nav-icon"><i class="fa-solid fa-house"></i></span>Home</div>
+    <div class="nav-item" onclick="showPage('codes',this)"><span class="nav-icon"><i class="fa-solid fa-radio"></i></span>10-Codes</div>
+    <div class="nav-item" onclick="showPage('phonetics',this)"><span class="nav-icon"><i class="fa-solid fa-font"></i></span>Phonetic Alphabets</div>
+    <div class="nav-item" onclick="showPage('caselaws',this)"><span class="nav-icon"><i class="fa-solid fa-scale-balanced"></i></span>Case Laws</div>
+    <div class="nav-item" onclick="showPage('constitution',this)"><span class="nav-icon"><i class="fa-solid fa-scroll"></i></span>Constitution</div>
+    <div class="nav-item" onclick="showPage('jurisdiction',this)"><span class="nav-icon"><i class="fa-solid fa-map"></i></span>Jurisdiction Map</div>
+    <div class="nav-item" onclick="showPage('court',this)"><span class="nav-icon"><i class="fa-solid fa-landmark"></i></span>Court</div>
+    <div class="nav-item" onclick="showPage('templates',this)"><span class="nav-icon"><i class="fa-solid fa-file-lines"></i></span>Templates</div>
+    <div class="nav-item" onclick="showPage('changelog',this)"><span class="nav-icon"><i class="fa-solid fa-clock-rotate-left"></i></span>Changelog</div>
+    <div class="nav-item" onclick="showPage('credits',this)"><span class="nav-icon"><i class="fa-solid fa-circle-info"></i></span>Credits</div>
+    <div class="sb-section">Training</div>
+    <div class="nav-item" onclick="showPage('guesser',this)"><span class="nav-icon"><i class="fa-solid fa-map-location-dot"></i></span>Street Guesser</div>
+  </nav>
+  <div class="sb-footer">
+    <strong>UPD Dashboard — v2.0</strong>
+    <span>Created by <a href="https://github.com/NBDBatman?tab=repositories" target="_blank" rel="noopener noreferrer">MercuryHQ</a>.</span>
+    <span>Released under the MIT License.</span>
+  </div>
+</aside>
+
+<!-- ═══════════ MAIN ═══════════ -->
+<main id="main">
+
+<!-- ── HOME ─────────────────────────────────────────── -->
+<div id="page-home" class="page active">
+  <div class="page-header"><h1><i class="fa-solid fa-house"></i> Home</h1><span class="ph-sub">Quick Reference</span></div>
+  <div class="page-content home-content">
+    <div class="home-shell">
+      <section class="response-strip" aria-label="Response codes">
+        <div class="response-code green"><span>Code 1</span><strong>Routine</strong><small>No lights or sirens</small></div>
+        <div class="response-code yellow"><span>Code 2</span><strong>Priority</strong><small>Lights only</small></div>
+        <div class="response-code red"><span>Code 3</span><strong>Emergency</strong><small>Lights and sirens</small></div>
+        <div class="response-code blue"><span>Code 4</span><strong>Clear</strong><small>Scene secure</small></div>
+        <div class="response-code blue"><span>Code 6</span><strong>Investigating</strong><small>Area investigation</small></div>
+      </section>
+
+      <section class="home-board">
+        <div class="home-card span-2">
+          <div class="home-card-head"><span><i class="fa-solid fa-tower-broadcast"></i> Pursuit Comms</span></div>
+          <div class="phrase-grid">
+            <span>[CALLSIGN] 10-80 with [VEHICLE DESC]</span>
+            <span>Vehicle is [# OCCUPANTS] UP</span>
+            <span>Traffic [LIGHT/MODERATE/HEAVY]</span>
+            <span>Weather [CLEAR/FOGGY/RAINY]</span>
+            <span>[DIRECTION] ON [ROAD]</span>
+            <span>SPEED [AVG SPEED]</span>
+          </div>
+        </div>
+
+        <div class="home-card radio-card">
+          <div class="home-card-head"><span><i class="fa-solid fa-radio"></i> Radio</span></div>
+          <div class="radio-list">
+            <div><span>Ch. 1</span><strong>Patrol</strong></div>
+            <div><span>Ch. 3</span><strong>ODPD</strong></div>
+            <div><span>Ch. 7</span><strong>PD Tow</strong></div>
+            <div><span>Ch. 10</span><strong>Doctors</strong></div>
+            <div><span>Ch. 15</span><strong>DOC</strong></div>
+            <div><span>Ch. 18</span><strong>Marshals</strong></div>
+          </div>
+        </div>
+
+        <div class="home-card">
+          <div class="home-card-head"><span><i class="fa-solid fa-car-side"></i> Unit Caps</span></div>
+          <div class="data-list">
+            <div><strong>Foot Pursuit</strong><span>2 Officers/Suspect</span></div>
+            <div><strong>Vehicle Pursuit / Boosts</strong><span>4 Units + 2/interference</span></div>
+            <div><strong>Street Races / 99D</strong><span>4 Units/car + Air 1</span></div>
+            <div><strong>24/7 / Laundromat</strong><span>4 Units</span></div>
+            <div><strong>Cash Exchange / Jewelry / Fleeca</strong><span>6 Units</span></div>
+            <div><strong>Paleto / Ammo Crate / 37A</strong><span>6 Units + Air 1</span></div>
+            <div><strong>Security Truck</strong><span>8 Units + Air 1</span></div>
+            <div><strong>Maze Bank / Art Asylum</strong><span>8-12 Units + Air 1</span></div>
+            <div><strong>Powerplant Disruption</strong><span>10 Units + Air 1</span></div>
+          </div>
+        </div>
+
+        <div class="home-card">
+          <div class="home-card-head"><span><i class="fa-solid fa-handcuffs"></i> Force</span></div>
+          <div class="force-list">
+            <div><span class="pill pill-g">Lvl 1</span><strong>Presence</strong><small>Officer as deterrent</small></div>
+            <div><span class="pill pill-g">Lvl 2</span><strong>Verbalisation</strong><small>Verbal commands</small></div>
+            <div><span class="pill pill-y">Lvl 3</span><strong>Empty Hand</strong><small>Cuffs and tackling</small></div>
+            <div><span class="pill pill-y">Lvl 4</span><strong>Less Lethal</strong><small>Tasers and batons</small></div>
+            <div><span class="pill pill-r">Lvl 5</span><strong>Lethal</strong><small>Firearms</small></div>
+          </div>
+        </div>
+
+        <div class="home-card">
+          <div class="home-card-head"><span><i class="fa-solid fa-keyboard"></i> Commands & Keybinds</span></div>
+          <div class="command-list">
+            <span class="cmd">↑</span><span>Strong Handcuffs</span>
+            <span class="cmd">↓</span><span>Soft Cuffs / Uncuff</span>
+            <span class="cmd">←</span><span>Escort</span>
+            <span class="cmd">/clear</span><span>Clear GPS blips</span>
+            <span class="cmd">/resetmdt</span><span>Restart MDT</span>
+            <span class="cmd">/runplate</span><span>Run a plate</span>
+            <span class="cmd">/flagplate</span><span>Flag a plate</span>
+            <span class="cmd">/unflagplate</span><span>Remove plate flag</span>
+            <span class="cmd">/radar</span><span>Toggle radar</span>
+            <span class="cmd">/jail</span><span>[ID] [Time]</span>
+            <span class="cmd">/bill</span><span>[ID] [Amount]</span>
+            <span class="cmd">/requestlawyer</span><span>Request lawyer</span>
+          </div>
+        </div>
+
+        <div class="home-card span-2">
+          <div class="home-card-head"><span><i class="fa-solid fa-scale-balanced"></i> Legal Standards</span></div>
+          <div class="legal-list">
+            <div><strong>Reasonable Suspicion</strong><span>More than a hunch, less than PC. Grounds for detainment.</span></div>
+            <div><strong>Probable Cause</strong><span>Logical belief supported by facts that a crime is connected.</span></div>
+            <div><strong>Person Search</strong><span>Consent or probable cause.</span></div>
+            <div><strong>Vehicle Search</strong><span>Consent, PC, arrest-related search, or legal impound.</span></div>
+            <div><strong>Property Search</strong><span>Consent, warrant, or exigent circumstances.</span></div>
+          </div>
+        </div>
+
+        <div class="home-card">
+          <div class="home-card-head"><span><i class="fa-solid fa-clipboard-list"></i> Reports</span></div>
+          <div class="report-list">
+            <span>Always third person.</span>
+            <span>Never use 10-codes.</span>
+            <span>Articulate every charge.</span>
+            <span>Include custodial actions.</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="home-row">
+        <div class="home-card">
+          <div class="home-card-head"><span><i class="fa-solid fa-scale-balanced"></i> Miranda Rights</span></div>
+          <div class="miranda-script">
+            <span>You have the right to remain silent.</span>
+            <span>Anything you say can and will be used against you in a court of law.</span>
+            <span>You have the right to an attorney.</span>
+            <span>If you cannot afford one, one will be appointed to you free of charge by the State if available.</span>
+            <span>Do you understand these rights as I have read them to you, Sir/Ma'am?</span>
+            <span>With these rights in mind, do you wish to continue speaking with me?</span>
+          </div>
+        </div>
+        <div class="home-card clown-card">
+          <div class="home-card-head"><span><i class="fa-solid fa-gavel"></i> Clown Rights</span></div>
+          <div class="clown-script">
+            <span>You have the right to remain silly.</span>
+            <span>Anything you say can and will be used against you in a clown court of law.</span>
+            <span>You have the right to a cupcake.</span>
+            <span>If you cannot afford a cupcake, one will be provided for you fresh from the funpile by Officer/Deputy [any].</span>
+            <span>Do you understand the clown rights I have just read to you?</span>
+          </div>
+        </div>
+        <div class="home-card">
+          <div class="home-card-head"><span><i class="fa-solid fa-sitemap"></i> Chain of Command</span></div>
+          <div class="chain-list">
+            <div><span>1</span><strong>Chief / Sheriff</strong></div>
+            <div><span>2</span><strong>Asst. Chief / Under Sheriff</strong></div>
+            <div><span>3</span><strong>Captain</strong></div>
+            <div><span>4</span><strong>Lieutenant</strong></div>
+            <div><span>5</span><strong>Sergeant</strong></div>
+            <div><span>6</span><strong>Senior Officer / Deputy</strong></div>
+            <div><span>7</span><strong>Full Officer / Deputy</strong></div>
+            <div><span>8</span><strong>PPO</strong></div>
+            <div><span>9</span><strong>Cadet</strong></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<!-- ── 10-CODES ──────────────────────────────────────── -->
+<div id="page-codes" class="page">
+  <div class="page-header"><h1><i class="fa-solid fa-radio"></i> 10-Codes</h1><span class="ph-sub" id="codes-count"></span></div>
+  <div class="page-content codes-content">
+    <div class="search-wrap"><span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span><input type="text" id="codes-search" placeholder="Search codes or descriptions…" oninput="renderCodes()"></div>
+    <div class="codes-toolbar">
+      <div class="filter-tabs">
+        <div class="ftab active" onclick="setFilter(this,'all')">All</div>
+        <div class="ftab" onclick="setFilter(this,'emergency')"><i class="fa-solid fa-circle icon-red"></i> Emergency</div>
+        <div class="ftab" onclick="setFilter(this,'urgent')"><i class="fa-solid fa-circle icon-orange"></i> Urgent</div>
+      </div>
+      <div class="view-toggle">
+        <div class="vtab active" onclick="setView(this,'grid')"><i class="fa-solid fa-table-cells-large"></i> Compact</div>
+        <div class="vtab" onclick="setView(this,'table')"><i class="fa-solid fa-table-list"></i> Table</div>
+      </div>
+    </div>
+    <div id="codes-grid" class="code-grid"></div>
+    <div id="codes-table-wrap" class="tbl-wrap" style="display:none">
+      <table><thead><tr><th>Code</th><th>Description</th><th>Priority</th></tr></thead><tbody id="codes-tbody"></tbody></table>
+    </div>
+  </div>
+</div>
+
+<!-- ── PHONETIC ALPHABETS ─────────────────────────────────────── -->
+<div id="page-phonetics" class="page">
+  <div class="page-header"><h1><i class="fa-solid fa-font"></i> Phonetic Alphabets</h1><span class="ph-sub">Radio spelling reference</span></div>
+  <div class="page-content">
+    <div class="phonetic-grid">
+      <section class="phonetic-card">
+        <div class="phonetic-title">NATO Phonetic Alphabet</div>
+        <div class="phonetic-table">
+          <div>A - ALPHA</div><div>N - NOVEMBER</div>
+          <div>B - BRAVO</div><div>O - OSCAR</div>
+          <div>C - CHARLIE</div><div>P - PAPA</div>
+          <div>D - DELTA</div><div>Q - QUEBEC</div>
+          <div>E - ECHO</div><div>R - ROMEO</div>
+          <div>F - FOXTROT</div><div>S - SIERRA</div>
+          <div>G - GOLF</div><div>T - TANGO</div>
+          <div>H - HOTEL</div><div>U - UNIFORM</div>
+          <div>I - INDIA</div><div>V - VICTOR</div>
+          <div>J - JULIET</div><div>W - WHISKEY</div>
+          <div>K - KILO</div><div>X - X-RAY</div>
+          <div>L - LIMA</div><div>Y - YANKEE</div>
+          <div>M - MIKE</div><div>Z - ZULU</div>
+        </div>
+      </section>
+
+      <section class="phonetic-card">
+        <div class="phonetic-title">American Phonetic Alphabet</div>
+        <div class="phonetic-table">
+          <div>A - ADAM</div><div>N - NORA</div>
+          <div>B - BOY</div><div>O - OCEAN</div>
+          <div>C - CHARLES</div><div>P - PAUL</div>
+          <div>D - DAVID</div><div>Q - QUEEN</div>
+          <div>E - EDWARD</div><div>R - ROBERT</div>
+          <div>F - FRANK</div><div>S - SAM</div>
+          <div>G - GEORGE</div><div>T - TOM</div>
+          <div>H - HENRY</div><div>U - UNION</div>
+          <div>I - IDA</div><div>V - VICTOR</div>
+          <div>J - JOHN</div><div>W - WILLIAM</div>
+          <div>K - KING</div><div>X - X-RAY</div>
+          <div>L - LINCOLN</div><div>Y - YOUNG</div>
+          <div>M - MARY</div><div>Z - ZEBRA</div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<!-- ── CASE LAWS ─────────────────────────────────────── -->
+<div id="page-caselaws" class="page">
+  <div class="page-header"><h1><i class="fa-solid fa-scale-balanced"></i> Case Laws</h1><span class="ph-sub" id="laws-count">Reference library</span></div>
+  <div class="page-content">
+    <div class="law-tools">
+      <div class="search-wrap law-search"><span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span><input type="text" id="laws-search" placeholder="Search case names, categories, or standards..." oninput="renderLaws()"></div>
+      <div class="law-filters">
+        <button class="law-filter-btn active" type="button" onclick="setLawFilter(this,'all')">All</button>
+        <button class="law-filter-btn force" type="button" onclick="setLawFilter(this,'force')">Force</button>
+        <button class="law-filter-btn search" type="button" onclick="setLawFilter(this,'search')">Search</button>
+        <button class="law-filter-btn court" type="button" onclick="setLawFilter(this,'court')">Court</button>
+        <button class="law-filter-btn conduct" type="button" onclick="setLawFilter(this,'conduct')">Conduct</button>
+      </div>
+    </div>
+    <div id="law-detail" class="law-detail" onclick="if(event.target===this)clearLawDetail()"></div>
+    <div id="laws-container" class="law-grid"></div>
+  </div>
+</div>
+
+<!-- ── CONSTITUTION ──────────────────────────────────── -->
+<div id="page-constitution" class="page">
+  <div class="page-header"><h1><i class="fa-solid fa-scroll"></i> Constitution of San Andreas</h1><span class="ph-sub">Articles, authorities, and rights</span></div>
+  <div class="page-content">
+    <div class="constitution-doc">
+      <section class="constitution-summary" aria-label="Constitution summary">
+        <div><strong>4 Articles</strong><span>Governance, authority, rights, and social services.</span></div>
+        <div><strong>Supreme Law</strong><span>The Constitution controls the legal framework of San Andreas.</span></div>
+        <div><strong>Rights Focused</strong><span>Article III contains the core citizen protections.</span></div>
+      </section>
+
+      <article class="constitution-section">
+        <div class="constitution-section-head"><span>Article I</span><strong>Governance and Law</strong></div>
+        <div class="constitution-rows">
+          <div><strong>Supremacy of the Constitution</strong><span>The San Andreas Constitution is the supreme law of the land.</span></div>
+          <div><strong>Obligation to Obey</strong><span>All citizens must adhere to the principles and laws set forth in this document.</span></div>
+          <div><strong>Duty to Pay Taxes</strong><span>Citizens have a duty to pay taxes.</span></div>
+        </div>
+      </article>
+
+      <article class="constitution-section">
+        <div class="constitution-section-head"><span>Article II</span><strong>Legislative Authorities</strong></div>
+        <div class="constitution-authorities">
+          <div><strong>DOJ</strong><span>Legislative authority over all legal and judicial matters within San Andreas. Ensures enforcement of laws, upholds justice, and protects citizens' rights. Precedents set by Justices act as Common Law. Also responsible for preserving the integrity and safety of the State, the Constitution, citizens' rights, and the laws of the State.</span></div>
+          <div><strong>Blaine County</strong><span>Legislative authority over its jurisdiction, responsible for governance, public services, and local laws pertaining to residents and operations within Blaine County. The Blaine County Mayor governs the County's laws; the Blaine County Sheriff's Office is responsible for public services. The Sheriff is appointed by the Blaine County Mayor.</span></div>
+          <div><strong>Los Santos County</strong><span>Legislative authority over its jurisdiction, responsible for governance, public services, and local laws pertaining to residents and operations within Los Santos. The Los Santos County Mayor governs Los Santos's laws; the LSPD is responsible for public services. The Chief of Police is appointed by the Los Santos County Mayor.</span></div>
+          <div><strong>SAMA</strong><span>San Andreas adheres to healthcare standards established by medical professionals. One currently active medical professional is publicly elected to oversee the medical authority, representing all medical factions alongside their High Command. The authority consists solely of active medical professionals — doctors or mental health professionals employed by the San Andreas Medical Group or Emergency Medical Services. This authority guides health legislation and represents all medical factions fairly.</span></div>
+        </div>
+        <div class="constitution-sub">Jurisdictions &amp; Administration</div>
+        <div class="constitution-rows">
+          <div><strong>Territorial Waters &amp; Islands</strong><span>The waters and islands surrounding the mainland are under shared State Jurisdiction. Waters and islands within a twenty-mile radius of the island are State territory if not designated on the map. The State may add or amend jurisdictions as needed, including any newly discovered land.</span></div>
+          <div><strong>Air Jurisdiction</strong><span>Air is governed by the jurisdiction it is above, up to 10 miles. Anything above this limit is under authority of the State of San Andreas.</span></div>
+          <div><strong>Undesignated Territory</strong><span>Areas undesignated to a specific jurisdiction are de facto State property. All municipalities have equal law enforcement powers on said territory.</span></div>
+          <div><strong>State-wide Laws</strong><span>If both Blaine County and Los Santos agree on a locally established law, it will be developed as a state-wide law.</span></div>
+          <div><strong>Elected Terms</strong><span>The Blaine County Mayor, Los Santos County Mayor, and the SAMA elected official each hold office for a three (3) month term before elections are held again.</span></div>
+          <div><strong>DOJ Administration</strong><span>The DOJ publishes and administers all public ballot measures, votes, elections, and referendums. The DOJ is also responsible for verifying election results and appointing public officials into their offices.</span></div>
+        </div>
+      </article>
+
+      <article class="constitution-section">
+        <div class="constitution-section-head"><span>Article III</span><strong>Rights and Freedoms</strong></div>
+        <div class="constitution-rights">
+          <div><strong>Right to Assemble</strong><span>Citizens are free to assemble peacefully, provided it does not hinder the rights of others.</span></div>
+          <div><strong>Right to Free Speech and Thought</strong><span>Citizens are free to express their thoughts and beliefs without censorship or coercion.</span></div>
+          <div><strong>Right to Dignity</strong><span>All citizens shall be treated equally and with respect, free from discrimination.</span></div>
+          <div><strong>Right to Information</strong><span>Citizens have the right to access public information necessary for their well-being.</span></div>
+          <div><strong>Right to Vote &amp; Petition</strong><span>Citizens have the right to present requests, grievances, and proposals to their government.</span></div>
+          <div><strong>Right to a Fair Trial and Due Process</strong><span>All citizens are guaranteed a fair trial and due process of law.</span></div>
+          <div><strong>Right to Privacy</strong><span>Citizens have the right to personal privacy and protection from unwarranted disclosure of private information.</span></div>
+          <div><strong>Right to Health and Protection of Others</strong><span>Citizens have the right to health services and the right to protect themselves and others within reason.</span></div>
+          <div><strong>Right to Property</strong><span>Citizens have the right to own material possessions and land, provided it does not infringe on others and their rights.</span></div>
+        </div>
+      </article>
+
+      <article class="constitution-section">
+        <div class="constitution-section-head"><span>Article IV</span><strong>Social Services</strong></div>
+        <div class="constitution-rows">
+          <div><strong>Right to Healthcare</strong><span>All citizens are eligible for subsidized emergency healthcare, including mental health services.</span></div>
+          <div><strong>Right to Free Housing</strong><span>Citizens are entitled to free housing provided by the state, starting with the apartments in Little Seoul.</span></div>
+          <div><strong>Right to Bear Arms</strong><span>Citizens with a legal civilian weapons license have the right to bear firearms. No license is needed for melee weapons.</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+
+<!-- ── JURISDICTION MAP ───────────────────────────────── -->
+<div id="page-jurisdiction" class="page">
+  <div class="page-header"><h1><i class="fa-solid fa-map"></i> Jurisdiction Map</h1><span class="ph-sub">San Andreas law enforcement jurisdictions</span></div>
+  <div class="page-content jurisdiction-content">
+    <img src="./assets/map-jurisdictions.jpg" alt="Map of San Andreas — Jurisdiction boundaries" class="jurisdiction-map">
+  </div>
+</div>
+
+<!-- ── COURT ──────────────────────────────────────────── -->
+<div id="page-court" class="page">
+  <div class="page-header"><h1><i class="fa-solid fa-landmark"></i> Court Procedures</h1><span class="ph-sub">Trial flow and objection reference</span></div>
+  <div class="page-content">
+    <div class="court-book">
+      <section class="court-stages" aria-label="Trial flow">
+        <div class="court-column-title"><i class="fa-solid fa-route"></i> Trial Flow</div>
+        <div class="court-stage-grid">
+          <div class="court-stage"><span>01</span><strong>Discovery</strong><small>Not used in Bench Trial.</small></div>
+          <div class="court-stage"><span>02</span><strong>Pre-Trial Motions</strong><small>Resolve legal issues before trial begins.</small></div>
+          <div class="court-stage"><span>03</span><strong>Opening Statements</strong><small>Bench Trial only if the judge allows it.</small></div>
+          <div class="court-stage"><span>04</span><strong>Prosecution</strong><small>Witnesses and evidence from the prosecution side.</small></div>
+          <div class="court-stage"><span>05</span><strong>Defense</strong><small>Witnesses and evidence from the defense side.</small></div>
+          <div class="court-stage"><span>06</span><strong>Closing Statements</strong><small>Bench Trial only if the judge allows it.</small></div>
+          <div class="court-stage"><span>07</span><strong>Deliberation</strong><small>Judge or jury reviews the record.</small></div>
+          <div class="court-stage"><span>08</span><strong>Judgement or Verdict</strong><small>The final decision is issued.</small></div>
+          <div class="court-stage"><span>09</span><strong>Post-Trial Motions</strong><small>Follow-up motions after judgement.</small></div>
+        </div>
+      </section>
+
+      <section class="court-reference">
+        <div class="court-column">
+          <div class="court-column-title"><i class="fa-solid fa-clipboard-list"></i> Courtroom Checklist</div>
+          <div class="court-row"><strong>Respect</strong><span>Always be respectful to the judge.</span></div>
+          <div class="court-row"><strong>Etiquette</strong><span>Do not enforce it yourself. That is the judge's job.</span></div>
+          <div class="court-row"><strong>Custody</strong><span>Check with the judge before uncuffing the suspect. Make the suspect aware of the consequences of fleeing.</span></div>
+          <div class="court-row"><strong>Seating</strong><span>Police normally sit prosecution on the right side.</span></div>
+          <div class="court-row"><strong>Witnesses</strong><span>Only introduce witnesses with relevant information.</span></div>
+        </div>
+
+        <div class="court-column">
+          <div class="court-column-title"><i class="fa-solid fa-folder-open"></i> Presenting the Case</div>
+          <div class="court-row"><strong>Proof</strong><span>Present proof for charges directly.</span></div>
+          <div class="court-row"><strong>Evidence</strong><span>Introduce every relevant piece for either side, including Brady material.</span></div>
+          <div class="court-row"><strong>Reports</strong><span>Highlight evidence in the report that proves the charges.</span></div>
+          <div class="court-row"><strong>Record</strong><span>Link relevant reports, incidents, and useful statements.</span></div>
+          <div class="court-row"><strong>Witness Cap</strong><span>Max 2 witnesses per side unless approved by the judge.</span></div>
+        </div>
+
+        <div class="court-column court-accent">
+          <div class="court-column-title"><i class="fa-solid fa-scale-balanced"></i> Examination Rules</div>
+          <div class="court-row"><strong>Objections</strong><span>Remind witnesses to wait 4 seconds after a question.</span></div>
+          <div class="court-row"><strong>Cross</strong><span>Leading the witness toward a specific answer is allowed.</span></div>
+          <div class="court-row"><strong>Direct</strong><span>Avoid leading questions unless the judge permits it.</span></div>
+          <div class="court-row"><strong>Extra Witnesses</strong><span>Use depositions or written statements only with approval.</span></div>
+        </div>
+      </section>
+
+      <section class="court-objections">
+      <div class="court-column-title"><i class="fa-solid fa-ban"></i> Objection Reference</div>
+      <div class="obj-grid">
+        <div class="obj"><strong>Leading</strong> — The question suggests an answer in any fashion.</div>
+        <div class="obj"><strong>Compound</strong> — Two different factors asked in the same question.</div>
+        <div class="obj"><strong>Calls for Narrative</strong> — Question calls for unnecessary narrative, or witness gives an overly long answer.</div>
+        <div class="obj"><strong>Argumentative</strong> — Question poses an argument rather than requesting testimony.</div>
+        <div class="obj"><strong>Asked and Answered</strong> — Same question asked again after witness already answered.</div>
+        <div class="obj"><strong>Vague</strong> — Question or answer is not pointed or direct enough to be correctly interpreted.</div>
+        <div class="obj"><strong>Non-responsive</strong> — Witness deflects with superficial information or doesn't answer.</div>
+        <div class="obj"><strong>Relevance</strong> — Question or answer has no material fact to the litigation.</div>
+        <div class="obj"><strong>Lack Foundation</strong> — Missing key material fact that must be established first.</div>
+        <div class="obj"><strong>Speculation</strong> — Calls upon the witness to testify beyond their personal knowledge.</div>
+        <div class="obj"><strong>Creation of Material Fact</strong> — Error in testimony, or information beyond the witness's scope is requested.</div>
+        <div class="obj"><strong>Opinion of a Layperson</strong> — Witness not qualified to answer in an expert capacity.</div>
+        <div class="obj"><strong>Hearsay</strong> — Witness asked to testify about statements of another person not on the stand.</div>
+        <div class="obj"><strong>General</strong> — General objection; judge will request further clarification.</div>
+        <div class="obj"><strong>Scope</strong> — Question asked outside the line of direct or cross-examination.</div>
+        <div class="obj"><strong>Badgering</strong> — Attorney makes statements to emotionally unbalance the witness.</div>
+        <div class="obj"><strong>No Question</strong> — No question present in the counselor's statement.</div>
+        <div class="obj"><strong>Counsel is Testifying</strong> — Counselor offering their own testimony within the question.</div>
+        <div class="obj"><strong>Facts Not in Evidence</strong> — Facts not admitted into evidence used as basis for a question.</div>
+        <div class="obj"><strong>Calls for Conclusion</strong> — Question asks for an opinion rather than facts.</div>
+        <div class="obj"><strong>Nothing Pending</strong> — Witness continues speaking on irrelevant matters. Use very sparingly.</div>
+      </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<!-- ── TEMPLATES ──────────────────────────────────────── -->
+<div id="page-templates" class="page">
+  <div class="page-header"><h1><i class="fa-solid fa-file-lines"></i> Templates</h1><span class="ph-sub" id="tmpl-count">Report Templates</span></div>
+  <div class="page-content">
+    <div class="tmpl-grid" id="tmpl-container"></div>
+  </div>
+</div>
+
+<!-- ── CHANGELOG ─────────────────────────────────────── -->
+<div id="page-changelog" class="page">
+  <div class="page-header"><h1><i class="fa-solid fa-clock-rotate-left"></i> Changelog</h1></div>
+  <div class="page-content">
+    <div class="cl-meta" id="changelog-meta"></div>
+    <div class="tbl-wrap">
+      <table><thead><tr><th>Date</th><th>Author</th><th>Change</th></tr></thead>
+      <tbody id="changelog-tbody">
+        <tr><td colspan="3">Loading changelog...</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+</div>
+
+<!-- ── CREDITS ───────────────────────────────────────── -->
+<div id="page-credits" class="page">
+  <div class="page-header"><h1><i class="fa-solid fa-circle-info"></i> Credits</h1><span class="ph-sub">Project attribution</span></div>
+  <div class="page-content">
+    <div class="credits-grid">
+      <section class="credit-card">
+        <div class="credit-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <div>
+          <strong>UPD Dashboard</strong>
+          <span>Created as a quick-reference dashboard for patrol, reports, court, case law, and radio information.</span>
+        </div>
+      </section>
+      <section class="credit-card">
+        <div class="credit-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+        <div>
+          <strong>Street Guesser</strong>
+          <span>Street Guesser game by LittlePepperBot, integrated into the dashboard training tab.</span>
+          <a href="https://github.com/LittlePepperBot/StreetGuesser" target="_blank" rel="noopener noreferrer">StreetGuesser repository</a>
+        </div>
+      </section>
+      <section class="credit-card">
+        <div class="credit-icon"><i class="fa-solid fa-icons"></i></div>
+        <div>
+          <strong>Icons & Assets</strong>
+          <span>Interface icons provided by Font Awesome. Dashboard logo and map assets are stored locally in the assets folder.</span>
+        </div>
+      </section>
+      <section class="credit-card">
+        <div class="credit-icon"><i class="fa-solid fa-file-lines"></i></div>
+        <div>
+          <strong>Reference Material</strong>
+          <span>Report templates, legal references, 10-codes, and procedures are maintained locally for quick access.</span>
+        </div>
+      </section>
+      <section class="credit-card">
+        <div class="credit-icon"><i class="fa-solid fa-handshake"></i></div>
+        <div>
+          <strong>Information Credits</strong>
+          <span>Thanks to @donnzy (251 Troy Drax) and @unicornfrapp (595 Remi Ironside) for the information used in this dashboard.</span>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<!-- ── STREET GUESSER ─────────────────────────────────── -->
+<div id="page-guesser" class="page">
+  <div class="sg-wrap">
+    <div class="sg-tabs">
+      <div class="sg-tab active" onclick="switchGame('Streets',this)"><i class="fa-solid fa-map-location-dot"></i> All Streets</div>
+      <div class="sg-tab" onclick="switchGame('Vinewood',this)"><i class="fa-solid fa-road"></i> Vinewood</div>
+      <div class="sg-tab" onclick="switchGame('MirrorPark',this)"><i class="fa-solid fa-tree-city"></i> Mirror Park</div>
+      <div class="sg-tab" onclick="switchGame('Sandy',this)"><i class="fa-solid fa-mountain-sun"></i> Sandy Shores</div>
+      <div class="sg-tab" onclick="switchGame('Grapeseed',this)"><i class="fa-solid fa-seedling"></i> Grapeseed</div>
+      <div class="sg-tab" onclick="switchGame('Paleto',this)"><i class="fa-solid fa-snowflake"></i> Paleto</div>
+      <div class="sg-tab" onclick="switchGame('InnerCityRoads',this)"><i class="fa-solid fa-city"></i> Inner City</div>
+    </div>
+    <div class="sg-topbar">
+      <div class="sg-name" id="sg-name">All Streets</div>
+      <div class="sg-stats">
+        <span class="sg-stat g" id="sg-correct">0 Correct</span>
+        <span class="sg-stat" id="sg-timer">0:00</span>
+        <span class="sg-stat r" id="sg-incorrect">0 Incorrect</span>
+        <span class="sg-stat" id="sg-score">0/0</span>
+      </div>
+      <button class="sg-btn primary" onclick="sgEngine&&sgEngine.start()" id="sg-start-btn"><i class="fa-solid fa-play"></i> Start</button>
+      <button class="sg-btn danger" onclick="sgEngine&&sgEngine.end()" id="sg-giveup" style="display:none">Give Up</button>
+    </div>
+    <div class="sg-canvas-area">
+      <canvas id="sg-canvas"></canvas>
+      <div class="sg-overlay" id="sg-overlay">
+        <div class="sg-result-box">
+          <div class="sg-result-title">Game Over</div>
+          <div class="sg-result-pct" id="sg-result-pct">0%</div>
+          <div class="sg-result-sub">Score</div>
+          <div class="sg-result-score" id="sg-result-score">0/0</div>
+          <div class="sg-result-sub">Time</div>
+          <div class="sg-result-time" id="sg-result-time">0:00</div>
+          <button class="sg-btn primary" onclick="sgEngine&&sgEngine.retry()" style="width:100%"><i class="fa-solid fa-rotate-right"></i> Retry</button>
+        </div>
+      </div>
+    </div>
+    <div class="sg-bottombar">
+      <button class="sg-btn" onclick="sgEngine&&sgEngine.prev()"><i class="fa-solid fa-chevron-left"></i> Prev</button>
+      <div class="sg-street-display unstarted" id="sg-street">Click Start to Begin</div>
+      <button class="sg-btn" onclick="sgEngine&&sgEngine.next()">Next <i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script src="./app.js"></script>
+</body>
+</html>

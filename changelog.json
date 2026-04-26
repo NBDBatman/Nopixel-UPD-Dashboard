@@ -1,0 +1,25 @@
+{
+  "contact": "Anything to add? Contact 723 Nathan Barr - @MercuryHQ",
+  "entries": [
+    {
+      "date": "27/02/26",
+      "author": "Remi",
+      "change": "Blunt Standard Added"
+    },
+    {
+      "date": "18/02/26",
+      "author": "Remi",
+      "change": "More Templates added"
+    },
+    {
+      "date": "10/02/26",
+      "author": "Remi",
+      "change": "Arrest Warrant Template removed - Not needed"
+    },
+    {
+      "date": "25/04/26",
+      "author": "Barr",
+      "change": "Created a full visual dash with the help of Remi's data. Added a changelog to track changes."
+    }
+  ]
+}
