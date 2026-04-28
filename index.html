@@ -24,7 +24,7 @@
 <link rel="shortcut icon" href="./assets/UPD_Placeholder.webp" type="image/webp">
 <script src="./StreetGuesser/database.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-<link rel="stylesheet" href="./styles.css?v=31">
+<link rel="stylesheet" href="./styles.css?v=34">
 </head>
 <body>
 
@@ -45,10 +45,25 @@
     <div class="nav-item" onclick="showPage('court',this)"><span class="nav-icon"><i class="fa-solid fa-landmark"></i></span>Court</div>
     <div class="nav-item" onclick="showPage('templates',this)"><span class="nav-icon"><i class="fa-solid fa-file-lines"></i></span>Templates</div>
     <div class="nav-item" onclick="showPage('changelog',this)"><span class="nav-icon"><i class="fa-solid fa-clock-rotate-left"></i></span>Changelog</div>
+    <div class="nav-item" onclick="showPage('roster',this)"><span class="nav-icon"><i class="fa-solid fa-users"></i></span>Roster</div>
     <div class="nav-item" onclick="showPage('credits',this)"><span class="nav-icon"><i class="fa-solid fa-circle-info"></i></span>Credits</div>
     <div class="sb-section">Training</div>
     <div class="nav-item" onclick="showPage('guesser',this)"><span class="nav-icon"><i class="fa-solid fa-map-location-dot"></i></span>Street Guesser</div>
   </nav>
+  <div class="sb-quick-links" id="sb-quick-links">
+    <div class="sb-section ql-toggle" onclick="toggleQuickLinks()">Quick Links<i class="fa-solid fa-chevron-right ql-chev"></i></div>
+    <div class="ql-links">
+      <a class="nav-item nav-link" href="https://www.nopixel.net/forum/index.php" target="_blank" rel="noopener noreferrer"><span class="nav-icon"><i class="fa-solid fa-link"></i></span>Nopixel Forums</a>
+      <a class="nav-item nav-link" href="https://mdt.na.nopixel.net" target="_blank" rel="noopener noreferrer"><span class="nav-icon"><i class="fa-solid fa-link"></i></span>MDT</a>
+      <a class="nav-item nav-link" href="https://docs.google.com/document/d/1x5lYTVD0kfAgB3IxVJ_d3sWAonEn-QiHO6L-mSFXh28/edit?tab=t.0" target="_blank" rel="noopener noreferrer"><span class="nav-icon"><i class="fa-solid fa-link"></i></span>UPD SOP's</a>
+      <a class="nav-item nav-link" href="https://docs.google.com/spreadsheets/d/15tE7r-z_8mEjOYRfyZY-3OCE6x-6XRwCKgxFjlD6exE/edit?gid=684178055#gid=684178055" target="_blank" rel="noopener noreferrer"><span class="nav-icon"><i class="fa-solid fa-link"></i></span>UPD Roster</a>
+      <a class="nav-item nav-link" href="https://dispatch-system-delta.vercel.app" target="_blank" rel="noopener noreferrer"><span class="nav-icon"><i class="fa-solid fa-link"></i></span>UPD Dispatch</a>
+      <a class="nav-item nav-link" href="https://quillbot.com/grammar-check" target="_blank" rel="noopener noreferrer"><span class="nav-icon"><i class="fa-solid fa-link"></i></span>Quillbot</a>
+      <a class="nav-item nav-link" href="https://docs.google.com/spreadsheets/d/1v60krFQaqfOU0x4j-KqJ3iz-_bu44F5pQeYpuYNX3nI/edit?gid=0#gid=0" target="_blank" rel="noopener noreferrer"><span class="nav-icon"><i class="fa-solid fa-link"></i></span>Remi's Cheat Sheet</a>
+      <a class="nav-item nav-link" href="https://docs.google.com/spreadsheets/d/1p6C-M0TnpBGlvJ0U9IJX1l9-UAsY_IIfqTslXcmKY10/edit?gid=1896387435#gid=1896387435" target="_blank" rel="noopener noreferrer"><span class="nav-icon"><i class="fa-solid fa-link"></i></span>Prescriptions</a>
+    </di
+    v>
+  </div>
   <div class="sb-footer">
     <strong>UPD Dashboard — v2.0</strong>
     <span>Created by <a href="https://github.com/NBDBatman?tab=repositories" target="_blank" rel="noopener noreferrer">MercuryHQ</a>.</span>
@@ -106,7 +121,7 @@
             <div><strong>24/7 / Laundromat</strong><span>4 Units</span></div>
             <div><strong>Cash Exchange / Jewelry / Fleeca</strong><span>6 Units</span></div>
             <div><strong>Paleto / Ammo Crate / 37A</strong><span>6 Units + Air 1</span></div>
-            <div><strong>Security Truck</strong><span>8 Units + Air 1</span></div>
+            <div><strong>Security Truck</strong><span>14 Units + Air 1</span></div>
             <div><strong>Maze Bank / Art Asylum</strong><span>8-12 Units + Air 1</span></div>
             <div><strong>Powerplant Disruption</strong><span>10 Units + Air 1</span></div>
           </div>
@@ -137,7 +152,7 @@
             <span class="cmd">/radar</span><span>Toggle radar</span>
             <span class="cmd">/jail</span><span>[ID] [Time]</span>
             <span class="cmd">/bill</span><span>[ID] [Amount]</span>
-            <span class="cmd">/requestlawyer</span><span>Request lawyer</span>
+            <span class="cmd">/requestlawyer</span><span>Request a lawyer, Make sure to include Suspect Name, <br>Station and Main Charge/s</br></span>
           </div>
         </div>
 
@@ -208,22 +223,15 @@
 <div id="page-codes" class="page">
   <div class="page-header"><h1><i class="fa-solid fa-radio"></i> 10-Codes</h1><span class="ph-sub" id="codes-count"></span></div>
   <div class="page-content codes-content">
-    <div class="search-wrap"><span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span><input type="text" id="codes-search" placeholder="Search codes or descriptions…" oninput="renderCodes()"></div>
-    <div class="codes-toolbar">
-      <div class="filter-tabs">
-        <div class="ftab active" onclick="setFilter(this,'all')">All</div>
-        <div class="ftab" onclick="setFilter(this,'emergency')"><i class="fa-solid fa-circle icon-red"></i> Emergency</div>
-        <div class="ftab" onclick="setFilter(this,'urgent')"><i class="fa-solid fa-circle icon-orange"></i> Urgent</div>
-      </div>
-      <div class="view-toggle">
-        <div class="vtab active" onclick="setView(this,'grid')"><i class="fa-solid fa-table-cells-large"></i> Compact</div>
-        <div class="vtab" onclick="setView(this,'table')"><i class="fa-solid fa-table-list"></i> Table</div>
+    <div class="codes-bar">
+      <div class="search-wrap"><span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span><input type="text" id="codes-search" placeholder="Search codes or descriptions…" oninput="renderCodes()"></div>
+      <div class="codes-filter-btns">
+        <button class="code-filt active" onclick="setFilter(this,'all')">All</button>
+        <button class="code-filt emergency" onclick="setFilter(this,'emergency')"><i class="fa-solid fa-circle"></i> Emergency</button>
+        <button class="code-filt urgent" onclick="setFilter(this,'urgent')"><i class="fa-solid fa-circle"></i> Urgent</button>
       </div>
     </div>
-    <div id="codes-grid" class="code-grid"></div>
-    <div id="codes-table-wrap" class="tbl-wrap" style="display:none">
-      <table><thead><tr><th>Code</th><th>Description</th><th>Priority</th></tr></thead><tbody id="codes-tbody"></tbody></table>
-    </div>
+    <div id="codes-grid"></div>
   </div>
 </div>
 
@@ -508,6 +516,19 @@
         </div>
       </section>
     </div>
+  </div>
+</div>
+
+<!-- ── ROSTER ─────────────────────────────────────────── -->
+<div id="page-roster" class="page">
+  <div class="page-header"><h1><i class="fa-solid fa-users"></i> Roster</h1><span class="ph-sub" id="roster-count">UPD Personnel</span></div>
+  <div class="page-content">
+    <div class="roster-bar">
+      <div class="search-wrap"><span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span><input type="text" id="roster-search" placeholder="Search by name, callsign, rank…" oninput="renderRoster()"></div>
+      <div id="roster-filters" class="roster-filters"></div>
+      <button class="roster-refresh" onclick="loadRoster()" title="Refresh from Google Sheets"><i class="fa-solid fa-rotate-right"></i> Refresh</button>
+    </div>
+    <div id="roster-container"><div class="roster-status">Navigate to this tab to load the roster.</div></div>
   </div>
 </div>
 
