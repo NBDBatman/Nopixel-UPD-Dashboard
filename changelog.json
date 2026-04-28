@@ -64,7 +64,37 @@
     {
       "date": "26/04/26",
       "author": "Barr",
-      "change": "Added roster"
+      "change": "Roster added — live data pulled from Google Sheets with search, sortable columns, and filters for rank, status, department, and shift."
+    },
+    {
+      "date": "26/04/26",
+      "author": "Barr",
+      "change": "Roster colour-coded badges added — status (Active/Reserve/LOA/Part-Time/Inactive), department (LSPD/BCSO/ODPD), and shift (AU/EU/NA) each have distinct pill colours. Discord and name columns hyperlinked."
+    },
+    {
+      "date": "28/04/26",
+      "author": "Barr",
+      "change": "Dashboard split into multi-page SPA — each section is its own HTML file. JS split into js/ modules, CSS moved to css/styles.css, sidebar extracted to partials/sidebar.html."
+    },
+    {
+      "date": "28/04/26",
+      "author": "Barr",
+      "change": "Client-side router added (nav.js) — page navigation now swaps only the main content area for instant, flash-free transitions without full page reloads."
+    },
+    {
+      "date": "28/04/26",
+      "author": "Barr",
+      "change": "Sidebar reordered — Changelog and Credits moved to a dedicated Info section at the bottom of the nav, above Quick Links."
+    },
+    {
+      "date": "28/04/26",
+      "author": "Barr",
+      "change": "Use of Force matrix redesigned — colour-coded escalation rows (green / gold / red) with numbered levels replacing the previous plain list."
+    },
+    {
+      "date": "28/04/26",
+      "author": "Barr",
+      "change": "Phonetic Alphabets redesigned — NATO and American alphabets now displayed as two side-by-side tables with accent-coloured letter cells."
     }
   ]
 }

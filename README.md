@@ -1,22 +1,55 @@
 # UPD Dashboard
 
-A static quick-reference dashboard for UPD patrol use. It includes 10-codes, phonetic alphabets, case law summaries, constitutional reference material, jurisdiction map, court procedure notes, report templates, changelog, credits, and an integrated Street Guesser training tab.
+A static quick-reference dashboard for UPD patrol use. Covers 10-codes, phonetic alphabets, case law summaries, constitutional reference, jurisdiction map, court procedure notes, report templates, live roster, changelog, credits, and an integrated Street Guesser training tool.
+
+Navigation is handled client-side — clicking between pages swaps only the main content area with no full page reload or flash.
 
 ## Project Structure
 
 ```text
 .
-├── index.html                 Main dashboard markup
-├── styles.css                 Dashboard styling and responsive layout
-├── app.js                     Dashboard data, navigation, rendering, and Street Guesser integration
-├── changelog.json             Changelog data
+├── index.html                  Home — response codes, pursuit comms, radio channels, unit caps,
+│                               use of force, keybinds, legal standards, Miranda, chain of command
+├── codes.html                  10-Codes — grouped by priority with filterable card grid
+├── phonetics.html              Phonetic Alphabets — NATO and American side-by-side tables
+├── laws.html                   Case Laws — searchable law summaries with detail panel
+├── constitution.html           Constitution — full San Andreas constitutional reference
+├── jurisdiction.html           Jurisdiction Map — SA law enforcement boundary map
+├── court.html                  Court — court procedure notes
+├── templates.html              Templates — structured report templates loaded from Report_Templates/
+├── roster.html                 Roster — live data from Google Sheets with search, sort, and filters
+├── guesser.html                Street Guesser — interactive map training game
+├── changelog.html              Changelog — version history rendered from changelog.json
+├── credits.html                Credits
+│
+├── css/
+│   └── styles.css              All dashboard styles
+│
+├── js/
+│   ├── nav.js                  Client-side SPA router — intercepts nav clicks, swaps #main content
+│   ├── utils.js                Shared helpers (escapeHtml, hl)
+│   ├── codes.js                10-Codes data and rendering
+│   ├── laws.js                 Case Laws data and rendering
+│   ├── templates.js            Templates loader and rendering
+│   ├── changelog.js            Changelog rendering (reads changelog.json)
+│   ├── roster.js               Roster — fetches live CSV + HTML from Google Sheets
+│   └── guesser.js              Street Guesser engine (Vec, SGStreet, SGEngine)
+│
+├── partials/
+│   └── sidebar.html            Shared sidebar markup reference
+│
+├── changelog.json              Changelog entries
+│
 ├── assets/
-│   ├── UPD_Placeholder.webp   Logo and favicon
-│   └── map-jurisdictions.jpg  Jurisdiction map
-├── Report_Templates/          Markdown report templates loaded by the Templates tab
+│   ├── UPD_Placeholder.webp    Logo and favicon
+│   ├── map-jurisdictions.jpg   Jurisdiction map image
+│   └── *.png                   Division badge images
+│
+├── Report_Templates/           Markdown report template files loaded by the Templates tab
+│
 └── StreetGuesser/
-    ├── database.js            Street data
-    └── images/map.png         Street Guesser map image
+    ├── database.js             Street coordinate data
+    └── images/map.png          Street Guesser map image
 ```
 
 ## Credits
