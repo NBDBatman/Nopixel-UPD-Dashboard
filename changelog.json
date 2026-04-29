@@ -4,97 +4,132 @@
     {
       "date": "10/02/26",
       "author": "Remi",
-      "change": "Arrest Warrant Template removed - Not needed"
+      "change": "Arrest Warrant Template removed — no longer needed."
     },
     {
       "date": "18/02/26",
       "author": "Remi",
-      "change": "More Templates added"
+      "change": "More report templates added."
     },
     {
       "date": "27/02/26",
       "author": "Remi",
-      "change": "Blunt Standard Added"
+      "change": "Blunt Standard added."
     },
     {
       "date": "25/04/26",
       "author": "Barr",
-      "change": "Created full visual dashboard. Rebuilt 10-Codes, Case Laws, Constitution, Court, Phonetic Alphabets, Templates, Changelog, and Street Guesser from source data into a single cohesive SPA."
+      "change": "UPD Dashboard created — all reference material including 10-Codes, Case Laws, Constitution, Phonetics, Templates, and Street Guesser brought together in one place."
     },
     {
       "date": "26/04/26",
       "author": "Barr",
-      "change": "Constitution expanded — full Jurisdictions & Administration section added, complete SAMA definition, DOJ/Blaine/Los Santos descriptions expanded, Article III rights corrected to source wording."
+      "change": "Constitution expanded — full Jurisdictions & Administration section added, complete SAMA definition, and Article III rights corrected to match source wording."
     },
     {
       "date": "26/04/26",
       "author": "Barr",
-      "change": "Home page updated — Miranda Rights, Clown Rights, and Chain of Command cards added. Missing unit caps (24/7 / Laundromat, Paleto / Ammo Crate / 37A), keybinds (arrow keys, /unflagplate, /jail, /bill), and radio Channel 15 (DOC) added."
+      "change": "Home page expanded — Miranda Rights, Clown Rights, and Chain of Command added. Missing unit caps, keybinds, and radio Channel 15 (DOC) filled in."
     },
     {
       "date": "26/04/26",
       "author": "Barr",
-      "change": "Templates tab redesigned — cards now render structured field views loaded from individual .md files in Report_Templates/."
+      "change": "Templates tab redesigned — report templates now display in a clean structured layout."
     },
     {
       "date": "26/04/26",
       "author": "Barr",
-      "change": "Jurisdiction Map tab added — dedicated page for San Andreas law enforcement jurisdiction boundaries map."
+      "change": "Jurisdiction Map tab added — dedicated page for the San Andreas law enforcement boundary map."
     },
     {
       "date": "26/04/26",
       "author": "Barr",
-      "change": "Case Laws updated — Rhodes Rule second paragraph added covering Judicial Authority obligations when a withholding allegation is made. Court custody note updated to include suspect fleeing consequences."
+      "change": "Case Laws updated — Rhodes Rule expanded and court custody note updated."
     },
     {
       "date": "26/04/26",
       "author": "Barr",
-      "change": "10-Codes tab fully redesigned — codes now grouped into Emergency, Urgent, and Standard sections with priority-coloured headers and a responsive auto-fill card grid."
+      "change": "10-Codes redesigned — codes grouped into Emergency, Urgent, and Standard sections with colour-coded priority headers."
     },
     {
       "date": "26/04/26",
       "author": "Barr",
-      "change": "Quick Links sidebar section made collapsible and hidden by default."
+      "change": "Quick Links made collapsible — hidden by default to keep the sidebar clean."
     },
     {
       "date": "26/04/26",
       "author": "Barr",
-      "change": "New Quick Links added — Prescriptions spreadsheet added to sidebar."
+      "change": "Prescriptions spreadsheet added to Quick Links."
     },
     {
       "date": "26/04/26",
       "author": "Barr",
-      "change": "Roster added — live data pulled from Google Sheets with search, sortable columns, and filters for rank, status, department, and shift."
+      "change": "Roster added — pulls live data from Google Sheets with search, sortable columns, and filters for rank, status, department, and shift."
     },
     {
       "date": "26/04/26",
       "author": "Barr",
-      "change": "Roster colour-coded badges added — status (Active/Reserve/LOA/Part-Time/Inactive), department (LSPD/BCSO/ODPD), and shift (AU/EU/NA) each have distinct pill colours. Discord and name columns hyperlinked."
+      "change": "Roster badges added — status, department, and shift each have distinct colour-coded pills. Discord and name columns link directly to the sheet."
     },
     {
       "date": "28/04/26",
       "author": "Barr",
-      "change": "Dashboard split into multi-page SPA — each section is its own HTML file. JS split into js/ modules, CSS moved to css/styles.css, sidebar extracted to partials/sidebar.html."
+      "change": "Dashboard restructured — each section is now its own dedicated page for better organisation."
     },
     {
       "date": "28/04/26",
       "author": "Barr",
-      "change": "Client-side router added (nav.js) — page navigation now swaps only the main content area for instant, flash-free transitions without full page reloads."
+      "change": "Navigation overhauled — switching between pages is now instant with no flashing or reloading."
     },
     {
       "date": "28/04/26",
       "author": "Barr",
-      "change": "Sidebar reordered — Changelog and Credits moved to a dedicated Info section at the bottom of the nav, above Quick Links."
+      "change": "Sidebar reordered — Changelog and Credits moved to an Info section at the bottom of the nav."
     },
     {
       "date": "28/04/26",
       "author": "Barr",
-      "change": "Use of Force matrix redesigned — colour-coded escalation rows (green / gold / red) with numbered levels replacing the previous plain list."
+      "change": "Use of Force card redesigned — escalation levels are now colour-coded and numbered for quicker reference."
     },
     {
       "date": "28/04/26",
       "author": "Barr",
-      "change": "Phonetic Alphabets redesigned — NATO and American alphabets now displayed as two side-by-side tables with accent-coloured letter cells."
+      "change": "Phonetic Alphabets redesigned — NATO and American alphabets now shown side by side as tables."
+    },
+    {
+      "date": "29/04/26",
+      "author": "Barr",
+      "change": "Changelog redesigned — now displayed as a visual timeline with entries grouped by date and colour-coded by author."
+    },
+    {
+      "date": "29/04/26",
+      "author": "Barr",
+      "change": "Credits page redesigned — cleaner layout with contributor profiles, tools used, and license information."
+    },
+    {
+      "date": "29/04/26",
+      "author": "Barr",
+      "change": "Plate / Name Converter added to the Phonetics page — type any plate or name to get the full phonetic readout, with a copy button for quick radio use."
+    },
+    {
+      "date": "29/04/26",
+      "author": "Barr",
+      "change": "Phonetics Quiz added — test your NATO and American alphabets with a randomised quiz that tracks your score, streak, and shows which letters you missed."
+    },
+    {
+      "date": "29/04/26",
+      "author": "Barr",
+      "change": "BOLO Board added — log active lookout notices with vehicle, plate, suspect, and reason. Mark resolved, edit inline, or delete. Copy button formats the BOLO ready for 311 dispatch."
+    },
+    {
+      "date": "29/04/26",
+      "author": "Barr",
+      "change": "10-Codes Quiz added — 20 random questions per round with multiple choice answers. Test code-to-meaning or meaning-to-code, with a recap of anything missed at the end."
+    },
+    {
+      "date": "29/04/26",
+      "author": "Barr",
+      "change": "Sidebar compacted — navigation items are smaller to fit more sections without scrolling."
     }
   ]
 }

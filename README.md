@@ -1,6 +1,6 @@
 # UPD Dashboard
 
-A static quick-reference dashboard for UPD patrol use. Covers 10-codes, phonetic alphabets, case law summaries, constitutional reference, jurisdiction map, court procedure notes, report templates, live roster, changelog, credits, and an integrated Street Guesser training tool.
+A static quick-reference dashboard for UPD patrol use. Covers 10-codes, phonetic alphabets, case law summaries, constitutional reference, jurisdiction map, court procedure notes, report templates, live roster, BOLO board, training tools, changelog, and credits.
 
 Navigation is handled client-side — clicking between pages swaps only the main content area with no full page reload or flash.
 
@@ -11,16 +11,19 @@ Navigation is handled client-side — clicking between pages swaps only the main
 ├── index.html                  Home — response codes, pursuit comms, radio channels, unit caps,
 │                               use of force, keybinds, legal standards, Miranda, chain of command
 ├── codes.html                  10-Codes — grouped by priority with filterable card grid
-├── phonetics.html              Phonetic Alphabets — NATO and American side-by-side tables
+├── phonetics.html              Phonetic Alphabets — NATO and American tables + plate/name converter
 ├── laws.html                   Case Laws — searchable law summaries with detail panel
 ├── constitution.html           Constitution — full San Andreas constitutional reference
 ├── jurisdiction.html           Jurisdiction Map — SA law enforcement boundary map
 ├── court.html                  Court — court procedure notes
 ├── templates.html              Templates — structured report templates loaded from Report_Templates/
 ├── roster.html                 Roster — live data from Google Sheets with search, sort, and filters
+├── bolo.html                   BOLO Board — active lookout notices, persisted in localStorage
 ├── guesser.html                Street Guesser — interactive map training game
-├── changelog.html              Changelog — version history rendered from changelog.json
-├── credits.html                Credits
+├── quiz.html                   Phonetics Quiz — NATO/American alphabet multiple-choice trainer
+├── tcquiz.html                 10-Codes Quiz — 20-question random multiple-choice quiz
+├── changelog.html              Changelog — timeline view rendered from changelog.json
+├── credits.html                Credits — contributors, tools used, and license
 │
 ├── css/
 │   └── styles.css              All dashboard styles
@@ -31,8 +34,12 @@ Navigation is handled client-side — clicking between pages swaps only the main
 │   ├── codes.js                10-Codes data and rendering
 │   ├── laws.js                 Case Laws data and rendering
 │   ├── templates.js            Templates loader and rendering
-│   ├── changelog.js            Changelog rendering (reads changelog.json)
+│   ├── changelog.js            Changelog timeline rendering (reads changelog.json)
 │   ├── roster.js               Roster — fetches live CSV + HTML from Google Sheets
+│   ├── phonetics.js            Plate/name phonetic converter
+│   ├── quiz.js                 Phonetics Quiz engine
+│   ├── tcquiz.js               10-Codes Quiz engine
+│   ├── bolo.js                 BOLO Board — add, edit, resolve, delete, 311 copy
 │   └── guesser.js              Street Guesser engine (Vec, SGStreet, SGEngine)
 │
 ├── partials/

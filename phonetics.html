@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -25,8 +25,13 @@
   <a href="./court.html" class="nav-item" data-page="court"><span class="nav-icon"><i class="fa-solid fa-landmark"></i></span>Court</a>
   <a href="./templates.html" class="nav-item" data-page="templates"><span class="nav-icon"><i class="fa-solid fa-file-lines"></i></span>Templates</a>
   <a href="./roster.html" class="nav-item" data-page="roster"><span class="nav-icon"><i class="fa-solid fa-users"></i></span>Roster</a>
+  <div class="sb-section">Operations</div>
+  <a href="./bolo.html" class="nav-item" data-page="bolo"><span class="nav-icon"><i class="fa-solid fa-binoculars"></i></span>BOLO Board</a>
   <div class="sb-section">Training</div>
   <a href="./guesser.html" class="nav-item" data-page="guesser"><span class="nav-icon"><i class="fa-solid fa-map-location-dot"></i></span>Street Guesser</a>
+  <a href="./quiz.html" class="nav-item" data-page="quiz"><span class="nav-icon"><i class="fa-solid fa-spell-check"></i></span>Phonetics Quiz</a>
+  <a href="./tcquiz.html" class="nav-item" data-page="tcquiz"><span class="nav-icon"><i class="fa-solid fa-circle-question"></i></span>10-Codes Quiz</a>
+  <a href="./ucquiz.html" class="nav-item" data-page="ucquiz"><span class="nav-icon"><i class="fa-solid fa-car-side"></i></span>Unit Caps Quiz</a>
   <div class="sb-section">Info</div>
   <a href="./changelog.html" class="nav-item" data-page="changelog"><span class="nav-icon"><i class="fa-solid fa-clock-rotate-left"></i></span>Changelog</a>
   <a href="./credits.html" class="nav-item" data-page="credits"><span class="nav-icon"><i class="fa-solid fa-circle-info"></i></span>Credits</a>
@@ -54,6 +59,20 @@
 <div class="page active">
   <div class="page-header"><h1><i class="fa-solid fa-font"></i> Phonetic Alphabets</h1><span class="ph-sub">Radio spelling reference</span></div>
   <div class="page-content">
+    <div class="pc-converter">
+      <div class="pc-conv-head">
+        <span class="pc-conv-title"><i class="fa-solid fa-keyboard"></i> Plate / Name Converter</span>
+        <div class="pc-alpha-toggle">
+          <button class="pc-alpha-btn active" onclick="pcSetAlpha('nato',this)">NATO</button>
+          <button class="pc-alpha-btn" onclick="pcSetAlpha('amer',this)">American</button>
+        </div>
+      </div>
+      <div class="pc-input-row">
+        <input type="text" id="pc-input" class="pc-input" placeholder="Type a plate or name… e.g. 4XLR023" maxlength="20" autocomplete="off" spellcheck="false">
+        <button class="pc-copy-btn" id="pc-copy" onclick="pcCopy()" disabled><i class="fa-solid fa-copy"></i> Copy</button>
+      </div>
+      <div class="pc-output" id="pc-output"><span class="pc-placeholder">Output will appear here</span></div>
+    </div>
     <div class="phonetic-tables">
       <div class="tbl-wrap">
         <table>
@@ -100,5 +119,7 @@
 </div>
 </main>
 <script src="./js/nav.js"></script>
+<script src="./js/utils.js"></script>
+<script src="./js/phonetics.js"></script>
 </body>
 </html>

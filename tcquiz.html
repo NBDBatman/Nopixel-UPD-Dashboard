@@ -1,4 +1,16 @@
-<div class="sb-logo">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UPD Dashboard — 10-Codes Quiz</title>
+<meta name="theme-color" content="#0f1623">
+<link rel="icon" href="./assets/UPD_Placeholder.webp" type="image/webp">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+<aside id="sidebar"><div class="sb-logo">
   <div class="sb-badge"><img src="./assets/UPD_Placeholder.webp" alt="UPD logo"></div>
   <div class="sb-title">UPD Dashboard<span>NoPixel Reference</span><span>UPD Cheat Sheet</span></div>
 </div>
@@ -42,3 +54,41 @@
   <span>Created by <a href="https://github.com/NBDBatman?tab=repositories" target="_blank" rel="noopener noreferrer">MercuryHQ</a>.</span>
   <span>Released under the MIT License.</span>
 </div>
+</aside>
+<main id="main">
+<div class="page active">
+  <div class="page-header"><h1><i class="fa-solid fa-circle-question"></i> 10-Codes Quiz</h1><span class="ph-sub">20 random questions per round</span></div>
+  <div class="page-content">
+    <div class="qz-shell">
+      <div class="qz-controls">
+        <div class="qz-mode-toggle">
+          <button class="tc-mode-btn qz-mode-btn active" onclick="tcSetMode('code',this)">Code → Meaning</button>
+          <button class="tc-mode-btn qz-mode-btn" onclick="tcSetMode('desc',this)">Meaning → Code</button>
+        </div>
+        <div class="qz-stats">
+          <span id="tc-score">0 / 20</span>
+          <span id="tc-streak" class="qz-streak-pill">Streak: 0</span>
+        </div>
+      </div>
+      <div id="tc-game">
+        <div class="tc-card" id="tc-card">
+          <div class="tc-question" id="tc-question"></div>
+          <div class="tc-options" id="tc-options"></div>
+          <div class="tc-feedback" id="tc-feedback"></div>
+          <div class="tc-next-wrap">
+            <button class="qz-submit-btn" id="tc-next" onclick="_tcAdvance()" style="display:none">Next →</button>
+          </div>
+        </div>
+        <div class="qz-progress" id="tc-progress"></div>
+      </div>
+      <div id="tc-result" class="qz-result-panel" style="display:none"></div>
+    </div>
+  </div>
+</div>
+</main>
+<script src="./js/nav.js"></script>
+<script src="./js/utils.js"></script>
+<script src="./js/codes.js"></script>
+<script src="./js/tcquiz.js"></script>
+</body>
+</html>
