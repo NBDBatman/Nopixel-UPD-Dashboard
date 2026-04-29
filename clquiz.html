@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UPD Dashboard — BOLO Board</title>
+<title>UPD Dashboard — Case Law Quiz</title>
 <meta name="theme-color" content="#0f1623">
 <link rel="icon" href="./assets/UPD_Placeholder.webp" type="image/webp">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -58,42 +58,38 @@
 </aside>
 <main id="main">
 <div class="page active">
-  <div class="page-header"><h1><i class="fa-solid fa-binoculars"></i> BOLO Board</h1><span class="ph-sub">Be on the lookout</span></div>
+  <div class="page-header"><h1><i class="fa-solid fa-gavel"></i> Case Law Quiz</h1><span class="ph-sub">All 17 laws per round</span></div>
   <div class="page-content">
-    <div class="bolo-form" id="bolo-form">
-      <div class="bolo-form-label" id="bolo-form-label"><i class="fa-solid fa-plus"></i> Add BOLO</div>
-      <div class="bolo-form-grid">
-        <input type="text" id="bolo-vehicle" class="bolo-input" placeholder="Vehicle (colour, make, model)">
-        <input type="text" id="bolo-plate" class="bolo-input" placeholder="Plate">
-        <input type="text" id="bolo-suspect" class="bolo-input" placeholder="Suspect description">
-        <select id="bolo-priority" class="bolo-input bolo-select">
-          <option value="high">High Priority</option>
-          <option value="medium">Medium Priority</option>
-          <option value="low">Low Priority</option>
-        </select>
+    <div class="qz-shell qz-shell-wide">
+      <div class="qz-controls">
+        <div class="qz-mode-toggle">
+          <button class="tc-mode-btn qz-mode-btn active" onclick="clSetMode('name',this)">Name → Rule</button>
+          <button class="tc-mode-btn qz-mode-btn" onclick="clSetMode('rule',this)">Rule → Name</button>
+        </div>
+        <div class="qz-stats">
+          <span id="cl-score">0 / 17</span>
+          <span id="cl-streak" class="qz-streak-pill">Streak: 0</span>
+        </div>
       </div>
-      <div class="bolo-form-row">
-        <input type="text" id="bolo-reason" class="bolo-input" placeholder="Reason / offence — press Enter to add">
-        <button class="bolo-add-btn" id="bolo-add-btn" onclick="boloAdd()"><i class="fa-solid fa-plus"></i> Add</button>
+      <div id="cl-game">
+        <div class="tc-card" id="cl-card">
+          <div class="tc-question cl-q-name" id="cl-question"></div>
+          <div class="tc-options" id="cl-options"></div>
+          <div class="tc-feedback" id="cl-feedback"></div>
+          <div class="tc-next-wrap">
+            <button class="qz-submit-btn" id="cl-next" onclick="_clAdvance()" style="display:none">Next →</button>
+          </div>
+        </div>
+        <div class="qz-progress" id="cl-progress"></div>
       </div>
+      <div id="cl-result" class="qz-result-panel" style="display:none"></div>
     </div>
-    <div class="bolo-board-bar">
-      <div class="bolo-tabs">
-        <button class="bolo-tab active" data-f="active" onclick="boloSetFilter('active',this)">Active</button>
-        <button class="bolo-tab" data-f="resolved" onclick="boloSetFilter('resolved',this)">Resolved</button>
-        <button class="bolo-tab" data-f="all" onclick="boloSetFilter('all',this)">All</button>
-      </div>
-      <div class="bolo-bar-right">
-        <span class="bolo-count" id="bolo-count"></span>
-        <button class="bolo-clear-btn" id="bolo-clear-btn" onclick="boloClearResolved()" style="display:none"><i class="fa-solid fa-broom"></i> Clear Resolved</button>
-      </div>
-    </div>
-    <div id="bolo-list"></div>
   </div>
 </div>
 </main>
 <script src="./js/nav.js"></script>
 <script src="./js/utils.js"></script>
-<script src="./js/bolo.js"></script>
+<script src="./js/laws.js"></script>
+<script src="./js/clquiz.js"></script>
 </body>
 </html>

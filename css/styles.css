@@ -401,19 +401,37 @@ tbody tr:hover td{background:rgba(255,255,255,.03)}
 .court-objections .obj-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .court-objections .obj{display:grid;gap:4px;background:rgba(15,22,35,.52);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:8px;font-size:12px;line-height:1.4;padding:9px 10px}
 .court-objections .obj strong{font-size:12px}
+.court-motions{background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:14px}
+.motion-groups{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.motion-group{display:flex;flex-direction:column;gap:6px}
+.motion-group-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:var(--gold);padding-bottom:6px;margin-bottom:2px;border-bottom:1px solid var(--border)}
+.motion-card{background:rgba(15,22,35,.52);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:8px;padding:9px 10px;font-size:12px;line-height:1.4}
+.motion-card strong{display:block;color:var(--text);margin-bottom:3px;font-size:12px}
+.motion-card span{color:var(--text2);font-size:11px;line-height:1.45;display:block}
 @media(max-width:1300px){
   .court-stage-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .court-reference{grid-template-columns:1fr 1fr}
   .court-accent{grid-column:1/-1}
   .court-objections .obj-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .motion-groups{grid-template-columns:1fr 1fr}
+  .motion-group:last-child{grid-column:1/-1}
 }
 @media(max-width:760px){
   .court-reference,.court-objections .obj-grid{grid-template-columns:1fr}
   .court-stage-grid{grid-template-columns:1fr}
+  .motion-groups{grid-template-columns:1fr}
+  .motion-group:last-child{grid-column:auto}
 }
 @media(max-width:460px){
   .court-row{grid-template-columns:1fr;gap:3px}
 }
+
+/* CASE LAW QUIZ */
+.cl-q-name{font-size:clamp(16px,2.8vw,30px);font-weight:800;text-align:center;padding:16px 20px;line-height:1.3;color:var(--text)}
+.cl-q-cat{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--gold);margin-bottom:8px;font-family:inherit}
+.cl-opt-rule{font-size:12px;line-height:1.5;text-align:left}
+.cl-opt-title{display:block;font-size:13px;font-weight:700;color:inherit}
+.cl-opt-cat{display:block;font-size:11px;color:var(--text2);margin-top:2px;font-weight:400}
 
 /* TEMPLATES */
 .tmpl-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
@@ -616,6 +634,7 @@ mark{background:rgba(245,158,11,.3);color:var(--text);border-radius:2px}
 
 /* PHONETICS QUIZ */
 .qz-shell{max-width:500px;margin:0 auto}
+.qz-shell-wide{max-width:780px}
 .qz-controls{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
 .qz-mode-toggle{display:flex;gap:3px;background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:3px}
 .qz-mode-btn{background:none;border:none;border-radius:6px;padding:6px 18px;font-size:13px;font-weight:700;color:var(--text2);cursor:pointer;transition:all .15s}
