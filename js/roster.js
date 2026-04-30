@@ -88,7 +88,8 @@ function resolveDiscordLink(discordValue,discordLinks){
   if(!value)return null;
   if(/^https?:\/\//i.test(value))return value;
   if(/^\d{17,20}$/.test(value))return`https://discord.com/users/${value}`;
-  return discordLinks[value]||discordLinks['@'+value]||null;
+  const resolved=discordLinks[value]||discordLinks['@'+value]||null;
+  return resolved&&/^https?:\/\//i.test(resolved)?resolved:null;
 }
 
 function buildRosterCallsign(callsignValue,suffixCode){

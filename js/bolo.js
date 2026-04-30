@@ -41,11 +41,8 @@ function _boloSetupListener(){
 
 async function _boloLog(action,summary){
   const session=_getSession();
-  const{error}=await _sb.from('bolo_logs').insert({
-    action,
-    bolo_summary:summary||'',
-    officer:session?session.callsign+' '+session.name:'Unknown'
-  });
+  const officer=session?session.callsign+' '+session.name:'Unknown';
+  const{error}=await _sb.from('bolo_logs').insert({action,bolo_summary:summary||'',officer});
   if(error)console.error('bolo_logs insert failed:',error.message,error.code);
 }
 
@@ -96,6 +93,15 @@ async function boloAdd(){
     added_by:session?session.callsign+' '+session.name:''
   });
   _boloLog('Added BOLO',[vehicle,plate,suspect].filter(Boolean).join(' · ')||reason);
+  const addFields=[];
+  if(vehicle)addFields.push({name:'Vehicle',value:vehicle,inline:true});
+  if(plate)addFields.push({name:'Plate',value:plate,inline:true});
+  if(suspect)addFields.push({name:'Suspect',value:suspect,inline:true});
+  if(owner)addFields.push({name:'Owner',value:owner,inline:true});
+  if(reason)addFields.push({name:'Reason',value:reason,inline:false});
+  addFields.push({name:'Priority',value:priority.charAt(0).toUpperCase()+priority.slice(1),inline:true});
+  if(session)addFields.push({name:'Added by',value:session.callsign+' '+session.name,inline:true});
+  _discordLog('🔍 New BOLO Added','',_DC.blue,addFields);
   _boloFetch();
   ['bolo-vehicle','bolo-plate','bolo-owner','bolo-suspect','bolo-reason'].forEach(id=>{
     const el=document.getElementById(id);if(el)el.value='';
@@ -113,13 +119,34 @@ function boloCancelInline(){_boloEditId=null;boloRender();}
 async function boloSaveInline(){
   if(_boloEditId===null)return;
   const get=id=>(document.getElementById(id)?.value||'').trim();
-  const editedB=_bolos.find(e=>e.id===_boloEditId);
+  const beforeB=_bolos.find(e=>e.id===_boloEditId);
+  const afterVehicle=get('bolo-ie-vehicle'),afterPlate=get('bolo-ie-plate');
+  const afterOwner=get('bolo-ie-owner'),afterSuspect=get('bolo-ie-suspect');
+  const afterReason=get('bolo-ie-reason'),afterPriority=get('bolo-ie-priority')||'high';
   await _sb.from('bolos').update({
-    vehicle:get('bolo-ie-vehicle'),plate:get('bolo-ie-plate'),
-    owner:get('bolo-ie-owner'),suspect:get('bolo-ie-suspect'),
-    reason:get('bolo-ie-reason'),priority:get('bolo-ie-priority')||'high'
+    vehicle:afterVehicle,plate:afterPlate,
+    owner:afterOwner,suspect:afterSuspect,
+    reason:afterReason,priority:afterPriority
   }).eq('id',_boloEditId);
-  if(editedB)_boloLog('Edited BOLO',_boloSummary(editedB));
+  if(beforeB){
+    _boloLog('Edited BOLO',_boloSummary(beforeB));
+    const editFields=[];
+    const diffs=[
+      ['Vehicle',beforeB.vehicle,afterVehicle],
+      ['Plate',beforeB.plate,afterPlate],
+      ['Suspect',beforeB.suspect,afterSuspect],
+      ['Owner',beforeB.owner,afterOwner],
+      ['Reason',beforeB.reason,afterReason],
+      ['Priority',beforeB.priority,afterPriority],
+    ];
+    for(const[label,bv,av]of diffs){
+      if(bv!==av){
+        editFields.push({name:label+' — Before',value:bv||'—',inline:true});
+        editFields.push({name:label+' — After',value:av||'—',inline:true});
+      }
+    }
+    _discordLog('✏️ BOLO Edited','**'+_boloSummary(beforeB)+'**',_DC.orange,editFields);
+  }
   _boloEditId=null;
   _boloFetch();
 }
@@ -147,6 +174,11 @@ async function boloResolve(id){
   if(b){
     await _sb.from('bolos').update({resolved:!b.resolved}).eq('id',id);
     _boloLog((b.resolved?'Reopened':'Resolved')+' BOLO',_boloSummary(b));
+    const resFields=[];
+    if(b.vehicle)resFields.push({name:'Vehicle',value:b.vehicle,inline:true});
+    if(b.plate)resFields.push({name:'Plate',value:b.plate,inline:true});
+    if(b.suspect)resFields.push({name:'Suspect',value:b.suspect,inline:true});
+    _discordLog(b.resolved?'🔄 BOLO Reopened':'✅ BOLO Resolved','**'+_boloSummary(b)+'**',b.resolved?_DC.orange:_DC.green,resFields);
     _boloFetch();
   }
 }
@@ -156,7 +188,15 @@ function boloDelete(id){
   _boloModal('Delete this BOLO? This cannot be undone.',async()=>{
     if(_boloEditId===id)_boloEditId=null;
     await _sb.from('bolos').delete().eq('id',id);
-    if(delB)_boloLog('Deleted BOLO',_boloSummary(delB));
+    if(delB){
+      _boloLog('Deleted BOLO',_boloSummary(delB));
+      const delFields=[];
+      if(delB.vehicle)delFields.push({name:'Vehicle',value:delB.vehicle,inline:true});
+      if(delB.plate)delFields.push({name:'Plate',value:delB.plate,inline:true});
+      if(delB.suspect)delFields.push({name:'Suspect',value:delB.suspect,inline:true});
+      if(delB.reason)delFields.push({name:'Reason',value:delB.reason,inline:false});
+      _discordLog('🗑️ BOLO Deleted','**'+_boloSummary(delB)+'**',_DC.red,delFields);
+    }
     _boloFetch();
   });
 }
@@ -167,6 +207,7 @@ function boloClearResolved(){
     if(ids.length){
       await _sb.from('bolos').delete().in('id',ids);
       _boloLog('Cleared resolved BOLOs',ids.length+' removed');
+      _discordLog('🧹 Resolved BOLOs Cleared','**'+ids.length+' BOLO'+(ids.length!==1?'s':'')+' removed from the board**',_DC.grey,[{name:'Count',value:String(ids.length),inline:true}]);
       _boloFetch();
     }
   });

@@ -8,12 +8,16 @@ function _initPresence(){
 
   const channel=_sb.channel('online-presence',{config:{presence:{key:session.uid}}});
 
+  const _presRefresh=()=>{
+    const state=channel.presenceState();
+    const users=Object.values(state).flat();
+    _updateOnlineBar(users,session.uid);
+  };
+
   channel
-    .on('presence',{event:'sync'},()=>{
-      const state=channel.presenceState();
-      const users=Object.values(state).flat();
-      _updateOnlineBar(users,session.uid);
-    })
+    .on('presence',{event:'sync'},_presRefresh)
+    .on('presence',{event:'join'},_presRefresh)
+    .on('presence',{event:'leave'},_presRefresh)
     .subscribe(async status=>{
       if(status==='SUBSCRIBED'){
         await channel.track({callsign:session.callsign,name:session.name,uid:session.uid});

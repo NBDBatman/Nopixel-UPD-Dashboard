@@ -150,6 +150,36 @@
       "date": "30/04/26",
       "author": "Barr",
       "change": "BOLO Board updated — registered owner field added, import and export added so the board can be saved to a file and restored, and plates now show on cards even without a vehicle description."
+    },
+    {
+      "date": "30/04/26",
+      "author": "Barr",
+      "change": "Login system added — officers sign in with their callsign, name, and department access code. All pages are auth-gated and redirect to the login screen if the session is missing or expired."
+    },
+    {
+      "date": "30/04/26",
+      "author": "Barr",
+      "change": "BOLO Board is now shared — the board syncs in real time across all logged-in officers via Supabase. Changes made by one officer appear instantly for everyone else."
+    },
+    {
+      "date": "30/04/26",
+      "author": "Barr",
+      "change": "Online bar added — shows which officers are currently on the dashboard, updated live as people join or leave."
+    },
+    {
+      "date": "30/04/26",
+      "author": "Barr",
+      "change": "Notepad added — on-duty scratch pad with markdown formatting toolbar, auto-save, preview mode, and a saved notes panel for storing multiple notes between sessions."
+    },
+    {
+      "date": "30/04/26",
+      "author": "Barr",
+      "change": "Discord logging added — sign-in, sign-out, and all BOLO actions (add, edit, resolve, reopen, delete, clear) are posted to a Discord channel as colour-coded embeds. Edits show before and after values for each changed field."
+    },
+    {
+      "date": "30/04/26",
+      "author": "Barr",
+      "change": "Audit logs added — all BOLO actions and auth events are recorded to Supabase with officer name, callsign, and timestamp."
     }
   ]
 }
