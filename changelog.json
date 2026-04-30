@@ -130,6 +130,16 @@
       "date": "29/04/26",
       "author": "Barr",
       "change": "Sidebar compacted — navigation items are smaller to fit more sections without scrolling."
+    },
+    {
+      "date": "29/04/26",
+      "author": "Barr",
+      "change": "Unit Caps Quiz added — all 9 scenarios per round with multiple choice answers. Tests how many units are allowed at each type of job."
+    },
+    {
+      "date": "30/04/26",
+      "author": "Barr",
+      "change": "Case Law Quiz added — all 17 case laws per round. Test yourself by matching the case name to its ruling or the ruling back to its name."
     }
   ]
 }
