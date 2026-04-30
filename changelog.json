@@ -140,6 +140,16 @@
       "date": "30/04/26",
       "author": "Barr",
       "change": "Case Law Quiz added — all 17 case laws per round. Test yourself by matching the case name to its ruling or the ruling back to its name."
+    },
+    {
+      "date": "30/04/26",
+      "author": "Barr",
+      "change": "Quiz timer added — all four training quizzes now show a 5-second countdown bar after each answer before moving to the next question."
+    },
+    {
+      "date": "30/04/26",
+      "author": "Barr",
+      "change": "BOLO Board updated — registered owner field added, import and export added so the board can be saved to a file and restored, and plates now show on cards even without a vehicle description."
     }
   ]
 }

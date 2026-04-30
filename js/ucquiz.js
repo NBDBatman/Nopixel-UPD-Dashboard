@@ -11,8 +11,37 @@ const UNIT_CAPS=[
 ];
 
 let _ucQueue=[],_ucIdx=0,_ucCorrect=0,_ucStreak=0,_ucResults=[],_ucAnswered=false;
+let _ucTimer=null,_ucTick=null;
+const _UC_DELAY=5;
+
+function _ucStartTimer(){
+  const next=document.getElementById('uc-next');
+  next.innerHTML='Next → <span class="qz-timer-count" id="uc-timer-count">'+_UC_DELAY+'</span>';
+  next.style.display='';
+  const card=document.getElementById('uc-card');
+  let bar=document.getElementById('uc-timer-bar');
+  if(!bar){
+    bar=document.createElement('div');
+    bar.id='uc-timer-bar';
+    bar.className='qz-timer';
+    bar.innerHTML='<div class="qz-timer-fill" id="uc-timer-fill"></div>';
+    card.appendChild(bar);
+  }
+  const fill=document.getElementById('uc-timer-fill');
+  fill.style.transition='none';fill.style.width='100%';
+  fill.offsetWidth;
+  fill.style.transition=`width ${_UC_DELAY}s linear`;fill.style.width='0%';
+  let t=_UC_DELAY;
+  if(_ucTick)clearInterval(_ucTick);
+  _ucTick=setInterval(()=>{t--;const el=document.getElementById('uc-timer-count');if(el)el.textContent=t;if(t<=0)clearInterval(_ucTick);},1000);
+  if(_ucTimer)clearTimeout(_ucTimer);
+  _ucTimer=setTimeout(_ucAdvance,_UC_DELAY*1000);
+}
 
 function ucStart(){
+  if(_ucTimer){clearTimeout(_ucTimer);_ucTimer=null;}
+  if(_ucTick){clearInterval(_ucTick);_ucTick=null;}
+  const bar=document.getElementById('uc-timer-bar');if(bar)bar.remove();
   _ucQueue=[...UNIT_CAPS].sort(()=>Math.random()-.5);
   _ucIdx=0;_ucCorrect=0;_ucStreak=0;_ucResults=[];_ucAnswered=false;
   document.getElementById('uc-game').style.display='';
@@ -61,12 +90,14 @@ function ucSelect(selected){
   }
   _ucResults.push({scenario:q.scenario,cap:q.cap,ok});
   _ucUpdateStats();_ucRenderProgress();
-  if(ok)setTimeout(_ucAdvance,850);
-  else document.getElementById('uc-next').style.display='';
+  _ucStartTimer();
 }
 
 function _ucAdvance(){
+  if(_ucTimer){clearTimeout(_ucTimer);_ucTimer=null;}
+  if(_ucTick){clearInterval(_ucTick);_ucTick=null;}
   document.getElementById('uc-next').style.display='none';
+  const bar=document.getElementById('uc-timer-bar');if(bar)bar.remove();
   _ucIdx++;
   if(_ucIdx>=_ucQueue.length){_ucShowResult();return;}
   _ucShowQuestion();
@@ -105,6 +136,14 @@ function _ucShowResult(){
     </div>`:''}
     <button class="qz-restart-btn" onclick="ucStart()"><i class="fa-solid fa-rotate-right"></i> Try Again</button>`;
 }
+
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Enter')return;
+  const next=document.getElementById('uc-next');
+  if(next&&next.style.display!=='none'){_ucAdvance();return;}
+  const focused=document.activeElement;
+  if(focused&&focused.classList.contains('tc-opt'))focused.click();
+});
 
 window.__pageInits=window.__pageInits||{};
 window.__pageInits.ucquiz=function(){ucStart();};

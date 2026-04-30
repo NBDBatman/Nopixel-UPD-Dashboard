@@ -22,6 +22,7 @@ let selectedLaw=null;
 
 function renderLaws(){
   const c=document.getElementById('laws-container');
+  if(!c)return;
   const count=document.getElementById('laws-count');
   const search=document.getElementById('laws-search');
   const detail=document.getElementById('law-detail');

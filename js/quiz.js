@@ -2,8 +2,39 @@ const QZ_NATO={A:'Alpha',B:'Bravo',C:'Charlie',D:'Delta',E:'Echo',F:'Foxtrot',G:
 const QZ_AMER={A:'Adam',B:'Boy',C:'Charles',D:'David',E:'Edward',F:'Frank',G:'George',H:'Henry',I:'Ida',J:'John',K:'King',L:'Lincoln',M:'Mary',N:'Nora',O:'Ocean',P:'Paul',Q:'Queen',R:'Robert',S:'Sam',T:'Tom',U:'Union',V:'Victor',W:'William',X:'X-Ray',Y:'Young',Z:'Zebra'};
 
 let _qzMode='nato',_qzQueue=[],_qzIdx=0,_qzCorrect=0,_qzStreak=0,_qzResults={},_qzAnswered=false;
+let _qzTimer=null,_qzTick=null;
+const _QZ_DELAY=5;
 
 function _qzAlpha(){return _qzMode==='nato'?QZ_NATO:QZ_AMER;}
+
+function _qzStartTimer(){
+  const btn=document.getElementById('qz-submit');
+  btn.innerHTML='Next → <span class="qz-timer-count" id="qz-timer-count">'+_QZ_DELAY+'</span>';
+  const card=document.getElementById('qz-card');
+  let bar=document.getElementById('qz-timer-bar');
+  if(!bar){
+    bar=document.createElement('div');
+    bar.id='qz-timer-bar';
+    bar.className='qz-timer qz-timer-deep';
+    bar.innerHTML='<div class="qz-timer-fill" id="qz-timer-fill"></div>';
+    card.appendChild(bar);
+  }
+  const fill=document.getElementById('qz-timer-fill');
+  fill.style.transition='none';fill.style.width='100%';
+  fill.offsetWidth;
+  fill.style.transition=`width ${_QZ_DELAY}s linear`;fill.style.width='0%';
+  let t=_QZ_DELAY;
+  if(_qzTick)clearInterval(_qzTick);
+  _qzTick=setInterval(()=>{t--;const el=document.getElementById('qz-timer-count');if(el)el.textContent=t;if(t<=0)clearInterval(_qzTick);},1000);
+  if(_qzTimer)clearTimeout(_qzTimer);
+  _qzTimer=setTimeout(_qzAdvance,_QZ_DELAY*1000);
+}
+
+function _qzClearTimer(){
+  if(_qzTimer){clearTimeout(_qzTimer);_qzTimer=null;}
+  if(_qzTick){clearInterval(_qzTick);_qzTick=null;}
+  const bar=document.getElementById('qz-timer-bar');if(bar)bar.remove();
+}
 
 function qzSetMode(mode,el){
   _qzMode=mode;
@@ -13,6 +44,7 @@ function qzSetMode(mode,el){
 }
 
 function qzStart(){
+  _qzClearTimer();
   _qzQueue=Object.keys(_qzAlpha()).sort(()=>Math.random()-.5);
   _qzIdx=0;_qzCorrect=0;_qzStreak=0;_qzResults={};_qzAnswered=false;
   document.getElementById('qz-game').style.display='';
@@ -38,7 +70,7 @@ function _qzShowQuestion(){
 }
 
 function qzSubmit(){
-  if(_qzAnswered){_qzAdvance();return;}
+  if(_qzAnswered){_qzClearTimer();_qzAdvance();return;}
   const input=document.getElementById('qz-input');
   const val=input.value.trim();
   if(!val)return;
@@ -61,12 +93,13 @@ function qzSubmit(){
     _qzStreak=0;
   }
   _qzResults[letter]=ok;
-  document.getElementById('qz-submit').textContent='Next →';
   _qzUpdateStats();
   _qzRenderProgress();
+  _qzStartTimer();
 }
 
 function _qzAdvance(){
+  _qzClearTimer();
   _qzIdx++;
   if(_qzIdx>=_qzQueue.length){_qzShowResult();return;}
   _qzShowQuestion();
@@ -93,7 +126,6 @@ function _qzShowResult(){
   const total=_qzQueue.length;
   const pct=Math.round(_qzCorrect/total*100);
   const label=pct===100?'Perfect!':pct>=80?'Nice work!':pct>=60?'Getting there!':'Keep practising!';
-  const correct=Object.entries(_qzResults).filter(([,v])=>v).map(([k])=>k).sort();
   const wrong=Object.entries(_qzResults).filter(([,v])=>!v).map(([k])=>`${k} = ${_qzAlpha()[k]}`).sort();
   document.getElementById('qz-game').style.display='none';
   const res=document.getElementById('qz-result');
@@ -106,11 +138,16 @@ function _qzShowResult(){
     <button class="qz-restart-btn" onclick="qzStart()"><i class="fa-solid fa-rotate-right"></i> Try Again</button>`;
 }
 
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Enter')return;
+  if(_qzAnswered){_qzClearTimer();_qzAdvance();}
+});
+
 window.__pageInits=window.__pageInits||{};
 window.__pageInits.quiz=function(){qzStart();};
 window.addEventListener('load',()=>{
   document.getElementById('qz-input')?.addEventListener('keydown',e=>{
-    if(e.key==='Enter'){e.preventDefault();qzSubmit();}
+    if(e.key==='Enter'){e.preventDefault();e.stopPropagation();qzSubmit();}
   });
   qzStart();
 });

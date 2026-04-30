@@ -27,6 +27,7 @@
   <a href="./roster.html" class="nav-item" data-page="roster"><span class="nav-icon"><i class="fa-solid fa-users"></i></span>Roster</a>
   <div class="sb-section">Operations</div>
   <a href="./bolo.html" class="nav-item" data-page="bolo"><span class="nav-icon"><i class="fa-solid fa-binoculars"></i></span>BOLO Board</a>
+  <a href="./notepad.html" class="nav-item" data-page="notepad"><span class="nav-icon"><i class="fa-solid fa-note-sticky"></i></span>Notepad</a>
   <div class="sb-section">Training</div>
   <a href="./guesser.html" class="nav-item" data-page="guesser"><span class="nav-icon"><i class="fa-solid fa-map-location-dot"></i></span>Street Guesser</a>
   <a href="./quiz.html" class="nav-item" data-page="quiz"><span class="nav-icon"><i class="fa-solid fa-spell-check"></i></span>Phonetics Quiz</a>
@@ -72,6 +73,7 @@
           <option value="low">Low Priority</option>
         </select>
       </div>
+      <input type="text" id="bolo-owner" class="bolo-input" placeholder="Registered owner" style="margin-bottom:8px">
       <div class="bolo-form-row">
         <input type="text" id="bolo-reason" class="bolo-input" placeholder="Reason / offence — press Enter to add">
         <button class="bolo-add-btn" id="bolo-add-btn" onclick="boloAdd()"><i class="fa-solid fa-plus"></i> Add</button>
@@ -85,6 +87,8 @@
       </div>
       <div class="bolo-bar-right">
         <span class="bolo-count" id="bolo-count"></span>
+        <button class="bolo-io-btn" onclick="boloImport()"><i class="fa-solid fa-file-import"></i> Import</button>
+        <button class="bolo-io-btn" onclick="boloExport()"><i class="fa-solid fa-file-export"></i> Export</button>
         <button class="bolo-clear-btn" id="bolo-clear-btn" onclick="boloClearResolved()" style="display:none"><i class="fa-solid fa-broom"></i> Clear Resolved</button>
       </div>
     </div>

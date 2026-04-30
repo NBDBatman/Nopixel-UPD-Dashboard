@@ -1,6 +1,31 @@
 // Requires CODES array from codes.js
 let _tcMode='code',_tcQueue=[],_tcIdx=0,_tcCorrect=0,_tcStreak=0,_tcResults=[],_tcAnswered=false;
-const _TC_ROUND=20;
+let _tcTimer=null,_tcTick=null;
+const _TC_ROUND=20,_TC_DELAY=5;
+
+function _tcStartTimer(){
+  const next=document.getElementById('tc-next');
+  next.innerHTML='Next → <span class="qz-timer-count" id="tc-timer-count">'+_TC_DELAY+'</span>';
+  next.style.display='';
+  const card=document.getElementById('tc-card');
+  let bar=document.getElementById('tc-timer-bar');
+  if(!bar){
+    bar=document.createElement('div');
+    bar.id='tc-timer-bar';
+    bar.className='qz-timer';
+    bar.innerHTML='<div class="qz-timer-fill" id="tc-timer-fill"></div>';
+    card.appendChild(bar);
+  }
+  const fill=document.getElementById('tc-timer-fill');
+  fill.style.transition='none';fill.style.width='100%';
+  fill.offsetWidth;
+  fill.style.transition=`width ${_TC_DELAY}s linear`;fill.style.width='0%';
+  let t=_TC_DELAY;
+  if(_tcTick)clearInterval(_tcTick);
+  _tcTick=setInterval(()=>{t--;const el=document.getElementById('tc-timer-count');if(el)el.textContent=t;if(t<=0)clearInterval(_tcTick);},1000);
+  if(_tcTimer)clearTimeout(_tcTimer);
+  _tcTimer=setTimeout(_tcAdvance,_TC_DELAY*1000);
+}
 
 function tcSetMode(mode,el){
   _tcMode=mode;
@@ -10,6 +35,9 @@ function tcSetMode(mode,el){
 }
 
 function tcStart(){
+  if(_tcTimer){clearTimeout(_tcTimer);_tcTimer=null;}
+  if(_tcTick){clearInterval(_tcTick);_tcTick=null;}
+  const bar=document.getElementById('tc-timer-bar');if(bar)bar.remove();
   _tcQueue=[...CODES].sort(()=>Math.random()-.5).slice(0,Math.min(_TC_ROUND,CODES.length));
   _tcIdx=0;_tcCorrect=0;_tcStreak=0;_tcResults=[];_tcAnswered=false;
   document.getElementById('tc-game').style.display='';
@@ -67,12 +95,14 @@ function tcSelect(selected){
   }
   _tcResults.push({code:q.code,desc:q.desc,ok});
   _tcUpdateStats();_tcRenderProgress();
-  if(ok)setTimeout(_tcAdvance,850);
-  else document.getElementById('tc-next').style.display='';
+  _tcStartTimer();
 }
 
 function _tcAdvance(){
+  if(_tcTimer){clearTimeout(_tcTimer);_tcTimer=null;}
+  if(_tcTick){clearInterval(_tcTick);_tcTick=null;}
   document.getElementById('tc-next').style.display='none';
+  const bar=document.getElementById('tc-timer-bar');if(bar)bar.remove();
   _tcIdx++;
   if(_tcIdx>=_tcQueue.length){_tcShowResult();return;}
   _tcShowQuestion();
@@ -112,6 +142,14 @@ function _tcShowResult(){
     </div>`:''}
     <button class="qz-restart-btn" onclick="tcStart()"><i class="fa-solid fa-rotate-right"></i> Try Again</button>`;
 }
+
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Enter')return;
+  const next=document.getElementById('tc-next');
+  if(next&&next.style.display!=='none'){_tcAdvance();return;}
+  const focused=document.activeElement;
+  if(focused&&focused.classList.contains('tc-opt'))focused.click();
+});
 
 window.__pageInits=window.__pageInits||{};
 window.__pageInits.tcquiz=function(){tcStart();};

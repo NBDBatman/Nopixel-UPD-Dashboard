@@ -1,5 +1,31 @@
 // Requires LAWS array from laws.js
 let _clMode='name',_clQueue=[],_clIdx=0,_clCorrect=0,_clStreak=0,_clResults=[],_clAnswered=false;
+let _clTimer=null,_clTick=null;
+const _CL_DELAY=5;
+
+function _clStartTimer(){
+  const next=document.getElementById('cl-next');
+  next.innerHTML='Next → <span class="qz-timer-count" id="cl-timer-count">'+_CL_DELAY+'</span>';
+  next.style.display='';
+  const card=document.getElementById('cl-card');
+  let bar=document.getElementById('cl-timer-bar');
+  if(!bar){
+    bar=document.createElement('div');
+    bar.id='cl-timer-bar';
+    bar.className='qz-timer';
+    bar.innerHTML='<div class="qz-timer-fill" id="cl-timer-fill"></div>';
+    card.appendChild(bar);
+  }
+  const fill=document.getElementById('cl-timer-fill');
+  fill.style.transition='none';fill.style.width='100%';
+  fill.offsetWidth;
+  fill.style.transition=`width ${_CL_DELAY}s linear`;fill.style.width='0%';
+  let t=_CL_DELAY;
+  if(_clTick)clearInterval(_clTick);
+  _clTick=setInterval(()=>{t--;const el=document.getElementById('cl-timer-count');if(el)el.textContent=t;if(t<=0)clearInterval(_clTick);},1000);
+  if(_clTimer)clearTimeout(_clTimer);
+  _clTimer=setTimeout(_clAdvance,_CL_DELAY*1000);
+}
 
 function clSetMode(mode,el){
   _clMode=mode;
@@ -9,6 +35,9 @@ function clSetMode(mode,el){
 }
 
 function clStart(){
+  if(_clTimer){clearTimeout(_clTimer);_clTimer=null;}
+  if(_clTick){clearInterval(_clTick);_clTick=null;}
+  const bar=document.getElementById('cl-timer-bar');if(bar)bar.remove();
   _clQueue=[...LAWS].sort(()=>Math.random()-.5);
   _clIdx=0;_clCorrect=0;_clStreak=0;_clResults=[];_clAnswered=false;
   document.getElementById('cl-game').style.display='';
@@ -79,12 +108,14 @@ function clSelect(idx){
   }
   _clResults.push({title:q.title,cat:q.catLabel,ok});
   _clUpdateStats();_clRenderProgress();
-  if(ok)setTimeout(_clAdvance,850);
-  else document.getElementById('cl-next').style.display='';
+  _clStartTimer();
 }
 
 function _clAdvance(){
+  if(_clTimer){clearTimeout(_clTimer);_clTimer=null;}
+  if(_clTick){clearInterval(_clTick);_clTick=null;}
   document.getElementById('cl-next').style.display='none';
+  const bar=document.getElementById('cl-timer-bar');if(bar)bar.remove();
   _clIdx++;
   if(_clIdx>=_clQueue.length){_clShowResult();return;}
   _clShowQuestion();
@@ -118,12 +149,20 @@ function _clShowResult(){
     <div class="qz-res-pct">${pct}%</div>
     <div class="qz-res-label">${escapeHtml(label)}</div>
     <div class="qz-res-sub">${_clCorrect} of ${_clQueue.length} correct</div>
-    ${wrong.length?`<div class="tc-missed">
+    ${wrong.length?`<div class="tc-missed cl-missed">
       <div class="tc-missed-title">Missed</div>
       ${wrong.map(r=>`<div class="tc-missed-row"><span class="tc-missed-code">${escapeHtml(r.title)}</span><span class="tc-missed-desc">${escapeHtml(r.cat)}</span></div>`).join('')}
     </div>`:''}
     <button class="qz-restart-btn" onclick="clStart()"><i class="fa-solid fa-rotate-right"></i> Try Again</button>`;
 }
+
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Enter')return;
+  const next=document.getElementById('cl-next');
+  if(next&&next.style.display!=='none'){_clAdvance();return;}
+  const focused=document.activeElement;
+  if(focused&&focused.classList.contains('tc-opt'))focused.click();
+});
 
 window.__pageInits=window.__pageInits||{};
 window.__pageInits.clquiz=function(){clStart();};

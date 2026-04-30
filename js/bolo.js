@@ -42,16 +42,17 @@ function boloAdd(){
   const get=id=>(document.getElementById(id)?.value||'').trim();
   const vehicle=get('bolo-vehicle'),plate=get('bolo-plate');
   const suspect=get('bolo-suspect'),reason=get('bolo-reason');
+  const owner=get('bolo-owner');
   const priority=get('bolo-priority')||'high';
-  if(!vehicle&&!suspect&&!reason){
+  if(!vehicle&&!plate&&!suspect&&!reason){
     const form=document.getElementById('bolo-form');
     form?.classList.add('bolo-shake');
     setTimeout(()=>form?.classList.remove('bolo-shake'),400);
     return;
   }
-  _bolos.unshift({id:Date.now(),ts:_boloTimestamp(),vehicle,plate,suspect,reason,priority,resolved:false});
+  _bolos.unshift({id:Date.now(),ts:_boloTimestamp(),vehicle,plate,owner,suspect,reason,priority,resolved:false});
   _boloSave();
-  ['bolo-vehicle','bolo-plate','bolo-suspect','bolo-reason'].forEach(id=>{
+  ['bolo-vehicle','bolo-plate','bolo-owner','bolo-suspect','bolo-reason'].forEach(id=>{
     const el=document.getElementById(id);if(el)el.value='';
   });
   document.getElementById('bolo-priority').value='high';
@@ -80,8 +81,8 @@ function boloSaveInline(){
   if(b){
     Object.assign(b,{
       vehicle:get('bolo-ie-vehicle'),plate:get('bolo-ie-plate'),
-      suspect:get('bolo-ie-suspect'),reason:get('bolo-ie-reason'),
-      priority:get('bolo-ie-priority')||'high'
+      owner:get('bolo-ie-owner'),suspect:get('bolo-ie-suspect'),
+      reason:get('bolo-ie-reason'),priority:get('bolo-ie-priority')||'high'
     });
   }
   _boloEditId=null;
@@ -96,6 +97,7 @@ function boloCopy311(id){
   const parts=['311 BOLO'];
   if(b.vehicle)parts.push('Vehicle: '+b.vehicle+(b.plate?' · '+b.plate:''));
   else if(b.plate)parts.push('Plate: '+b.plate);
+  if(b.owner)parts.push('Owner: '+b.owner);
   if(b.suspect)parts.push('Suspect: '+b.suspect);
   if(b.reason)parts.push(b.reason);
   navigator.clipboard.writeText(parts.join(' | ')).then(()=>{
@@ -142,7 +144,11 @@ function boloSetFilter(f,el){
 function _boloCardNormal(b){
   const prio=b.priority||'medium';
   const prioLabel=prio==='high'?'HIGH':prio==='medium'?'MED':'LOW';
-  const vehicleHtml=b.vehicle?`<div class="bolo-field"><span class="bolo-lbl">Vehicle</span><span class="bolo-val">${escapeHtml(b.vehicle)}${b.plate?` &nbsp;<span class="bolo-plate">${escapeHtml(b.plate)}</span>`:''}</span></div>`:'';
+  let vehicleHtml='';
+  if(b.vehicle&&b.plate)vehicleHtml=`<div class="bolo-field"><span class="bolo-lbl">Vehicle</span><span class="bolo-val">${escapeHtml(b.vehicle)} &nbsp;<span class="bolo-plate">${escapeHtml(b.plate)}</span></span></div>`;
+  else if(b.vehicle)vehicleHtml=`<div class="bolo-field"><span class="bolo-lbl">Vehicle</span><span class="bolo-val">${escapeHtml(b.vehicle)}</span></div>`;
+  else if(b.plate)vehicleHtml=`<div class="bolo-field"><span class="bolo-lbl">Plate</span><span class="bolo-val"><span class="bolo-plate">${escapeHtml(b.plate)}</span></span></div>`;
+  const ownerHtml=b.owner?`<div class="bolo-field"><span class="bolo-lbl">Owner</span><span class="bolo-val">${escapeHtml(b.owner)}</span></div>`:'';
   const suspectHtml=b.suspect?`<div class="bolo-field"><span class="bolo-lbl">Suspect</span><span class="bolo-val">${escapeHtml(b.suspect)}</span></div>`:'';
   const reasonHtml=b.reason?`<div class="bolo-reason">${escapeHtml(b.reason)}</div>`:'';
   return`<div class="bolo-card bolo-prio-${prio}${b.resolved?' bolo-resolved':''}">
@@ -151,7 +157,7 @@ function _boloCardNormal(b){
       <span class="bolo-ts">${escapeHtml(b.ts)}</span>
       ${b.resolved?'<span class="bolo-res-badge">Resolved</span>':''}
     </div>
-    <div class="bolo-card-body">${vehicleHtml}${suspectHtml}${reasonHtml}</div>
+    <div class="bolo-card-body">${vehicleHtml}${ownerHtml}${suspectHtml}${reasonHtml}</div>
     <div class="bolo-card-foot">
       <button class="bolo-btn bolo-btn-res" onclick="boloResolve(${b.id})">${b.resolved?'<i class="fa-solid fa-rotate-left"></i> Reopen':'<i class="fa-solid fa-check"></i> Resolve'}</button>
       <button class="bolo-btn bolo-btn-edit" onclick="boloEdit(${b.id})"><i class="fa-solid fa-pen"></i> Edit</button>
@@ -177,6 +183,7 @@ function _boloCardEdit(b){
       <input id="bolo-ie-suspect" class="bolo-input" value="${escapeHtml(b.suspect||'')}" placeholder="Suspect description">
       <select id="bolo-ie-priority" class="bolo-input bolo-select">${opt('high')}${opt('medium')}${opt('low')}</select>
     </div>
+    <input id="bolo-ie-owner" class="bolo-input bolo-ie-owner-input" value="${escapeHtml(b.owner||'')}" placeholder="Registered owner">
     <input id="bolo-ie-reason" class="bolo-input bolo-ie-reason-input" value="${escapeHtml(b.reason||'')}" placeholder="Reason / offence">
     <div class="bolo-ie-btns">
       <button class="bolo-btn bolo-btn-save" onclick="boloSaveInline()"><i class="fa-solid fa-floppy-disk"></i> Save</button>
@@ -210,6 +217,42 @@ function boloRender(){
   document.getElementById('bolo-ie-reason')?.addEventListener('keydown',e=>{
     if(e.key==='Enter'){e.preventDefault();boloSaveInline();}
   });
+}
+
+// ── Import / Export ──────────────────────────────────────────────────────────
+
+function boloExport(){
+  if(!_bolos.length){return;}
+  const date=new Date().toISOString().slice(0,10);
+  const blob=new Blob([JSON.stringify(_bolos,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download=`UPD-BOLO-${date}.json`;a.click();
+  URL.revokeObjectURL(url);
+}
+
+function boloImport(){
+  const input=document.createElement('input');
+  input.type='file';input.accept='.json';
+  input.onchange=e=>{
+    const file=e.target.files[0];
+    if(!file)return;
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      try{
+        const data=JSON.parse(ev.target.result);
+        if(!Array.isArray(data))throw new Error();
+        const count=data.length;
+        _boloModal(`Import ${count} BOLO${count!==1?'s':''}? This will replace your current board.`,()=>{
+          _bolos=data;_boloSave();boloRender();
+        });
+      }catch(err){
+        alert('Invalid BOLO file — could not import.');
+      }
+    };
+    reader.readAsText(file);
+  };
+  input.click();
 }
 
 window.__pageInits=window.__pageInits||{};
