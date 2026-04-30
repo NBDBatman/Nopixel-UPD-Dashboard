@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UPD Dashboard — Sign In</title>
+<meta name="theme-color" content="#0f1623">
+<link rel="icon" href="./assets/UPD_Placeholder.webp" type="image/webp">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="./css/styles.css">
+</head>
+<body class="login-body">
+<div class="login-wrap">
+  <div class="login-card">
+    <div class="login-logo">
+      <img src="./assets/UPD_Placeholder.webp" alt="UPD">
+      <h1>UPD Dashboard</h1>
+      <p>NoPixel Reference — Sign in to continue</p>
+    </div>
+    <form class="login-form" onsubmit="doLogin();return false;">
+      <div class="login-row">
+        <input type="text" id="l-callsign" class="login-input" placeholder="Callsign" autocomplete="off" maxlength="10">
+        <input type="text" id="l-name" class="login-input" placeholder="Name (e.g. Nathan Barr)" autocomplete="off" maxlength="40">
+      </div>
+      <input type="password" id="l-code" class="login-input" placeholder="Department access code" autocomplete="off">
+      <div class="login-error" id="login-error"></div>
+      <button type="submit" class="login-btn" id="login-btn">
+        <i class="fa-solid fa-right-to-bracket"></i> Sign In
+      </button>
+    </form>
+  </div>
+  <div class="login-footer">UPD Dashboard · NoPixel Reference · MIT License</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./js/supabase-init.js"></script>
+<script src="./js/login.js"></script>
+</body>
+</html>

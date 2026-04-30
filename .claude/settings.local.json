@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "WebFetch(domain:docs.google.com)",
-      "WebFetch(domain:doc-0g-ag-sheets.googleusercontent.com)"
+      "WebFetch(domain:doc-0g-ag-sheets.googleusercontent.com)",
+      "WebFetch(domain:dispatch-system-delta.vercel.app)",
+      "Bash(curl -s \"https://dispatch-system-delta.vercel.app\" -H \"User-Agent: Mozilla/5.0\")",
+      "Bash(curl -s \"https://dispatch-system-delta.vercel.app/assets/index-Dt2EkR9e.js\")"
     ]
   }
 }

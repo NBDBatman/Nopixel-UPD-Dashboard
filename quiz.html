@@ -8,6 +8,7 @@
 <link rel="icon" href="./assets/UPD_Placeholder.webp" type="image/webp">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="stylesheet" href="./css/styles.css">
+<script>!function(){try{var s=JSON.parse(localStorage.getItem('upd-session'));if(!s||!s.expires||Date.now()>s.expires)window.location.replace('./login.html');}catch(e){window.location.replace('./login.html');}}();</script>
 </head>
 <body>
 <aside id="sidebar"><div class="sb-logo">
@@ -88,8 +89,12 @@
   </div>
 </div>
 </main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./js/supabase-init.js"></script>
+<script src="./js/auth.js"></script>
 <script src="./js/nav.js"></script>
 <script src="./js/utils.js"></script>
 <script src="./js/quiz.js"></script>
+<script src="./js/presence.js"></script>
 </body>
 </html>
