@@ -180,6 +180,16 @@
       "date": "30/04/26",
       "author": "Barr",
       "change": "Audit logs added — all BOLO actions and auth events are recorded to Supabase with officer name, callsign, and timestamp."
+    },
+    {
+      "date": "01/05/26",
+      "author": "Barr",
+      "change": "Light and dark theme added — toggle between them with the sun/moon button in the online bar. Choice is saved across sessions."
+    },
+    {
+      "date": "01/05/26",
+      "author": "Barr",
+      "change": "Session duration extended — logins now stay active for 30 days instead of 8 hours."
     }
   ]
 }

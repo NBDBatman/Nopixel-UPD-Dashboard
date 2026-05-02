@@ -1,5 +1,5 @@
 const _LOGIN_SESSION_KEY='upd-session';
-const _LOGIN_SESSION_MS=8*60*60*1000;
+const _LOGIN_SESSION_MS=30*24*60*60*1000;
 
 // If already logged in redirect straight to dashboard
 (function(){

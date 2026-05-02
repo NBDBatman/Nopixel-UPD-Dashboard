@@ -1,5 +1,8 @@
-let _bolos=[],_boloFilter='active',_boloEditId=null,_boloListenerActive=false;
+let _bolos=[],_boloFilter='active',_boloEditId=null,_boloListenerActive=false,_boloExpireTimer=null;
+const _boloLoggedHidden=new Set();
 const _PRIO_ORDER={high:0,medium:1,low:2};
+const _BOLO_RESOLVE_MS=60*60*1000;
+const _BOLO_DELETE_MS=2*60*60*1000;
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -16,7 +19,8 @@ function _mapBolo(row){
     owner:row.owner||'',suspect:row.suspect||'',
     reason:row.reason||'',priority:row.priority||'high',
     resolved:row.resolved||false,ts:row.ts||'',
-    addedBy:row.added_by||''
+    addedBy:row.added_by||'',
+    createdAt:row.created_at?new Date(row.created_at).getTime():null
   };
 }
 
@@ -25,7 +29,38 @@ function _mapBolo(row){
 async function _boloFetch(){
   if(!window._sb)return;
   const{data,error}=await _sb.from('bolos').select('*').order('created_at',{ascending:false});
-  if(!error&&data){_bolos=data.map(_mapBolo);boloRender();}
+  if(!error&&data){_bolos=data.map(_mapBolo);_boloAutoExpire();boloRender();}
+}
+
+async function _boloAutoExpire(){
+  if(!window._sb||!_bolos.length)return;
+  const now=Date.now();
+  const toResolve=_bolos.filter(b=>!b.resolved&&b.createdAt&&(now-b.createdAt)>=_BOLO_RESOLVE_MS);
+  const toHide=_bolos.filter(b=>b.resolved&&b.createdAt&&(now-b.createdAt)>=_BOLO_DELETE_MS&&!_boloLoggedHidden.has(b.id));
+  if(toHide.length){
+    for(const b of toHide){
+      _boloLoggedHidden.add(b.id);
+      _boloLog('BOLO hidden from board',_boloSummary(b));
+    }
+    const summaries=toHide.map(b=>'• '+_boloSummary(b)).join('\n');
+    _discordLog(
+      '👁️ '+(toHide.length===1?'BOLO':'BOLOs')+' Hidden from Board',
+      summaries,
+      _DC.grey,
+      [{name:'Count',value:String(toHide.length),inline:true},{name:'Reason',value:'Resolved for 1 hour',inline:true}]
+    );
+  }
+  if(!toResolve.length)return;
+  await _sb.from('bolos').update({resolved:true}).in('id',toResolve.map(b=>b.id));
+  for(const b of toResolve)_boloLog('Auto-resolved BOLO',_boloSummary(b));
+  const summaries=toResolve.map(b=>'• '+_boloSummary(b)).join('\n');
+  _discordLog(
+    '⏱ '+(toResolve.length===1?'BOLO':'BOLOs')+' Auto-Resolved',
+    summaries,
+    _DC.grey,
+    [{name:'Count',value:String(toResolve.length),inline:true},{name:'Reason',value:'Active for 1 hour',inline:true}]
+  );
+  _boloFetch();
 }
 
 function _boloSetupListener(){
@@ -35,6 +70,8 @@ function _boloSetupListener(){
   _sb.channel('bolos-changes')
     .on('postgres_changes',{event:'*',schema:'public',table:'bolos'},()=>{_boloFetch();})
     .subscribe();
+  if(_boloExpireTimer)clearInterval(_boloExpireTimer);
+  _boloExpireTimer=setInterval(()=>{_boloAutoExpire();boloRender();},60000);
 }
 
 // ── Audit Log ────────────────────────────────────────────────────────────────
@@ -276,10 +313,24 @@ function _boloCardNormal(b){
   const suspectHtml=b.suspect?`<div class="bolo-field"><span class="bolo-lbl">Suspect</span><span class="bolo-val">${escapeHtml(b.suspect)}</span></div>`:'';
   const reasonHtml=b.reason?`<div class="bolo-reason">${escapeHtml(b.reason)}</div>`:'';
   const addedByHtml=b.addedBy?`<span class="bolo-added-by">${escapeHtml(b.addedBy)}</span>`:'';
+  let expireHtml='';
+  if(b.createdAt){
+    const threshold=b.resolved?_BOLO_DELETE_MS:_BOLO_RESOLVE_MS;
+    const expiresAt=b.createdAt+threshold;
+    const remaining=expiresAt-Date.now();
+    if(remaining>0){
+      const mins=Math.ceil(remaining/60000);
+      const label=mins>=60?Math.floor(mins/60)+'h '+(mins%60)+'m':mins+'m';
+      const atTime=new Date(expiresAt).toLocaleTimeString('en-AU',{hour:'2-digit',minute:'2-digit',hour12:false});
+      const tip=b.resolved?`Hidden from board at ${atTime}`:`Auto-resolves at ${atTime}`;
+      expireHtml=`<span class="bolo-expire${mins<=15?' bolo-expire-soon':''}" data-tip="${tip}">⏱ ${label}</span>`;
+    }
+  }
   return`<div class="bolo-card bolo-prio-${prio}${b.resolved?' bolo-resolved':''}">
     <div class="bolo-card-head">
       <span class="bolo-prio-pill bolo-pp-${prio}">${prioLabel}</span>
       <span class="bolo-ts">${escapeHtml(b.ts)}</span>
+      ${expireHtml}
       ${b.resolved?'<span class="bolo-res-badge">Resolved</span>':''}
       ${addedByHtml}
     </div>
@@ -327,7 +378,9 @@ function boloRender(){
   const resolvedCount=_bolos.filter(b=>b.resolved).length;
   if(countEl)countEl.textContent=activeCount+' active · '+resolvedCount+' resolved';
   if(clearBtn)clearBtn.style.display=resolvedCount?'':'none';
+  const now=Date.now();
   const filtered=_bolos.filter(b=>{
+    if(b.createdAt&&(now-b.createdAt)>=_BOLO_DELETE_MS)return false;
     if(_boloFilter==='active')return!b.resolved;
     if(_boloFilter==='resolved')return b.resolved;
     return true;

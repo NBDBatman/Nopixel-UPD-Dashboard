@@ -15,7 +15,7 @@ class Vec{
 class SGStreet{
   constructor(engine,street){
     this.engine=engine;this.street=street;
-    this.hovered=false;this.selectable=true;this.guessedCorrectly=false;
+    this.hovered=false;this.selectable=true;this.guessedCorrectly=false;this.isQuestion=false;
     this.segs='Points' in street?[street.Points]:street.Segments;
     this._calcBounds();
   }
@@ -34,15 +34,16 @@ class SGStreet{
         const pl=Math.max(0,Math.min(Vec.sub(cv,a).dot(nd),len));
         const cp=Vec.add(a,Vec.mult(nd,pl));
         const d=cp.dist(cv);
-        if(d<6&&(best===null||d<best))best=d;
+        if(d!==null&&d<6&&(best===null||d<best))best=d;
       }
     }
     return best;
   }
   draw(ctx,zoom){
-    if(!this.hovered&&this.selectable)return;
+    if(!this.hovered&&this.selectable&&!this.isQuestion)return;
     let color,alpha;
-    if(this.selectable){color=this.hovered?'#f97316':'#6b7280';alpha=this.hovered?0.9:0.3;}
+    if(this.isQuestion){color='#f59e0b';alpha=0.95;}
+    else if(this.selectable){color=this.hovered?'#f97316':'#6b7280';alpha=this.hovered?0.9:0.3;}
     else{color=this.guessedCorrectly?'#22c55e':'#ef4444';alpha=0.7;}
     ctx.globalAlpha=alpha;ctx.strokeStyle=color;
     ctx.lineWidth=Math.max(2,3*zoom);ctx.lineCap='round';ctx.lineJoin='round';
@@ -71,6 +72,13 @@ class SGEngine{
     this.objs={};this.data=null;
     this.started=false;this.queue=[];this.qi=0;
     this.guesses=0;this.correct=0;this.t0=null;this.ticking=false;
+    this._paused=false;
+    this.streak=0;this.maxStreak=0;
+    this.missed=[];
+    this.currentKey=null;
+    this.mode='find';
+    this._questionObj=null;
+    this._currentOpts=[];this._currentCorrect=null;
     this._events();
     new ResizeObserver(()=>{
       if(!this.canvas.offsetParent)return;
@@ -82,7 +90,8 @@ class SGEngine{
     this.canvas.addEventListener('mousedown',e=>{this.drag=this._xy(e);this.holding=true;this.moving=false;});
     this._onMove=e=>{
       if(!this.canvas.isConnected)return;
-      const pos=this._xy(e);this._hover(pos);
+      const pos=this._xy(e);
+      if(this.mode==='find')this._hover(pos);
       if(!this.holding)return;
       const d=Vec.sub(this.drag,pos);
       if(d.mag()>3)this.moving=true;
@@ -91,7 +100,7 @@ class SGEngine{
     this._onUp=()=>{this.holding=false;};
     window.addEventListener('mousemove',this._onMove);
     window.addEventListener('mouseup',this._onUp);
-    this.canvas.addEventListener('mouseup',e=>{if(!this.moving&&e.button===0)this._select(this._xy(e));});
+    this.canvas.addEventListener('mouseup',e=>{if(!this.moving&&e.button===0&&this.mode==='find')this._select(this._xy(e));});
     this.canvas.addEventListener('wheel',e=>{
       e.preventDefault();this.animating=false;
       const xy=this._xy(e);
@@ -136,6 +145,7 @@ class SGEngine{
     if(best!==this.hovered){if(this.hovered)this.hovered.hovered=false;this.hovered=best;if(best)best.hovered=true;}
   }
   _select(pos){
+    if(this._paused)return;
     let best=null,bd=Infinity;
     for(const o of Object.values(this.objs)){
       if(!o.selectable||!o.inBounds(this.c2w(pos)))continue;
@@ -155,56 +165,172 @@ class SGEngine{
     this._animStep();
     requestAnimationFrame(()=>this._loop());
   }
+  setMode(mode){
+    if(this.mode===mode)return;
+    this.mode=mode;
+    if(this.started){this.started=false;this.ticking=false;}
+    this._buildObjs();
+    this._resetState();
+  }
   load(dataKey,label){
+    this.currentKey=dataKey;
     this.data=MAP[dataKey];this._resetState();this._buildObjs();this.resetView(false);
     document.getElementById('sg-name').textContent=label;
     document.getElementById('sg-score').textContent='0/'+Object.keys(this.data).length;
     document.getElementById('sg-correct').textContent='0 Correct';
     document.getElementById('sg-incorrect').textContent='0 Incorrect';
     document.getElementById('sg-timer').textContent='0:00';
+    const best=this._getBest(this.currentKey+'-'+this.mode);
+    const bestEl=document.getElementById('sg-best');
+    if(bestEl)bestEl.textContent=best?'Best: '+Math.round(best.pct*100)+'%':'';
   }
   _buildObjs(){this.objs={};for(const[k,s]of Object.entries(this.data))this.objs[k]=new SGStreet(this,s);}
   _resetState(){
     this.started=false;this.queue=[];this.qi=0;this.guesses=0;this.correct=0;this.t0=null;this.ticking=false;
+    this._paused=false;this.streak=0;this.maxStreak=0;this.missed=[];
+    if(this._questionObj){this._questionObj.isQuestion=false;this._questionObj=null;}
     document.getElementById('sg-overlay').classList.remove('show');
     document.getElementById('sg-giveup').style.display='none';
     document.getElementById('sg-start-btn').style.display='inline-block';
-    const sd=document.getElementById('sg-street');sd.textContent='Click Start to Begin';sd.className='sg-street-display unstarted';
+    const streakEl=document.getElementById('sg-streak');if(streakEl)streakEl.textContent='';
+    const findBar=document.getElementById('sg-find-bar');
+    const nameBar=document.getElementById('sg-name-bar');
+    if(this.mode==='find'){
+      if(findBar)findBar.style.display='flex';
+      if(nameBar)nameBar.style.display='none';
+      const sd=document.getElementById('sg-street');
+      if(sd){sd.textContent='Click Start to Begin';sd.className='sg-street-display unstarted';}
+    }else{
+      if(findBar)findBar.style.display='none';
+      if(nameBar)nameBar.style.display='flex';
+      const opts=document.getElementById('sg-options');
+      if(opts)opts.innerHTML='<span class="sg-name-prompt">Click Start to Begin</span>';
+    }
   }
   _updateUI(){
     const total=this.data?Object.keys(this.data).length:0;
     document.getElementById('sg-score').textContent=this.guesses+'/'+total;
     document.getElementById('sg-correct').textContent=this.correct+' Correct';
     document.getElementById('sg-incorrect').textContent=(this.guesses-this.correct)+' Incorrect';
+    const streakEl=document.getElementById('sg-streak');
+    if(streakEl)streakEl.textContent=this.streak>=3?'🔥 '+this.streak:'';
   }
   _showStreet(){
     if(!this.queue.length)return;
+    const cur=this.queue[this.qi];
+    if(this.mode==='find'){
+      const sd=document.getElementById('sg-street');
+      sd.textContent=cur;sd.className='sg-street-display';
+    }else{
+      if(this._questionObj){this._questionObj.isQuestion=false;this._questionObj=null;}
+      const obj=this.objs[cur];
+      if(obj){obj.isQuestion=true;this._questionObj=obj;this.focus(obj);}
+      this._showOptions(cur);
+    }
+  }
+  _showOptions(correctKey){
+    const container=document.getElementById('sg-options');
+    if(!container)return;
+    const allKeys=Object.keys(this.data);
+    const wrong=allKeys.filter(k=>k!==correctKey).sort(()=>Math.random()-.5).slice(0,3);
+    this._currentOpts=[correctKey,...wrong].sort(()=>Math.random()-.5);
+    this._currentCorrect=correctKey;
+    container.innerHTML=this._currentOpts.map((k,i)=>
+      `<button class="sg-opt-btn" onclick="sgEngine&&sgEngine._onNameSelect(${i})">${k}</button>`
+    ).join('');
+  }
+  _flashFeedback(text,ok){
     const sd=document.getElementById('sg-street');
-    sd.textContent=this.queue[this.qi];sd.className='sg-street-display';
+    sd.textContent=text;
+    sd.className='sg-street-display '+(ok?'sg-street-ok':'sg-street-err');
+  }
+  _getBest(key){
+    try{return JSON.parse(localStorage.getItem('upd-sg-best-'+key))||null;}catch(e){return null;}
+  }
+  _saveBest(key,score,total,ms){
+    const pct=score/total;
+    const prev=this._getBest(key);
+    if(!prev||pct>prev.pct||(pct===prev.pct&&ms<prev.ms)){
+      localStorage.setItem('upd-sg-best-'+key,JSON.stringify({pct,score,total,ms,streak:this.maxStreak}));
+      return true;
+    }
+    return false;
   }
   start(){
     if(this.started||!this.data)return;
     this.started=true;
     this.queue=Object.keys(this.data).sort(()=>Math.random()-.5);
     this.qi=0;this.guesses=0;this.correct=0;this.t0=new Date();this.ticking=true;
+    this._paused=false;this.streak=0;this.maxStreak=0;this.missed=[];
     document.getElementById('sg-giveup').style.display='inline-block';
     document.getElementById('sg-start-btn').style.display='none';
     this._updateUI();this._showStreet();this._tick();
   }
-  end(){if(!this.started)return;this.started=false;this.ticking=false;this._showResult();}
-  retry(){document.getElementById('sg-overlay').classList.remove('show');this._buildObjs();this._resetState();this.start();}
-  prev(){if(!this.started)return;this.qi=(this.qi-1+this.queue.length)%this.queue.length;this._showStreet();}
-  next(){if(!this.started)return;this.qi=(this.qi+1)%this.queue.length;this._showStreet();}
-  _onSelect(obj){
+  end(){
     if(!this.started)return;
+    this.started=false;this.ticking=false;this._paused=false;
+    if(this._questionObj){this._questionObj.isQuestion=false;this._questionObj=null;}
+    this._showResult();
+  }
+  retry(){document.getElementById('sg-overlay').classList.remove('show');this._buildObjs();this._resetState();this.start();}
+  prev(){if(!this.started||this._paused||this.mode==='name')return;this.qi=(this.qi-1+this.queue.length)%this.queue.length;this._showStreet();}
+  next(){if(!this.started||this._paused||this.mode==='name')return;this.qi=(this.qi+1)%this.queue.length;this._showStreet();}
+  _onSelect(obj){
+    if(!this.started||this._paused)return;
     const cur=this.queue[this.qi];
     const ok=obj.street.Name===cur;
-    if(ok){obj.selectable=false;obj.guessedCorrectly=true;this.correct++;}
-    else{const co=this.objs[cur];if(co){co.selectable=false;co.guessedCorrectly=false;this.focus(co);}}
-    this.queue.splice(this.qi,1);
-    if(this.qi>=this.queue.length)this.qi=0;
-    this.guesses++;this._updateUI();
-    if(!this.queue.length)this.end();else this._showStreet();
+    this.guesses++;
+    if(ok){
+      obj.selectable=false;obj.guessedCorrectly=true;
+      this.correct++;this.streak++;
+      if(this.streak>this.maxStreak)this.maxStreak=this.streak;
+      this._flashFeedback('✓ '+cur,true);
+      this.queue.splice(this.qi,1);
+      if(this.qi>=this.queue.length)this.qi=0;
+      this._updateUI();
+      if(!this.queue.length){setTimeout(()=>this.end(),500);}
+      else{setTimeout(()=>this._showStreet(),600);}
+    }else{
+      const co=this.objs[cur];
+      if(co){co.selectable=false;co.guessedCorrectly=false;this.focus(co);}
+      this.streak=0;this.missed.push(cur);
+      this._flashFeedback('✗ '+cur,false);
+      this.queue.splice(this.qi,1);
+      if(this.qi>=this.queue.length)this.qi=0;
+      this._paused=true;this._updateUI();
+      setTimeout(()=>{this._paused=false;if(!this.queue.length){this.end();}else{this._showStreet();}},1500);
+    }
+  }
+  _onNameSelect(i){
+    if(!this.started||this._paused)return;
+    const selected=this._currentOpts[i];
+    const correct=this._currentCorrect;
+    const ok=selected===correct;
+    const buttons=[...document.querySelectorAll('#sg-options .sg-opt-btn')];
+    buttons.forEach((b,idx)=>{
+      b.disabled=true;
+      if(this._currentOpts[idx]===correct)b.classList.add('sg-opt-correct');
+      else if(idx===i&&!ok)b.classList.add('sg-opt-wrong');
+    });
+    this.guesses++;
+    if(ok){
+      if(this._questionObj){this._questionObj.isQuestion=false;this._questionObj.guessedCorrectly=true;this._questionObj.selectable=false;this._questionObj=null;}
+      this.correct++;this.streak++;
+      if(this.streak>this.maxStreak)this.maxStreak=this.streak;
+      this.queue.splice(this.qi,1);
+      if(this.qi>=this.queue.length)this.qi=0;
+      this._updateUI();
+      if(!this.queue.length){setTimeout(()=>this.end(),600);}
+      else{setTimeout(()=>this._showStreet(),800);}
+    }else{
+      if(this._questionObj){this._questionObj.isQuestion=false;this._questionObj.guessedCorrectly=false;this._questionObj.selectable=false;this._questionObj=null;}
+      this.streak=0;this.missed.push(correct);
+      this._paused=true;
+      this.queue.splice(this.qi,1);
+      if(this.qi>=this.queue.length)this.qi=0;
+      this._updateUI();
+      setTimeout(()=>{this._paused=false;if(!this.queue.length){this.end();}else{this._showStreet();}},1500);
+    }
   }
   _tick(){
     if(!this.ticking)return;
@@ -215,11 +341,29 @@ class SGEngine{
   }
   _showResult(){
     this.resetView(false);
-    const total=Object.keys(this.data).length,d=new Date()-this.t0;
+    const total=Object.keys(this.data).length;
+    const d=new Date()-this.t0;
     const m=Math.floor(d/60000),s=Math.floor((d%60000)/1000).toString().padStart(2,'0');
+    const isNewBest=this._saveBest(this.currentKey+'-'+this.mode,this.correct,total,d);
     document.getElementById('sg-result-pct').textContent=Math.round(this.correct/total*100)+'%';
     document.getElementById('sg-result-score').textContent=this.correct+'/'+total;
     document.getElementById('sg-result-time').textContent=m+':'+s;
+    const bestEl=document.getElementById('sg-result-best');
+    if(bestEl){
+      if(isNewBest){bestEl.innerHTML='<span class="sg-new-best">🏆 New Best!</span>';}
+      else{const b=this._getBest(this.currentKey+'-'+this.mode);bestEl.textContent=b?'Best: '+Math.round(b.pct*100)+'% ('+b.score+'/'+b.total+')':'';}
+    }
+    const streakEl=document.getElementById('sg-result-streak');
+    if(streakEl)streakEl.textContent=this.maxStreak>0?'Best streak: '+this.maxStreak:'';
+    const missedEl=document.getElementById('sg-result-missed');
+    if(missedEl){
+      if(!this.missed.length){
+        missedEl.innerHTML='<div class="sg-missed-perfect">Perfect round! 🎉</div>';
+      }else{
+        missedEl.innerHTML='<div class="sg-missed-title">Missed ('+this.missed.length+')</div>'+
+          '<div class="sg-missed-list">'+this.missed.map(n=>`<span class="sg-missed-pill">${n}</span>`).join('')+'</div>';
+      }
+    }
     document.getElementById('sg-overlay').classList.add('show');
   }
 }
@@ -232,6 +376,12 @@ function switchGame(key,el){
   document.querySelectorAll('.sg-tab').forEach(t=>t.classList.remove('active'));
   el.classList.add('active');
   if(sgEngine)sgEngine.load(key,GAME_LABELS[key]);
+}
+
+function setGuesserMode(mode,el){
+  document.querySelectorAll('.sg-mode-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  if(sgEngine)sgEngine.setMode(mode);
 }
 
 function _initGuesser(){

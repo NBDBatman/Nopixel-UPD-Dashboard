@@ -41,6 +41,7 @@ function _createOnlineBar(session){
       '<span class="ob-me" id="ob-me"></span>'+
       '<span class="ob-sep">·</span>'+
       '<span class="ob-time" id="ob-time"></span>'+
+      '<button class="ob-theme" id="th-toggle" onclick="toggleTheme()" title="Toggle theme"></button>'+
       '<button class="ob-logout" onclick="logout()" title="Sign out"><i class="fa-solid fa-right-from-bracket"></i></button>'+
     '</div>';
   document.body.appendChild(bar);
