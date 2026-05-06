@@ -1,0 +1,581 @@
+"id","comment","type","direction","from_account_id","from_civ_name","from_account_name","to_account_id","to_civ_name","to_account_name","amount","date","tax_percentage","tax_type","tax_id"
+"dbcca5c7-cb1d-47ed-a5aa-e4f415022665","Business Services Payment: Fuel purchase of 73 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","15","Tue Mar 31 2026 08:55:03 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"de63cf18-23f8-4f95-b00a-dd05d56b1916","Business Services Payment: Fuel purchase of 73 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","73","Tue Mar 31 2026 08:55:03 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"624b7e5f-de49-4969-82d9-76e9e8a546c0","Business Services Reimbursement: Fuel purchase of 12 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","14","Tue Mar 31 2026 09:00:03 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"d34d0069-4d67-4151-99e8-566468c466fc","Restaurant Order Payment cccb6b54-7b4d-433b-ad7a-f5baab8d15d2
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","222","Wed Apr 01 2026 03:30:52 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"228b785d-5063-401d-a87e-33531536920b","Restaurant Order Payment cccb6b54-7b4d-433b-ad7a-f5baab8d15d2","purchase","out","61304777","Nathan Barr","Personal Account","8","null","null","1110","Wed Apr 01 2026 03:30:53 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"19201a49-222d-4775-8cf2-816c6c41fead","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","10","Wed Apr 01 2026 03:40:11 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"572df570-7bea-43db-887b-4e790f75166f","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","50","Wed Apr 01 2026 03:40:11 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"a8a202d2-9105-4545-9453-ea14e768bfef","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","60","Wed Apr 01 2026 05:11:36 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"a17c79d0-ff52-4bb6-bcf8-a808cab14939","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","300","Wed Apr 01 2026 05:11:36 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"b163a5d4-0b31-4a7e-bd89-c06774ea90e0","Twatter Blu Subscription
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","16","Thu Apr 02 2026 07:16:55 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"87f11735-a6df-491e-b208-7c4ba325a203","Twatter Blu Subscription","purchase","out","61304777","Nathan Barr","Personal Account","5","null","null","80","Thu Apr 02 2026 07:16:55 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"4382f859-ae84-4154-a1ca-f03c19a6baed","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","4","Thu Apr 02 2026 08:02:45 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"f8a4f23d-818f-433d-a69a-ad0155509784","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","20","Thu Apr 02 2026 08:02:45 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"5b6bdbd8-6b0f-4f83-b097-162855b3f2c6","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","2","Thu Apr 02 2026 08:02:52 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"0bb1fee8-e8c8-409e-83d3-8190ef6278bd","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","10","Thu Apr 02 2026 08:02:52 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"25ddfa0a-ca05-47a7-9c9c-8a11fd53d145","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","30","Thu Apr 02 2026 08:03:11 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"47ee872c-afa4-48cb-a83e-8cd7fa393786","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","150","Thu Apr 02 2026 08:03:11 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"582205b8-67f3-477f-b21f-7667b8ed7189","Phone Payment from 4206406257","transfer","in","9","Nathan Barr","null","61304777","Nathan Barr","Personal Account","1000","Thu Apr 02 2026 09:09:52 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"f8b74519-5ede-47d5-b352-a5816e5f3a22","Phone Payment to 4209025022","transfer","out","61304777","Nathan Barr","Personal Account","9","null","null","2500","Thu Apr 02 2026 09:10:25 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"ee7c6573-6719-43da-bd61-739e8b6988c8","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","10","Thu Apr 02 2026 09:44:50 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"f7ba44b2-8e52-4643-9c0c-cda736ec0629","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","50","Thu Apr 02 2026 09:44:50 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"fad4c832-175a-4e68-b686-1a443ed3803d","Los Santos Paycheck","payslip","in","10","Government Pay","null","61304777","Nathan Barr","Personal Account","16132","Thu Apr 02 2026 16:13:52 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"9bb3ce9e-f87c-4c82-8f28-1203fa3c314b","Blaine County Paycheck","payslip","in","11","Government Pay","null","61304777","Nathan Barr","Personal Account","56040","Thu Apr 02 2026 16:18:39 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"0baf6560-31df-4267-90c6-e23d1f942988","Showroom Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","7800","Thu Apr 02 2026 16:44:01 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"83e482b8-d553-4fea-a80d-b8c4c95534ae","Showroom Purchase","purchase","out","61304777","Nathan Barr","Personal Account","1","null","null","39000","Thu Apr 02 2026 16:44:01 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"0b997d99-a771-4b30-808f-50c45efa69c8","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","1000","Fri Apr 03 2026 02:33:15 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"16dad2f5-5137-4fa8-99b3-0602140e7a80","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","5000","Fri Apr 03 2026 02:33:15 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"16058e51-857c-451d-90a1-485d55a29a0b","Bennys
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","420","Fri Apr 03 2026 02:34:26 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"eaca00b6-a2bb-4eb9-809d-1ea1ecb2a579","Bennys","purchase","out","61304777","Nathan Barr","Personal Account","5","null","null","2100","Fri Apr 03 2026 02:34:26 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"c58372d1-30ba-4866-aa8b-d237f0daaa6e","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","8","Fri Apr 03 2026 05:40:14 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"26ab8990-07f9-4abe-aac5-cdbdf3635259","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","40","Fri Apr 03 2026 05:40:14 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"e5be5dcd-92bd-4925-a8ca-aabce5b420ac","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","4","Fri Apr 03 2026 05:40:20 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"c032ee53-456a-4baa-a4e2-5a9c9c788907","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","20","Fri Apr 03 2026 05:40:20 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"55124689-0ff5-4ac8-896d-dfb1fecf8e68","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","30","Fri Apr 03 2026 05:40:31 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"b75c6f65-1395-4e15-99d0-c37571e79e8d","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","150","Fri Apr 03 2026 05:40:31 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"5e03432c-62a1-4307-87db-0cba05ea96b1","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","200","Fri Apr 03 2026 06:27:43 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"097d7459-1ffc-4247-87e2-2e3529caab01","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","1000","Fri Apr 03 2026 06:27:43 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"f9a346c1-5652-4df2-af87-54146e3d816f","Business Services Payment: Fuel purchase of 86 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","17","Fri Apr 03 2026 07:07:15 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"e0677618-d342-4b77-b03d-60e4bb86e54d","Business Services Payment: Fuel purchase of 86 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","86","Fri Apr 03 2026 07:07:15 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"ac90ae30-0467-4536-a1d3-951f66d4b03c","Business Services Reimbursement: Fuel purchase of 14 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","17","Fri Apr 03 2026 07:12:15 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"9c833817-6f59-43f1-a17e-9096de19b827","Twatter Blu Subscription
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","16","Sun Apr 05 2026 03:31:33 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"d4e5537f-93d9-4d09-99d7-c6592a511d04","Twatter Blu Subscription","purchase","out","61304777","Nathan Barr","Personal Account","5","null","null","80","Sun Apr 05 2026 03:31:33 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"21411aab-da0b-4f85-a6ba-23bf28536170","Clothing Store
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","5","Sun Apr 05 2026 05:18:13 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"9877a3e5-6cb8-467d-812f-dfd341c0c778","Clothing Store","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","25","Sun Apr 05 2026 05:18:13 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"0891c837-9b97-4ed0-ad49-018504899e28","Business Services Payment: Fuel purchase of 62 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","12","Mon Apr 06 2026 07:11:17 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"63c7ecaa-589e-4500-82e7-f1c16bde6a75","Business Services Payment: Fuel purchase of 62 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","62","Mon Apr 06 2026 07:11:17 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"626d4ef5-6d9e-4e96-b965-b26e32f1436a","Business Services Reimbursement: Fuel purchase of 10 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","12","Mon Apr 06 2026 07:16:17 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"4ca50ad6-37ca-471e-909a-306acb73e05e","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","17","Mon Apr 06 2026 08:34:56 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"6caf8e66-576b-48ab-bdb0-3cb000a4eec1","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","85","Mon Apr 06 2026 08:34:56 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"7dbf41fc-f1e4-4794-8580-6401060d7ece","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","90","Mon Apr 06 2026 08:37:06 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"4d9a3cf3-0370-433c-9dac-527f4809686c","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","450","Mon Apr 06 2026 08:37:06 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"06573de0-7094-4fe7-bfba-a06c2b3fe833","Business Services Payment: Fuel purchase of 89 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","18","Mon Apr 06 2026 08:38:38 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"6baf9e30-f697-4744-9dbf-a237e6de4f47","Business Services Payment: Fuel purchase of 89 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","89","Mon Apr 06 2026 08:38:38 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"65c0fdf9-29d9-40f5-8048-d5aaf6663838","Business Services Reimbursement: Fuel purchase of 15 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","18","Mon Apr 06 2026 08:43:38 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"a660e909-4442-4efa-9d27-17f7bcb60fb4","Bennys
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","320","Mon Apr 06 2026 11:39:54 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"a2b20962-e344-4b89-bc44-88a9b9e4f56b","Bennys","purchase","out","61304777","Nathan Barr","Personal Account","5","null","null","1600","Mon Apr 06 2026 11:39:54 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"c111f5f0-01b7-41fe-adb2-394c6d3400f4","Bennys
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","100","Mon Apr 06 2026 11:42:02 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"bc414f87-8c4e-45ea-868f-3d619d98e598","Bennys","purchase","out","61304777","Nathan Barr","Personal Account","5","null","null","500","Mon Apr 06 2026 11:42:02 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"2cf5e339-98d8-4a9c-af2e-383658b9cf7e","Los Santos Paycheck","payslip","in","10","Government Pay","null","61304777","Nathan Barr","Personal Account","5381","Mon Apr 06 2026 11:52:35 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"6ceb9e25-ad08-4ef5-bd1b-210b25372c1e","Business Services Payment: Fuel purchase of 76 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","15","Mon Apr 06 2026 11:53:49 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"b8f52872-df33-4e06-b400-0d11ed2d51d6","Business Services Payment: Fuel purchase of 76 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","76","Mon Apr 06 2026 11:53:49 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"ae33a8b2-912c-4602-bf10-9405fa22d664","Business Services Reimbursement: Fuel purchase of 13 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","16","Mon Apr 06 2026 11:58:50 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"9d24f754-8835-4796-b097-8c9ef2248816","Blaine County Paycheck","payslip","in","11","Government Pay","null","61304777","Nathan Barr","Personal Account","19600","Mon Apr 06 2026 12:00:26 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"16ca3cca-9727-4e44-a4a2-a24350725b63","Business Services Payment: Fuel purchase of 73 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","15","Tue Apr 07 2026 06:33:54 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"9b4ccd48-3320-4061-acac-28e000227c58","Business Services Payment: Fuel purchase of 73 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","73","Tue Apr 07 2026 06:33:54 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"0c4c1124-4614-4440-b6fb-7d78a380f655","Business Services Reimbursement: Fuel purchase of 12 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","14","Tue Apr 07 2026 06:38:54 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"38fbdbc7-5369-48fb-a291-9896d729a673","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","12","Tue Apr 07 2026 07:45:48 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"4537ad79-e594-4251-9ae1-eed4af657041","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","60","Tue Apr 07 2026 07:45:48 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"8491e1e9-82ea-4fe1-a93c-aa860ca1ba4e","Phone Payment to 4205370174","transfer","out","61304777","Nathan Barr","Personal Account","9","null","null","20000","Wed Apr 08 2026 06:01:00 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"70f9218f-2bc5-425d-9f2e-cdf9cdbf22ec","Phone Payment to 4205224812","transfer","out","61304777","Nathan Barr","Personal Account","9","null","null","5000","Wed Apr 08 2026 07:37:00 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"4f29a609-7ddd-4487-a8a3-908cc31adce1","Phone Payment from 4208855673","transfer","in","9","Nathan Barr","null","61304777","Nathan Barr","Personal Account","5000","Wed Apr 08 2026 07:58:28 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"13503521-1b62-4450-919f-9f46bc2ded5d","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","10","Wed Apr 08 2026 08:34:14 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"acc44f9d-a608-41b3-a015-b0b9cd9f27a7","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","50","Wed Apr 08 2026 08:34:14 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"27309d0e-6ed5-42b4-8720-ca8cfeca996b","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","108","Fri Apr 10 2026 05:12:18 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"26744a7f-b817-41de-9cb9-ad8828476424","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","540","Fri Apr 10 2026 05:12:18 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"fefc3b0b-b9bd-4202-ba06-dc1a8724d924","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","30","Fri Apr 10 2026 08:09:32 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"422764a4-ace5-487c-bee8-4da1455a07ad","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","150","Fri Apr 10 2026 08:09:32 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"5b84af3b-58ce-46fb-9fb2-e022f3d866f6","Business Services Payment: Fuel purchase of 88 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","18","Fri Apr 10 2026 09:43:34 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"3bdaa982-a9b4-49dd-b955-3f244144ddf9","Business Services Payment: Fuel purchase of 88 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","88","Fri Apr 10 2026 09:43:34 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"2a3ba344-a61f-4465-affb-1cc4e7d27590","Business Services Reimbursement: Fuel purchase of 15 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","18","Fri Apr 10 2026 09:48:34 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"429d5f14-80f7-41b6-9ee1-aa09217920f8","Twatter Blu Subscription
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","16","Sun Apr 12 2026 03:47:45 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"3f5f5d2d-7da3-4e71-8898-74de0297b5f1","Twatter Blu Subscription","purchase","out","61304777","Nathan Barr","Personal Account","5","null","null","80","Sun Apr 12 2026 03:47:45 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"6a2d946f-bf8d-4df8-bf46-c21a2694954a","Clothing Store
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","5","Sun Apr 12 2026 04:05:41 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"eac3af4f-863b-4b30-b490-cb2a712d8d26","Clothing Store","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","25","Sun Apr 12 2026 04:05:41 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"5e3391b4-b257-4fc0-bf0a-f94aba0c41f3","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","15","Sun Apr 12 2026 07:34:06 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"41ebf09f-5c50-4919-8bdc-3e82dc356b24","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","75","Sun Apr 12 2026 07:34:06 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"47e916ec-8ff1-42e3-ac88-afd2766272f0","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","4","Sun Apr 12 2026 07:34:33 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"3a3cefb1-977e-4e20-bca0-224921e5118e","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","20","Sun Apr 12 2026 07:34:33 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"33bf05c2-dc6d-463e-b888-8fc79d09de19","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","2","Sun Apr 12 2026 07:34:48 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"01f192a6-c06e-4e0c-87b3-457a6df6d6d7","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","10","Sun Apr 12 2026 07:34:48 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"278b99e6-91a0-4a9f-940b-136473960781","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","150","Sun Apr 12 2026 09:45:06 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"c1c630d0-d08a-4e0c-aeab-6fec44f99a5e","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","750","Sun Apr 12 2026 09:45:07 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"1cd3fb0e-015a-437c-b39f-ce36e8b05649","Clothing Store
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","50","Mon Apr 13 2026 05:33:14 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"27e19888-523e-4ece-9307-c8143b2c16f6","Clothing Store","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","250","Mon Apr 13 2026 05:33:14 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"9e1f4a22-4aa3-4256-bf44-f4b23474f327","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","45","Mon Apr 13 2026 05:38:52 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"1e830fc1-ec15-418b-a00b-e4f4c160b7d3","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","225","Mon Apr 13 2026 05:38:53 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"26ef9a56-9125-44a9-ba2b-cd705bc0b7de","Clothing Store
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","15","Mon Apr 13 2026 05:45:24 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"73e8649b-2f14-48d0-bf42-18abec16e704","Clothing Store","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","75","Mon Apr 13 2026 05:45:24 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"0fc97826-810c-4658-8f22-f8586190c717","Clothing Store
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","5","Mon Apr 13 2026 06:43:22 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"475324be-ef6e-4c0f-8242-c708a4e2cd60","Clothing Store","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","25","Mon Apr 13 2026 06:43:22 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"6309f75a-6532-4c69-86bb-0aad2f127ec7","Business Services Payment: Fuel purchase of 82 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","16","Mon Apr 13 2026 10:43:09 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"dcf7df77-1b2d-494a-8506-8d1bade8f0f4","Business Services Payment: Fuel purchase of 82 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","82","Mon Apr 13 2026 10:43:09 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"0fff7401-9148-4e6d-a4f7-6be0f7a87b15","Business Services Reimbursement: Fuel purchase of 14 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","17","Mon Apr 13 2026 10:48:09 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"200c8ab7-c010-4b65-9a05-18c08703ce59","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","28","Tue Apr 14 2026 08:41:11 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"b6bad9b6-9e7e-45a6-9225-9023143ac3a6","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","140","Tue Apr 14 2026 08:41:11 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"d1887749-47ae-4b5e-be28-d338c1a16807","NATHAN BARR | 16062 | GREEN LIGHT DISTRICT | ENTERTAINMENT WEDDING | FIND THE GROOMS WEDDING GAME WINNER | CONGRATS | $5K !","transfer","in","64522972","Finley Schmidt","Green Light District","61304777","Nathan Barr","Personal Account","5000","Tue Apr 14 2026 14:16:54 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"7aee3dd4-272a-4415-9aa4-9f7840f22ee5","Los Santos Paycheck","payslip","in","10","Government Pay","null","61304777","Nathan Barr","Personal Account","22575","Tue Apr 14 2026 14:42:51 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"fcc76bd8-bd46-458a-b2cf-a8e7794ca0b7","Blaine County Paycheck","payslip","in","11","Government Pay","null","61304777","Nathan Barr","Personal Account","86800","Tue Apr 14 2026 14:48:32 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"3d2a8f29-68ba-431d-b861-0c1bce899170","Business Services Payment: Fuel purchase of 52 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","10","Tue Apr 14 2026 15:23:12 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"a56025c7-ccfa-484b-87c6-724d9abd7680","Business Services Payment: Fuel purchase of 52 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","52","Tue Apr 14 2026 15:23:12 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"752bb2f0-bece-45c1-831e-6b71e65d7fbe","Business Services Reimbursement: Fuel purchase of 9 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","11","Tue Apr 14 2026 15:28:12 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"00c9fa0e-df83-4056-86b9-b796925529d8","Clothing Store
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","5","Tue Apr 14 2026 15:32:46 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"f79979dd-9851-413c-bd0a-16b1a306a0d1","Clothing Store","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","25","Tue Apr 14 2026 15:32:46 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"d22299f3-e6ab-4c42-9449-6e79e8380bdb","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","60","Wed Apr 15 2026 10:09:44 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"7c968c67-e4d5-47cf-b035-cda2d8455220","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","300","Wed Apr 15 2026 10:09:44 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"624063cb-1f63-40fc-8051-1a6f073bab54","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","30","Wed Apr 15 2026 10:10:01 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"1cadfb84-55be-4433-aeb0-b8f055579d1f","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","150","Wed Apr 15 2026 10:10:01 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"9f2812d7-ce58-48d9-a29c-7c0393702d96","Clothing Store
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","30","Wed Apr 15 2026 10:38:56 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"e1064dbf-78c2-476b-88ae-9282503199fe","Clothing Store","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","150","Wed Apr 15 2026 10:38:56 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"566c58f1-4558-4f22-9cd9-63ae6d9ddd92","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","312","Thu Apr 16 2026 05:56:42 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"82da5575-e25b-4580-a962-1dec0a624bd6","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","1560","Thu Apr 16 2026 05:56:42 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"7a68243d-ca42-46aa-8879-0172d14129b6","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","160","Thu Apr 16 2026 05:57:13 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"681ae96a-3b6f-429f-9988-dfbb5c2fc667","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","800","Thu Apr 16 2026 05:57:13 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"211ce0e6-e617-4028-8b6c-9ab5296f670d","Business Services Payment: Fuel purchase of 96 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","19","Thu Apr 16 2026 06:49:31 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"b65a2dd5-9093-424c-84d8-3e11b0d5872c","Business Services Payment: Fuel purchase of 96 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","96","Thu Apr 16 2026 06:49:31 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"0e9c6f82-a1c6-47e5-8a3f-8107b537233e","Business Services Reimbursement: Fuel purchase of 16 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","19","Thu Apr 16 2026 06:54:31 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"07326b9c-570f-4791-af0e-7e130906d246","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","10","Thu Apr 16 2026 07:43:41 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"a1ca2fda-3bfa-40d9-a24b-fd4aac988301","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","50","Thu Apr 16 2026 07:43:41 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"c1888b83-0cb4-4efe-9e1b-eca91c4d03bd","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","6","Thu Apr 16 2026 07:43:48 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"76793c3c-7141-4751-ac45-d20d61f05390","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","30","Thu Apr 16 2026 07:43:48 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"98891ffe-490e-43f5-9d50-23f703780531","Showroom Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","18000","Thu Apr 16 2026 07:49:16 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"41015b02-e768-4cdb-88ca-12d4a41dc904","Showroom Purchase","purchase","out","61304777","Nathan Barr","Personal Account","1","null","null","90000","Thu Apr 16 2026 07:49:16 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"75c625e5-2d59-4cc3-87dc-e0813cabf946","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","45","Thu Apr 16 2026 07:50:33 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"9046eeac-f744-4b1c-8f96-809354ade7a7","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","225","Thu Apr 16 2026 07:50:33 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"c48d6235-f8d8-4b6a-a32e-182700fce24b","Physical payslip cashout","payslip","in","10","Government Pay","null","61304777","Nathan Barr","Personal Account","6900","Thu Apr 16 2026 07:53:04 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"a5fa9ece-3ccb-48d8-96f9-e988991ea430","Los Santos Paycheck","payslip","in","10","Government Pay","null","61304777","Nathan Barr","Personal Account","1792","Thu Apr 16 2026 07:53:05 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"f6372006-6613-446b-ac18-dd1123387fcb","Business Services Payment: Fuel purchase of 70 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","14","Thu Apr 16 2026 08:25:16 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"30566d8b-63d2-4d2f-9e4f-b7a4c109d985","Business Services Payment: Fuel purchase of 70 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","70","Thu Apr 16 2026 08:25:16 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"32be5e3d-f27a-46c6-bb36-44aea0f4264e","Business Services Reimbursement: Fuel purchase of 12 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","14","Thu Apr 16 2026 08:30:16 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"f5a27292-ef33-42d8-9e31-913e084ae841","Bennys
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","750","Thu Apr 16 2026 08:35:10 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"6835637f-d21e-43a2-9b08-7cd4c3634aba","Bennys","purchase","out","61304777","Nathan Barr","Personal Account","5","null","null","3750","Thu Apr 16 2026 08:35:10 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"3e4a752b-668f-43ce-b1d1-c97ead922f0a","Business Services Payment: Fuel purchase of 65 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","13","Thu Apr 16 2026 09:01:12 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"cb8cbcd7-8764-4263-a1c2-cb6d76f89557","Business Services Payment: Fuel purchase of 65 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","65","Thu Apr 16 2026 09:01:12 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"faa4af79-1468-4b09-b888-dcf3c6affe9a","Business Services Reimbursement: Fuel purchase of 11 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","13","Thu Apr 16 2026 09:06:13 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"8d841689-318a-4be7-998b-dba62f3f3ea4","Bennys
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","110","Thu Apr 16 2026 10:37:23 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"c01a4583-6988-4e20-aaf9-dc0e9a8b56b4","Bennys","purchase","out","61304777","Nathan Barr","Personal Account","5","null","null","550","Thu Apr 16 2026 10:37:23 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"e02ad672-9c08-4fe6-90b4-b98314932c38","Phone Payment from 4205607771","transfer","in","9","Nathan Barr","null","61304777","Nathan Barr","Personal Account","30000","Thu Apr 16 2026 11:19:13 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"75d47ddc-561e-44dc-9cea-44e0e31b98c6","Phone Payment from 4205607771","transfer","in","9","Nathan Barr","null","61304777","Nathan Barr","Personal Account","30000","Thu Apr 16 2026 11:19:16 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"9a58dd9e-2fe3-489a-a6f7-bfb3e12f8f83","Business Services Payment: Fuel purchase of 83 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","17","Thu Apr 16 2026 12:59:57 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"5df40518-8501-4b52-b006-ac750bd38a4d","Business Services Payment: Fuel purchase of 83 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","83","Thu Apr 16 2026 12:59:57 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"6ef2b652-f743-4fd6-a446-bde4a074f4b4","Business Services Reimbursement: Fuel purchase of 14 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","17","Thu Apr 16 2026 13:04:57 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"8f25688f-02a7-4633-9b01-34927b2474a0","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","60","Thu Apr 16 2026 13:34:17 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"cd8228d2-c8a6-4848-bd77-ba1698a12c02","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","300","Thu Apr 16 2026 13:34:17 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"bccaf068-31f3-402b-b4f4-5961b3c50788","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","10","Thu Apr 16 2026 13:34:39 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"3886ad28-e8b9-4f3b-90db-5bf93153b6cb","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","50","Thu Apr 16 2026 13:34:39 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"75cef816-6258-4095-a6f0-391486f917b1","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","100","Thu Apr 16 2026 18:37:06 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"08aa3dc1-19c6-4803-a236-7ef96ce62e8b","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","500","Thu Apr 16 2026 18:37:06 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"9ab0cd2e-7383-41a6-94df-dd7daa84b753","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","30","Fri Apr 17 2026 14:51:31 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"601c468a-5434-4a4b-95fd-7dcd9e91515b","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","150","Fri Apr 17 2026 14:51:31 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"4efe6064-d692-417d-b8c9-0cafc74cd6e2","Business Services Payment: Fuel purchase of 68 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","14","Fri Apr 17 2026 15:09:30 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"fad8d3a4-b994-43a3-a972-7b6787b3d429","Business Services Payment: Fuel purchase of 68 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","68","Fri Apr 17 2026 15:09:30 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"66aa770a-16bf-4bbe-b6c0-37194018b53b","Business Services Reimbursement: Fuel purchase of 11 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","13","Fri Apr 17 2026 15:14:30 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"0b645533-e88e-4d51-92ed-5ccbae3fdd65","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","2198","Fri Apr 17 2026 16:06:45 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"ac78c8a7-e5f7-4f98-a291-8498f62fb480","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","10990","Fri Apr 17 2026 16:06:46 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"f0a236be-49f3-481d-9064-b7ee640c978c","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","78","Fri Apr 17 2026 16:22:05 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"801ec183-1ded-4703-882b-c22068d8b60c","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","390","Fri Apr 17 2026 16:22:05 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"0b94ea59-01cd-4c76-b9f2-4580e8e33a73","ATM Withdrawal","withdraw","out","61304777","Nathan Barr","Personal Account","61304777","Nathan Barr","Personal Account","10000","Fri Apr 17 2026 17:47:26 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"7ce47451-57fa-4c0e-b96a-03943d239c7d","Business Charge: Selling S4 Parts, 99mm Turbo & Semi-Slick Set (Teddy Tannadice - 21532)
+Type: Tax","purchase","out","61304777","Teddy Tannadice","Personal Account","10","null","null","14000","Fri Apr 17 2026 18:07:39 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"0125573f-206e-44d5-988d-b348425962e9","Business Charge: Selling S4 Parts, 99mm Turbo & Semi-Slick Set (Teddy Tannadice - 21532)","purchase","out","61304777","Teddy Tannadice","Personal Account","64264460","Teddy Tannadice","Wheelie Good Repairs","70000","Fri Apr 17 2026 18:07:40 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"0125573f-206e-44d5-988d-b348425962e9","Business Charge: Selling S4 Parts, 99mm Turbo & Semi-Slick Set (Teddy Tannadice - 21532)","purchase","out","61304777","Teddy Tannadice","Personal Account","64264460","Eva Yodder","Wheelie Good Repairs","70000","Fri Apr 17 2026 18:07:40 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"5b18bb1b-ad4d-4d09-8b95-817c29471c61","Business Charge: Selling 150 Red Bins (Teddy Tannadice - 21532)
+Type: Tax","purchase","out","61304777","Teddy Tannadice","Personal Account","10","null","null","4500","Fri Apr 17 2026 18:14:32 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"718ab355-d08e-465b-a718-0969caddfcda","Business Charge: Selling 150 Red Bins (Teddy Tannadice - 21532)","purchase","out","61304777","Teddy Tannadice","Personal Account","64264460","Teddy Tannadice","Wheelie Good Repairs","22500","Fri Apr 17 2026 18:14:32 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"718ab355-d08e-465b-a718-0969caddfcda","Business Charge: Selling 150 Red Bins (Teddy Tannadice - 21532)","purchase","out","61304777","Teddy Tannadice","Personal Account","64264460","Eva Yodder","Wheelie Good Repairs","22500","Fri Apr 17 2026 18:14:32 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"a1e82d6c-304a-4a15-9e22-db45b05915ab","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","100","Fri Apr 17 2026 18:23:18 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"b1692834-6ce2-4d58-a699-c1f4af90b955","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","500","Fri Apr 17 2026 18:23:18 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"8084c1f4-b424-4d26-9fb8-fda3337b3492","Los Santos Paycheck","payslip","in","10","Government Pay","null","61304777","Nathan Barr","Personal Account","5275","Fri Apr 17 2026 18:34:45 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"af40b8ad-2220-4476-97af-60554a9c1a35","Blaine County Paycheck","payslip","in","11","Government Pay","null","61304777","Nathan Barr","Personal Account","33600","Fri Apr 17 2026 18:39:04 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"b104636d-7dcc-4877-ab83-b5e7afe56f5b","Phone Payment to 4202140963","transfer","out","61304777","Nathan Barr","Personal Account","9","null","null","5000","Fri Apr 17 2026 18:49:18 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"6a379e43-dad1-4e80-9f63-517c77eed809","Business Services Payment: Fuel purchase of 52 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","10","Fri Apr 17 2026 19:00:02 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"33e348b0-e480-4bb3-8573-dd232f29353c","Business Services Payment: Fuel purchase of 52 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","52","Fri Apr 17 2026 19:00:02 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"6c7b8238-8954-45f7-8120-d97d2fc65c65","Business Services Reimbursement: Fuel purchase of 9 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","11","Fri Apr 17 2026 19:05:03 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"721ebae6-b8ef-4c2b-b345-a80077338074","Restaurant Order Payment 23d5c1c2-f30b-4919-a42a-d5055d72a94f
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","520","Fri Apr 17 2026 20:45:08 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"82ee999f-d31d-414c-ab67-0382b4a8fac8","Restaurant Order Payment 23d5c1c2-f30b-4919-a42a-d5055d72a94f","purchase","out","61304777","Nathan Barr","Personal Account","8","null","null","2600","Fri Apr 17 2026 20:45:08 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"0238ae44-ff2f-480d-94d2-ed44ac37d862","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","120","Fri Apr 17 2026 22:16:00 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"836cca0c-645e-4b27-acc1-e5af6f915b9e","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","600","Fri Apr 17 2026 22:16:00 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"d3fef721-dc8d-43d3-95a6-86bc81084d4d","Business Services Payment: Fuel purchase of 66 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","13","Fri Apr 17 2026 22:19:41 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"9dfc7ddb-a627-42be-92c8-053e465a3f29","Business Services Payment: Fuel purchase of 66 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","66","Fri Apr 17 2026 22:19:41 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"984b7c58-ad76-4536-ae32-df99de20eb2f","Business Services Reimbursement: Fuel purchase of 11 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","13","Fri Apr 17 2026 22:24:42 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"a6b6beeb-3bbf-47ea-af09-20d334441fb2","Business Services Payment: Fuel purchase of 83 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","17","Sat Apr 18 2026 01:24:59 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"bde8479b-80b6-4c1f-915d-5dff00d75040","Business Services Payment: Fuel purchase of 83 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","83","Sat Apr 18 2026 01:24:59 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"fb993534-055a-42e7-8a47-2dd80ac54395","Business Services Reimbursement: Fuel purchase of 40 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","48","Sat Apr 18 2026 01:29:59 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"f7d45b62-98c5-414e-8f0a-c4100dfb66fa","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","44","Sat Apr 18 2026 05:37:19 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"5d896117-1074-4a5e-9c6a-be84e6f8686f","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","220","Sat Apr 18 2026 05:37:19 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"fbbf1308-74ab-4dfe-8ac4-6c10c8b4ac4d","Business Services Payment: Fuel purchase of 46 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","9","Sat Apr 18 2026 05:39:33 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"0bcfaf22-2723-4403-9c70-6f3085038064","Business Services Payment: Fuel purchase of 46 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","46","Sat Apr 18 2026 05:39:33 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"79cf5d53-bba1-4a0f-bf1d-186566768ae9","Business Services Reimbursement: Fuel purchase of 8 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","10","Sat Apr 18 2026 05:44:34 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"c7f96166-804b-4794-8adb-152b7dd76f25","Business Services Payment: Fuel purchase of 5 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","1","Sat Apr 18 2026 05:49:08 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"1371273f-a2ab-419e-bfc6-ebb3aab9a8e1","Business Services Payment: Fuel purchase of 5 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","5","Sat Apr 18 2026 05:49:08 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"dadceb3a-b9ff-4c8e-9d2e-ffe43d2bd73d","Business Services Reimbursement: Fuel purchase of 1 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","1","Sat Apr 18 2026 05:54:08 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"96db152a-01f8-4332-bcb1-a94badb20e88","Business Services Payment: Fuel purchase of 68 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","14","Sat Apr 18 2026 19:38:17 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"a053b164-82d3-4425-92b8-077f6f1fa03b","Business Services Payment: Fuel purchase of 68 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","68","Sat Apr 18 2026 19:38:17 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"6cbc9de9-bc3e-4a84-94ec-bbd08555e53d","Business Services Reimbursement: Fuel purchase of 11 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","13","Sat Apr 18 2026 19:43:18 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"67473fe7-01fa-4142-af93-c6440b322451","Business Services Payment: Fuel purchase of 73 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","15","Sat Apr 18 2026 23:41:25 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"4517d174-236a-4a6f-8a94-4584e9821f5d","Business Services Payment: Fuel purchase of 73 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","73","Sat Apr 18 2026 23:41:25 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"50bdebfa-3104-4d10-8491-8633e41bb65b","Business Services Reimbursement: Fuel purchase of 12 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","14","Sat Apr 18 2026 23:46:25 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"7ebf9ab1-20b9-490d-b94f-7cb96027abd0","Clothing Store
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","25","Sat Apr 18 2026 23:49:20 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"a05903e6-6f9f-4db1-aa2b-6212ed49d404","Clothing Store","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","125","Sat Apr 18 2026 23:49:20 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"e6792a8a-50a5-4002-ba72-297218da9792","Physical payslip cashout","payslip","in","10","Government Pay","null","61304777","Nathan Barr","Personal Account","1200","Sun Apr 19 2026 00:28:12 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"ed6d31f5-3305-4d2f-95eb-1be426faeabf","Los Santos Paycheck","payslip","in","10","Government Pay","null","61304777","Nathan Barr","Personal Account","10781","Sun Apr 19 2026 00:28:14 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"21bacddb-09ac-4e83-abbc-e9d6386c4bee","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","219","Sun Apr 19 2026 02:00:21 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"7da54ab6-769f-4e7f-9304-69c67eda45f0","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","1095","Sun Apr 19 2026 02:00:21 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"9ca55a79-4f79-4dde-ae2f-d1e2969bfba4","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","60","Sun Apr 19 2026 02:00:33 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"eb4b1957-b814-46db-a036-189ba61da96a","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","300","Sun Apr 19 2026 02:00:33 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"5c9a6c32-9744-4562-97b5-c13884e6df4f","Business Services Payment: Fuel purchase of 74 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","15","Sun Apr 19 2026 02:01:45 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"51a53c65-a219-4fce-9e7b-157d4d321c91","Business Services Payment: Fuel purchase of 74 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","74","Sun Apr 19 2026 02:01:45 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"5189ce6a-bb9b-4b2f-abd2-1cfb5fadd60e","Business Services Reimbursement: Fuel purchase of 12 gallons of regular fuel reimbursed.","purchase","in","11","Nathan Barr","null","61304777","Nathan Barr","Personal Account","14","Sun Apr 19 2026 02:06:46 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"6b514a2e-c281-4db3-8edf-90b4c659aa4d","Blaine County Paycheck","payslip","in","11","Government Pay","null","61304777","Nathan Barr","Personal Account","39200","Sun Apr 19 2026 03:52:54 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"0a520f70-adbc-485a-a07f-291867d5a81e","Twatter Blu Subscription
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","16","Sun Apr 19 2026 05:06:51 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"edb4b2a4-0fcd-4c1b-ab19-33ddc5473f3f","Twatter Blu Subscription","purchase","out","61304777","Nathan Barr","Personal Account","5","null","null","80","Sun Apr 19 2026 05:06:51 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"5a0c04ad-bf85-4a5f-8e6f-a3238161b648","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","30","Mon Apr 20 2026 00:56:15 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"58581ab7-e273-4c41-bd55-2e6dc2a94d1e","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","150","Mon Apr 20 2026 00:56:15 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"12da2d3c-1849-4615-b24f-a0b0c5cb1746","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","90","Mon Apr 20 2026 00:56:28 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"01e4fce8-323d-4e7f-82ca-f4778e6a4524","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","450","Mon Apr 20 2026 00:56:28 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"619a0c10-0d0a-41a5-a42f-c162483fc02f","Business Services Payment: Fuel purchase of 95 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","19","Mon Apr 20 2026 02:41:47 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"42a5db0e-52d3-476e-85cb-80dc80b73552","Business Services Payment: Fuel purchase of 95 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","95","Mon Apr 20 2026 02:41:47 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"dfbeba9d-b364-4891-b810-d42e225da453","Business Services Reimbursement: Fuel purchase of 16 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","19","Mon Apr 20 2026 02:46:48 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"fde9f4eb-018c-47e1-9522-81beab031dca","Restaurant Order Payment 3d8838e0-9412-412f-95c9-c57f268906ac
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","555","Mon Apr 20 2026 03:27:44 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"3ba926ea-662b-4a4c-9c92-20ff0be417f3","Restaurant Order Payment 3d8838e0-9412-412f-95c9-c57f268906ac","purchase","out","61304777","Nathan Barr","Personal Account","8","null","null","2775","Mon Apr 20 2026 03:27:44 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"d62bbc8c-a494-4c87-ac1b-ecb884358344","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","16","Mon Apr 20 2026 04:53:13 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"30e2531c-5948-434a-8232-cf30c112639d","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","80","Mon Apr 20 2026 04:53:13 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"65e5435d-0e8a-42f1-a40d-c6a5e04e29b3","ATM Withdrawal","withdraw","out","61304777","Nathan Barr","Personal Account","61304777","Nathan Barr","Personal Account","25000","Mon Apr 20 2026 05:26:40 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"cf3fdc99-9ea2-48c7-bc27-b251a2999641","Business Services Payment: Fuel purchase of 70 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","14","Mon Apr 20 2026 05:51:54 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"bb3d8b49-6166-40a3-a36b-528f3bd30873","Business Services Payment: Fuel purchase of 70 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","70","Mon Apr 20 2026 05:51:54 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"9f2b4fb4-e84b-4e18-b701-e375f513f5e2","Business Services Reimbursement: Fuel purchase of 12 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","14","Mon Apr 20 2026 05:56:54 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"454c7a46-cc27-47ca-a19f-baad4b655612","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","4","Mon Apr 20 2026 07:53:27 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"016a705a-6529-4d34-941c-40901b9314d2","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","20","Mon Apr 20 2026 07:53:27 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"46d846b0-c253-4008-8329-d5029b74f588","ATM Withdrawal","withdraw","out","61304777","Nathan Barr","Personal Account","61304777","Nathan Barr","Personal Account","500","Mon Apr 20 2026 07:57:03 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"b978eb03-fe85-4629-9721-24b348abb01d","ATM Usage Fee - d05ff1db-8218-550f-b589-eab2a26f8744","withdraw","out","61304777","Nathan Barr","Personal Account","61304777","Nathan Barr","Personal Account","50","Mon Apr 20 2026 07:57:03 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"259ba52b-05cb-4c42-8f38-2e9fd3a3177d","Business Services Payment: Fuel purchase of 47 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","9","Mon Apr 20 2026 12:36:18 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"7b05c676-ef92-4292-ba5f-0a77975a2e03","Business Services Payment: Fuel purchase of 47 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","47","Mon Apr 20 2026 12:36:18 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"3a347a98-236b-46c6-a4d9-0a574cbcb878","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","90","Mon Apr 20 2026 12:38:16 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"0e8b22fa-c195-4265-acbb-b507d600de6c","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","450","Mon Apr 20 2026 12:38:16 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"ac81cf5b-2547-4d8b-9496-4f840834bd5d","Business Services Reimbursement: Fuel purchase of 8 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","10","Mon Apr 20 2026 12:41:18 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"3dd20a4a-b188-453a-8dfa-ffbce77e29ae","Los Santos Paycheck","payslip","in","10","Government Pay","null","61304777","Nathan Barr","Personal Account","1772","Mon Apr 20 2026 12:42:07 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"b6e6b877-420f-467e-8694-c247a9d10e0d","Business Services Payment: Fuel purchase of 66 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","13","Mon Apr 20 2026 13:56:20 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"8bc0bc8e-e500-446c-b726-8ff17d2ea646","Business Services Payment: Fuel purchase of 66 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","66","Mon Apr 20 2026 13:56:20 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"c9131861-43c8-49cc-b90e-7db815b065de","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","12","Mon Apr 20 2026 13:58:09 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"89b979ad-11c2-4ba5-a9b1-d661cc11cac5","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","60","Mon Apr 20 2026 13:58:09 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"76d94eba-7cab-4855-9d66-d45ab46e3fc9","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","100","Mon Apr 20 2026 14:53:05 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"be1d2c17-686a-44f8-b6f1-d6bf9bc8e5f9","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","500","Mon Apr 20 2026 14:53:05 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"1e463775-31c2-4214-97ab-2311b673f074","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","10","Mon Apr 20 2026 16:10:55 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"b91e0789-5e0b-4744-b522-d0c2c62091c5","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","50","Mon Apr 20 2026 16:10:55 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"d4fc2246-07a9-4082-94ed-d4a3a027c12e","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","130","Mon Apr 20 2026 17:33:39 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"3e9e8d91-786e-4786-8d74-63fafa314b17","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","650","Mon Apr 20 2026 17:33:39 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"505963e5-9426-4728-b46f-bc5a6369680d","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","65","Mon Apr 20 2026 17:36:13 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"7faba2a7-e1fd-4ae3-b41b-3a288bb8026f","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","325","Mon Apr 20 2026 17:36:13 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"cb8a8723-d67e-485b-81f9-42b660008c76","Business Services Payment: Fuel purchase of 64 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","13","Mon Apr 20 2026 17:44:37 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"49661a24-8364-4006-8dd3-84b216c70cf0","Business Services Payment: Fuel purchase of 64 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","64","Mon Apr 20 2026 17:44:37 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"5376f19e-5ab6-4813-947b-897bcc19adf5","Business Services Reimbursement: Fuel purchase of 11 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","13","Mon Apr 20 2026 17:49:38 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"2d24e1fb-138c-4659-af21-c6da0c7eb072","Business Services Payment: Fuel purchase of 50 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","10","Tue Apr 21 2026 16:03:26 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"3e36581e-be6a-4eb9-aa44-af77d27bb25c","Business Services Payment: Fuel purchase of 50 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","50","Tue Apr 21 2026 16:03:26 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"42b7894f-71f0-4dda-97b8-d76103d3efc8","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","3212","Tue Apr 21 2026 16:05:59 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"42e87441-f71d-457d-82e1-6e3391295845","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","16060","Tue Apr 21 2026 16:05:59 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"a2d45a5d-ff94-4292-bf50-51886ef67c55","Business Services Reimbursement: Fuel purchase of 8 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","10","Tue Apr 21 2026 16:08:26 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"782dc1e2-bedf-4edb-9f78-797b7b9af5db","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","105","Tue Apr 21 2026 16:21:55 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"edd19cea-f541-481e-9ea6-2c69de7ec8aa","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","525","Tue Apr 21 2026 16:21:55 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"8f2058ce-a712-4af3-9052-0a3e272c7e0b","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","30","Tue Apr 21 2026 16:22:13 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"c20ae8d6-b187-4f2f-86f3-a63a0f557732","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","150","Tue Apr 21 2026 16:22:13 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"0e85fb32-6579-4bc6-afb8-f5c6ed659173","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","20","Tue Apr 21 2026 17:31:47 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"7ac1a63e-e44b-4490-ac5e-cc571deff513","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","100","Tue Apr 21 2026 17:31:47 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"fe75eb77-bd58-4b5e-b1c3-84bea5332f03","Los Santos Paycheck","payslip","in","10","Government Pay","null","61304777","Nathan Barr","Personal Account","4200","Tue Apr 21 2026 19:02:16 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"3491dc46-3a72-4d85-996a-d2e523491660","Blaine County Paycheck","payslip","in","11","Government Pay","null","61304777","Nathan Barr","Personal Account","36402","Tue Apr 21 2026 19:06:02 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"e62672f0-6378-409e-8be6-9bf126b408a4","Business Services Payment: Fuel purchase of 58 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","12","Tue Apr 21 2026 19:24:27 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"b805b770-9f22-4f9b-b149-0e0addfbcfc5","Business Services Payment: Fuel purchase of 58 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","58","Tue Apr 21 2026 19:24:27 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"7ade1948-dfac-4887-9bda-c59c474f59db","Business Services Reimbursement: Fuel purchase of 10 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","12","Tue Apr 21 2026 19:29:27 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"8a5c157d-f865-480a-b8ff-2ed41c2db328","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","100","Tue Apr 21 2026 21:27:15 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"031a1fca-0914-408d-9288-5a8fa24b207f","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","500","Tue Apr 21 2026 21:27:15 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"db84e23a-f864-4ead-a967-c9a4474f683a","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","14","Tue Apr 21 2026 22:41:34 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"30bc7120-1c5e-494d-a75c-957c14cb561f","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","70","Tue Apr 21 2026 22:41:34 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"b20a1fab-2f73-439a-a3cd-16b712c75b23","Business Services Payment: Fuel purchase of 77 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","15","Tue Apr 21 2026 23:30:16 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"380c03e8-01df-48eb-ae3c-9a6c9d1e1469","Business Services Payment: Fuel purchase of 77 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","77","Tue Apr 21 2026 23:30:16 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"fcd6a863-beb5-494e-8c10-03934130911a","Business Services Reimbursement: Fuel purchase of 13 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","16","Tue Apr 21 2026 23:35:17 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"8808a5c0-35dc-4e40-8cf0-08c25e0f7fae","Business Services Payment: Fuel purchase of 90 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","18","Wed Apr 22 2026 02:57:18 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"5696d21b-814d-4ce2-a67c-821c3843778d","Business Services Payment: Fuel purchase of 90 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","90","Wed Apr 22 2026 02:57:18 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"baeb12ad-8eec-4375-b36d-6d11397f7a12","Business Services Reimbursement: Fuel purchase of 15 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","18","Wed Apr 22 2026 03:02:18 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"0fa692d6-df2e-442c-a2b1-45836e3fe7c1","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","90","Thu Apr 23 2026 05:56:40 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"46b105cd-a45f-40eb-9ba5-1d57a6b62a7c","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","450","Thu Apr 23 2026 05:56:40 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"a1722df2-440b-48d3-90fe-6372b32e4ec1","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","20","Thu Apr 23 2026 07:01:15 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"2d7c1df5-cbed-46fe-a201-21b27d97a65b","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","100","Thu Apr 23 2026 07:01:15 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"99d39650-acc0-4548-9282-6d1ef7e99f8c","Blaine County Paycheck","payslip","in","11","Government Pay","null","61304777","Nathan Barr","Personal Account","28000","Thu Apr 23 2026 07:21:21 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"8ff6eb4f-e9ce-450a-8fd8-3de368573504","Business Services Payment: Fuel purchase of 64 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","13","Fri Apr 24 2026 20:53:03 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"5dd6902f-6d7c-4a29-98c3-7600efc9df9e","Business Services Payment: Fuel purchase of 64 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","64","Fri Apr 24 2026 20:53:03 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"33baa77a-e823-428f-8241-cd81629f1025","Business Services Reimbursement: Fuel purchase of 11 gallons of regular fuel reimbursed.","purchase","in","11","Nathan Barr","null","61304777","Nathan Barr","Personal Account","13","Fri Apr 24 2026 20:58:03 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"7a11511c-6d54-4710-80b0-5809916c238a","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","40","Fri Apr 24 2026 22:05:49 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"cefd7a95-8a55-4c0c-8335-31dcd4f85aa0","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","200","Fri Apr 24 2026 22:05:49 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"e58bc215-c922-4d5e-a631-f1e02651800f","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","18","Fri Apr 24 2026 22:33:45 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"b3ed9153-2855-4e49-b8d1-f729e354ec43","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","90","Fri Apr 24 2026 22:33:46 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"c1ce8d06-0a7d-4bb1-87e2-761cdd80f0b8","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","75","Fri Apr 24 2026 22:58:24 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"c284b842-200c-41c1-954b-68cbaea5ca70","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","375","Fri Apr 24 2026 22:58:24 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"9eacdd50-d5bf-4365-bf18-44bc6bec3907","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","8","Sat Apr 25 2026 05:46:04 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"aaa37693-91e7-4afb-923b-ab104cf6a883","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","40","Sat Apr 25 2026 05:46:04 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"a6f71c86-2480-4a24-af54-d33e1d99eeb7","Business Services Payment: Fuel purchase of 35 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","7","Sat Apr 25 2026 21:01:05 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"d209e474-4d81-4d90-9360-882837397fd6","Business Services Payment: Fuel purchase of 35 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","35","Sat Apr 25 2026 21:01:05 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"f37f3d0d-90ff-4d9a-80e0-06ba980780d4","Business Services Reimbursement: Fuel purchase of 6 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","7","Sat Apr 25 2026 21:06:05 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"1e25627b-e904-44b4-8fe4-4b355d5e1470","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","30","Sat Apr 25 2026 21:19:39 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"879111fb-315f-4c6e-b984-1b03383e19e9","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","150","Sat Apr 25 2026 21:19:39 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"14f325a0-4d88-4914-9c5c-d89ea5f8227a","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","75","Sat Apr 25 2026 23:33:58 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"547ba17c-ebdb-4687-8f4e-3fb5e28f5e42","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","375","Sat Apr 25 2026 23:33:58 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"5d78ceb9-196b-42a6-9a5f-8d112c03e902","Business Services Payment: Fuel purchase of 60 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","12","Sun Apr 26 2026 04:29:34 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"a403ec4d-29e9-42e5-a8e1-168f739ead71","Business Services Payment: Fuel purchase of 60 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","60","Sun Apr 26 2026 04:29:34 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"7da23361-a309-4782-912c-c6284a978441","Business Services Reimbursement: Fuel purchase of 10 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","12","Sun Apr 26 2026 04:34:35 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"a1b31568-a4fd-4500-be37-d1ec251aa185","Twatter Blu Subscription
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","16","Sun Apr 26 2026 05:07:03 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"759dab38-3dfe-4f32-9674-02d1cbeea34c","Twatter Blu Subscription","purchase","out","61304777","Nathan Barr","Personal Account","5","null","null","80","Sun Apr 26 2026 05:07:03 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"9a7265d0-d7e2-4a24-8731-26f65314f6a6","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","6","Sun Apr 26 2026 07:48:49 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"7c480ac8-ac18-4d08-8768-77af58828ebd","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","30","Sun Apr 26 2026 07:48:49 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"fa894c11-e73c-4b9f-8844-7ac48cf4aa35","Business Services Payment: Fuel purchase of 37 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","7","Sun Apr 26 2026 07:54:22 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"8d6d43b6-4572-411d-b0b8-2d86f9203ec3","Business Services Payment: Fuel purchase of 37 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","37","Sun Apr 26 2026 07:54:22 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"2ce3f8c9-5f00-4941-b751-de8a3012751d","Business Services Reimbursement: Fuel purchase of 6 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","7","Sun Apr 26 2026 07:59:22 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"604f0998-3ca9-487b-936a-d4437788e455","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","77","Sun Apr 26 2026 08:12:30 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"e0b91f92-038f-4a5c-aa14-9b13ca470c01","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","385","Sun Apr 26 2026 08:12:30 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"d56e3ac3-84d7-40bd-b9c1-235f4514f158","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","135","Sun Apr 26 2026 08:19:59 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"665a4ddb-5219-44d6-bef8-ec9bc3909537","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","675","Sun Apr 26 2026 08:19:59 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"19b0088c-229e-44a9-9d23-f7a79c573fdf","Business Services Payment: Fuel purchase of 80 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","16","Mon Apr 27 2026 01:40:48 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"f9b75148-1587-444b-9b4a-2c40499b2fe2","Business Services Payment: Fuel purchase of 80 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","80","Mon Apr 27 2026 01:40:48 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"2f6ae1d1-5730-4084-8207-40b9e66fa108","Business Services Reimbursement: Fuel purchase of 13 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","16","Mon Apr 27 2026 01:45:48 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"a4f34810-ac63-419b-b4d8-8ff6409937f7","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","30","Mon Apr 27 2026 03:31:27 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"9f83e438-4275-4ce5-abd0-bcf80f1a104f","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","150","Mon Apr 27 2026 03:31:27 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"6281637e-46bc-4a04-865e-fbe77cdf9abc","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","8","Mon Apr 27 2026 03:31:57 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"95e3aabb-6835-4bf8-976f-ccf105e12069","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","40","Mon Apr 27 2026 03:31:57 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"f3cb214a-d031-40fa-9265-60510d8d1410","Business Services Payment: Fuel purchase of 44 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","9","Mon Apr 27 2026 05:28:41 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"7221b11d-2f77-4fc4-913f-beeff9e6bb01","Business Services Payment: Fuel purchase of 44 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","44","Mon Apr 27 2026 05:28:41 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"0d65cc0a-7aeb-48ed-beb3-0738e17be256","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","100","Mon Apr 27 2026 05:31:39 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"77f99a7f-9009-431b-bf1a-ef314d2c07fa","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","500","Mon Apr 27 2026 05:31:39 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"438b565e-9b8f-44fb-b0d9-97803fe1e486","Business Services Reimbursement: Fuel purchase of 7 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","8","Mon Apr 27 2026 05:33:42 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"708a8a67-c860-4cae-a2e5-3a9fc0f62155","Los Santos Paycheck","payslip","in","10","Government Pay","null","61304777","Nathan Barr","Personal Account","30193","Mon Apr 27 2026 06:02:05 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"f0f1fe9a-8b47-4ff4-8fb6-b9a683ff9fb0","Blaine County Paycheck","payslip","in","11","Government Pay","null","61304777","Nathan Barr","Personal Account","39315","Mon Apr 27 2026 06:05:37 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"98f8f82a-6cc9-4b24-9cce-e272196c213a","Business Services Payment: Fuel purchase of 62 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","12","Mon Apr 27 2026 23:21:39 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"e976dc06-2b25-4cc6-bd28-a5fc9cf6979d","Business Services Payment: Fuel purchase of 62 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","62","Mon Apr 27 2026 23:21:39 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"ff48bf88-b924-4c52-8302-ec86ee18f318","Business Services Reimbursement: Fuel purchase of 10 gallons of regular fuel reimbursed.","purchase","in","11","Nathan Barr","null","61304777","Nathan Barr","Personal Account","12","Mon Apr 27 2026 23:26:40 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"a6af3fe1-9da9-4363-8d8c-523c2cbbba88","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","16","Mon Apr 27 2026 23:47:19 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"4e0d6c09-2978-415e-8a0e-18e96897a7e0","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","80","Mon Apr 27 2026 23:47:19 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"12ff52b2-fcc1-4fcd-aac8-65fd13ed40b1","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","105","Tue Apr 28 2026 00:21:24 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"a9a11ebf-e7e2-43e5-906a-c448ca721ba0","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","525","Tue Apr 28 2026 00:21:24 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"96d3b7a8-652f-499d-8c6d-2230f52721bf","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","6","Tue Apr 28 2026 03:58:28 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"1367a908-8441-426f-856a-e92bcfc3361f","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","30","Tue Apr 28 2026 03:58:28 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"23d221b7-e274-4499-ab64-55a5f2f6c7d2","Business Services Payment: Fuel purchase of 56 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","11","Tue Apr 28 2026 04:50:54 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"fb70cd22-5c61-4caf-91e6-3222a14a2a3a","Business Services Payment: Fuel purchase of 56 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","56","Tue Apr 28 2026 04:50:54 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"685e3749-ca49-4997-9dcd-97005d57d134","Business Services Reimbursement: Fuel purchase of 9 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","11","Tue Apr 28 2026 04:55:54 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"f8947515-ca59-44b2-9e9c-9a73c16f2e46","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","6","Tue Apr 28 2026 18:30:42 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"74bafcf5-2b42-4290-90e2-b5ea0fae460c","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","30","Tue Apr 28 2026 18:30:42 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"d1a47b4d-3a74-4262-b50c-9481a778db54","Business Services Payment: Fuel purchase of 54 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","11","Tue Apr 28 2026 18:37:35 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"cfb2315e-6658-4f18-bda3-533853b97f73","Business Services Payment: Fuel purchase of 54 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","54","Tue Apr 28 2026 18:37:35 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"d5750cb4-a71f-4675-a828-8552389604e6","Business Services Reimbursement: Fuel purchase of 9 gallons of regular fuel reimbursed.","purchase","in","11","Nathan Barr","null","61304777","Nathan Barr","Personal Account","11","Tue Apr 28 2026 18:42:36 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"bfd45d73-37ef-419d-9e7a-8cfc43828c57","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","164","Tue Apr 28 2026 19:59:54 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"66365842-d3f9-4ebd-a88f-c2f1a1e7029c","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","820","Tue Apr 28 2026 19:59:54 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"f4d4ee61-88ef-4f78-b038-93b5262e35af","Business Services Payment: Fuel purchase of 52 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","10","Tue Apr 28 2026 20:45:19 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"3cb8e5eb-fe7e-44fc-8dba-4f823399fc89","Business Services Payment: Fuel purchase of 52 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","52","Tue Apr 28 2026 20:45:19 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"1e394696-7ea5-429d-9d9e-387d58a3b969","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","90","Wed Apr 29 2026 01:17:34 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"9e1d405e-2a32-418b-a254-458fcb876db1","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","450","Wed Apr 29 2026 01:17:34 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"edf669a4-ef95-4da1-9482-4f3e4a4496da","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","40","Wed Apr 29 2026 01:58:30 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"e8a4e2ae-491d-4d94-b9a2-0a4afae6306c","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","200","Wed Apr 29 2026 01:58:30 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"68ab62e8-c91e-49b2-92c7-98387bf73273","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","20","Wed Apr 29 2026 01:58:36 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"587b09a0-7f56-4855-a335-89cbfef8f3a6","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","100","Wed Apr 29 2026 01:58:36 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"01d8d63e-4052-476d-a358-2da78ce40206","Business Services Payment: Fuel purchase of 53 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","11","Wed Apr 29 2026 03:07:29 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"e276c18c-f6c1-4853-a9dc-f7269dac9b27","Business Services Payment: Fuel purchase of 53 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","53","Wed Apr 29 2026 03:07:29 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"40e21419-3bd4-4e80-9d2b-987294a2e991","Business Services Reimbursement: Fuel purchase of 9 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","11","Wed Apr 29 2026 03:12:29 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"7586b0e5-83b1-479e-8d59-4a3c85b20cc0","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","67","Wed Apr 29 2026 18:23:22 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"9858069d-ff47-4a7e-98f3-784ae82bbacf","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","335","Wed Apr 29 2026 18:23:23 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"bc753873-3330-4130-8b8d-d363e696422e","Business Services Payment: Fuel purchase of 26 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","5","Wed Apr 29 2026 19:01:13 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"b4076978-33a1-4266-9e9d-5494b698508c","Business Services Payment: Fuel purchase of 26 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","26","Wed Apr 29 2026 19:01:13 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"c3d90d87-f1bf-4d68-8c23-c9e91acc2634","Business Services Reimbursement: Fuel purchase of 4 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","5","Wed Apr 29 2026 19:06:13 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"7aee02f3-12b5-4539-b467-83b4bc7c2f5f","Los Santos Paycheck","payslip","in","10","Government Pay","null","61304777","Nathan Barr","Personal Account","9240","Wed Apr 29 2026 23:47:06 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"220bb471-8e47-4212-9eda-ad22d056db70","Business Services Payment: Fuel purchase of 68 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","14","Thu Apr 30 2026 00:52:55 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"3f35ea70-a5b0-41de-bedb-44a46e6fcdda","Business Services Payment: Fuel purchase of 68 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","68","Thu Apr 30 2026 00:52:55 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"d12dad66-1692-4453-b97c-b758a7c8ca93","Business Services Reimbursement: Fuel purchase of 11 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","13","Thu Apr 30 2026 00:57:56 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"7245cfb7-64ab-4d17-b5d1-23058b22daeb","Business Services Payment: Fuel purchase of 50 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","10","Thu Apr 30 2026 03:18:16 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"2e87141c-d0d7-4f81-841e-d6c014603694","Business Services Payment: Fuel purchase of 50 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","50","Thu Apr 30 2026 03:18:16 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"3744c191-9ee9-44ec-a1f3-a11cf966c4cc","Business Services Reimbursement: Fuel purchase of 8 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","10","Thu Apr 30 2026 03:23:17 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"07cf2c87-747f-468c-b2db-fa9a5976a4f6","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","48","Thu Apr 30 2026 04:02:47 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"809b834b-602e-4c87-a846-cd7776a2c072","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","240","Thu Apr 30 2026 04:02:47 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"4bf7c6b3-3c07-44fb-95cc-63f572dc5c94","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","9","Thu Apr 30 2026 18:00:36 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"46b92fa4-4a22-4577-b9c9-f9e64b046314","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","45","Thu Apr 30 2026 18:00:36 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"a58dc825-6410-4c90-ab3c-fc78d552ac05","Business Services Payment: Fuel purchase of 53 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","11","Thu Apr 30 2026 18:03:19 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"53e983a3-fca6-4603-8040-084c9fbd4526","Business Services Payment: Fuel purchase of 53 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","53","Thu Apr 30 2026 18:03:19 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"59411566-5b9e-4128-8e90-9fa74dc9de3d","Business Services Reimbursement: Fuel purchase of 9 gallons of regular fuel reimbursed.","purchase","in","11","Nathan Barr","null","61304777","Nathan Barr","Personal Account","11","Thu Apr 30 2026 18:08:19 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"0a9baf60-11a3-4597-a0bc-ba98e953c9d4","Business Services Payment: Fuel purchase of 48 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","10","Thu Apr 30 2026 22:09:44 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"b209a60b-3ecf-45e1-839b-43d550bd2349","Business Services Payment: Fuel purchase of 48 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","48","Thu Apr 30 2026 22:09:44 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"15eab1d9-12a1-4c2c-845a-5ce240a5455b","Business Services Reimbursement: Fuel purchase of 8 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","10","Thu Apr 30 2026 22:14:44 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"878cb5c6-0872-4cc1-a878-6444a78ee0ed","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","16","Fri May 01 2026 00:25:37 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"2e1438d9-4fac-427c-a8ff-4840ba77b97b","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","80","Fri May 01 2026 00:25:38 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"7ad1ce25-b7e6-4aa5-8c43-4db8dbf72541","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","30","Fri May 01 2026 01:13:52 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"4fe6cdb2-f8c7-4bfc-9657-6e13fbcf8f97","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","150","Fri May 01 2026 01:13:52 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"ec6cff66-492e-4a2c-8884-108016d938d1","Showroom Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","9000","Fri May 01 2026 01:16:02 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"2264c2c9-956c-4931-9a72-847c951af68f","Showroom Purchase","purchase","out","61304777","Nathan Barr","Personal Account","1","null","null","45000","Fri May 01 2026 01:16:02 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"266ac8d2-599a-4ca7-b709-be9458790e90","Business Services Payment: Fuel purchase of 97 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","19","Fri May 01 2026 03:22:11 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"2120bfd1-4bc5-46ca-af6e-eebe6ca06ca1","Business Services Payment: Fuel purchase of 97 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","97","Fri May 01 2026 03:22:11 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"4c454d83-2a65-4e79-8caa-5e8b82b1b30f","Business Services Reimbursement: Fuel purchase of 16 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","19","Fri May 01 2026 03:27:11 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"b5bc4f82-bae7-4567-82e4-b836d4dfcba8","Blaine County Paycheck","payslip","in","11","Government Pay","null","61304777","Nathan Barr","Personal Account","56000","Fri May 01 2026 03:56:21 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"6623b19b-75d1-43cc-98be-30b1d1a82f13","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","620","Fri May 01 2026 04:13:48 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"920f274b-a86d-4510-8656-6261780b7801","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","11","null","null","3100","Fri May 01 2026 04:13:48 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"a98e0974-2e7b-4269-a29e-aa6fd9d97283","Showroom Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","200","Fri May 01 2026 06:16:59 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"b5576e34-4e4d-4283-878d-327bc018b05e","Showroom Purchase","purchase","out","61304777","Nathan Barr","Personal Account","1","null","null","1000","Fri May 01 2026 06:16:59 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"13c89ecd-6869-4ab0-8f36-670e92208ebf","Bennys
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","870","Fri May 01 2026 06:24:39 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"2298376c-3e5c-406d-8873-2e37a613b176","Bennys","purchase","out","61304777","Nathan Barr","Personal Account","5","null","null","4350","Fri May 01 2026 06:24:39 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"53e8746c-5dbc-497f-8cbe-70fda200d6b2","Los Santos Paycheck","payslip","in","10","Government Pay","null","61304777","Nathan Barr","Personal Account","14771","Sat May 02 2026 01:20:50 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"b3b4cb6d-ff49-4438-9d58-2715042bb3e4","Store Purchase
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","100","Sat May 02 2026 01:25:29 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"3c463517-c502-40c9-af90-5a10a08088e2","Store Purchase","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","500","Sat May 02 2026 01:25:29 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"9b81b076-8db8-4fc4-8690-42e3cc0a557c","Thanks for the vehicle parts","transfer","out","61304777","Nathan Barr","Personal Account","64435060","Gonzalina Potogold","Material Gals","120000","Sat May 02 2026 01:44:35 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"9b81b076-8db8-4fc4-8690-42e3cc0a557c","Thanks for the vehicle parts","transfer","out","61304777","Nathan Barr","Personal Account","64435060","Jennifer Lindqvist","Material Gals","120000","Sat May 02 2026 01:44:35 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"9b81b076-8db8-4fc4-8690-42e3cc0a557c","Thanks for the vehicle parts","transfer","out","61304777","Nathan Barr","Personal Account","64435060","Sage Reinhart","Material Gals","120000","Sat May 02 2026 01:44:35 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"e6d7d0d8-70b6-4b1b-a79e-d80acb248082","Business Services Payment: Fuel purchase of 58 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","12","Sat May 02 2026 01:45:48 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"5aeba79c-ed82-4f0f-a176-e46fd5b4eaf4","Business Services Payment: Fuel purchase of 58 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","58","Sat May 02 2026 01:45:49 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"30fef0b3-179c-455e-9054-76ab473d8b04","Business Services Reimbursement: Fuel purchase of 10 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","12","Sat May 02 2026 01:50:49 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"
+"f165b130-810b-4614-aafa-debc90cd7342","Business Services Payment: Fuel purchase of 30 gallons of regular fuel.
+Type: Tax","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","6","Sat May 02 2026 02:46:22 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"e4feda31-252e-49dd-a25d-1c87a4e1dffc","Business Services Payment: Fuel purchase of 30 gallons of regular fuel.","purchase","out","61304777","Nathan Barr","Personal Account","10","null","null","30","Sat May 02 2026 02:46:22 GMT+0000 (Coordinated Universal Time)","20","No Tax","1"
+"56932385-762f-4396-9650-183390cef55f","Business Services Reimbursement: Fuel purchase of 5 gallons of regular fuel reimbursed.","purchase","in","10","Nathan Barr","null","61304777","Nathan Barr","Personal Account","6","Sat May 02 2026 02:51:22 GMT+0000 (Coordinated Universal Time)","0","No Tax","1"

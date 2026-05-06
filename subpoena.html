@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UPD Dashboard — Unit Caps Quiz</title>
+<title>UPD Dashboard — Subpoena Analyser</title>
 <meta name="theme-color" content="#0f1623">
 <link rel="icon" href="./assets/UPD_Placeholder.webp" type="image/webp">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -60,40 +60,116 @@
 </div>
 </aside>
 <main id="main">
-<div class="page active">
-  <div class="page-header"><h1><i class="fa-solid fa-car-side"></i> Unit Caps Quiz</h1><span class="ph-sub">All 9 scenarios per round</span></div>
-  <div class="page-content">
-    <div class="qz-shell">
-      <div class="qz-controls">
-        <div></div>
-        <div class="qz-stats">
-          <span id="uc-score">0 / 9</span>
-          <span id="uc-streak" class="qz-streak-pill">Streak: 0</span>
+<div class="page active" id="page-subpoena">
+  <div class="page-header">
+    <h1><i class="fa-solid fa-magnifying-glass-chart"></i> Subpoena Analyser</h1>
+    <div class="sp-mode-toggle">
+      <button class="sp-mode-btn active" onclick="spSetMode('phone',this)"><i class="fa-solid fa-mobile-screen-button"></i> Phone</button>
+      <button class="sp-mode-btn" onclick="spSetMode('bank',this)"><i class="fa-solid fa-building-columns"></i> Bank</button>
+    </div>
+    <span class="ph-sub">Local only — files are never uploaded</span>
+  </div>
+
+  <!-- ── PHONE ── -->
+  <div id="sp-phone" class="sp-panel">
+    <div class="sp-controls">
+      <button class="np-btn" onclick="spUploadPhone()"><i class="fa-solid fa-upload"></i> Load Files</button>
+      <button class="np-btn" onclick="spImportPhonebook()" title="Import number→name CSV"><i class="fa-solid fa-address-book"></i> Import Contacts</button>
+      <button class="np-btn" onclick="spExportContacts()" title="Export saved contacts as CSV"><i class="fa-solid fa-download"></i> Export Contacts</button>
+      <div class="search-wrap sp-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="sp-phone-search" placeholder="Search messages or contacts…" oninput="spPhoneSearch()">
+      </div>
+      <button class="np-btn" onclick="spOpenExport('phone')" id="sp-phone-export-btn" style="display:none"><i class="fa-solid fa-file-export"></i> Export</button>
+      <button class="np-btn np-btn-danger" onclick="spClearPhone()"><i class="fa-solid fa-trash"></i> Clear</button>
+    </div>
+    <div id="sp-phone-empty" class="sp-empty-state">
+      <i class="fa-solid fa-mobile-screen-button"></i>
+      <strong>No phone records loaded</strong>
+      <span>Upload one or more phone subpoena Excel files to get started.</span>
+      <button class="np-btn" onclick="spUploadPhone()"><i class="fa-solid fa-upload"></i> Load Files</button>
+    </div>
+    <div id="sp-phone-split" class="sp-split" style="display:none">
+      <div class="sp-sidebar">
+        <div class="sp-sidebar-tabs">
+          <button class="sp-sb-tab active" onclick="spSidebarTab('convos',this)">Conversations</button>
+          <button class="sp-sb-tab" onclick="spSidebarTab('stats',this)">Stats</button>
+        </div>
+        <div id="sp-convo-list" class="sp-convo-list"></div>
+        <div id="sp-stats-panel" class="sp-stats-panel" style="display:none"></div>
+      </div>
+      <div class="sp-thread">
+        <div class="sp-thread-header" id="sp-thread-header"></div>
+        <div class="sp-messages" id="sp-messages">
+          <div class="sp-empty sp-empty-thread"><i class="fa-solid fa-comments"></i><span>Select a conversation</span></div>
         </div>
       </div>
-      <div id="uc-game">
-        <div class="tc-card" id="uc-card">
-          <div class="tc-question tc-q-desc" id="uc-question"></div>
-          <div class="tc-options" id="uc-options"></div>
-          <div class="tc-feedback" id="uc-feedback"></div>
-          <div class="tc-next-wrap">
-            <button class="qz-submit-btn" id="uc-next" onclick="_ucAdvance()" style="display:none">Next →</button>
-          </div>
-        </div>
-        <div class="qz-progress" id="uc-progress"></div>
+    </div>
+  </div>
+
+  <!-- ── BANK ── -->
+  <div id="sp-bank" class="sp-panel" style="display:none">
+    <div class="sp-controls">
+      <button class="np-btn" onclick="spUploadBank()"><i class="fa-solid fa-upload"></i> Load Files</button>
+      <div class="search-wrap sp-search">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="sp-bank-search" placeholder="Search transactions…" oninput="spBankSearch()">
       </div>
-      <div id="uc-result" class="qz-result-panel" style="display:none"></div>
+      <select class="roster-filter-sel" id="sp-bank-type" onchange="spBankFilter()"><option value="">All Types</option></select>
+      <select class="roster-filter-sel" id="sp-bank-dir" onchange="spBankFilter()"><option value="">All Directions</option></select>
+      <div class="sp-col-btn-wrap">
+        <button class="np-btn" onclick="spToggleBankColPicker(this)"><i class="fa-solid fa-table-columns"></i> Columns</button>
+      </div>
+      <button class="np-btn" onclick="spOpenExport('bank')" id="sp-bank-export-btn" style="display:none"><i class="fa-solid fa-file-export"></i> Export</button>
+      <button class="np-btn np-btn-danger" onclick="spClearBank()"><i class="fa-solid fa-trash"></i> Clear</button>
+    </div>
+    <div id="sp-bank-empty" class="sp-empty-state">
+      <i class="fa-solid fa-building-columns"></i>
+      <strong>No bank records loaded</strong>
+      <span>Upload one or more bank subpoena Excel files to get started.</span>
+      <button class="np-btn" onclick="spUploadBank()"><i class="fa-solid fa-upload"></i> Load Files</button>
+    </div>
+    <div id="sp-bank-content" style="display:none;flex-direction:row;flex:1;overflow:hidden">
+      <div class="sp-sidebar sp-bank-sidebar">
+        <div class="sp-bank-sidebar-hd">Bank Views</div>
+        <div id="sp-account-list" class="sp-convo-list"></div>
+      </div>
+      <div class="sp-bank-main">
+        <div class="sp-bank-view-header"><i class="fa-solid fa-layer-group"></i><span id="sp-bank-view-title">All Transactions</span></div>
+        <div class="sp-stats-bar" id="sp-bank-stats"></div>
+        <div class="tbl-wrap sp-bank-tbl">
+          <table>
+            <thead><tr id="sp-bank-head">
+              <th>Date</th><th>Type</th><th>Direction</th><th>From</th><th>To</th><th>Amount</th><th>Comment</th>
+            </tr></thead>
+            <tbody id="sp-bank-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ── EXPORT OVERLAY ── -->
+  <div id="sp-export-overlay" class="sp-export-overlay" style="display:none">
+    <div class="sp-export-topbar">
+      <button class="np-btn" onclick="spCloseExport()"><i class="fa-solid fa-arrow-left"></i> Back</button>
+      <span class="sp-export-hint"><i class="fa-solid fa-eye-slash"></i> Click any entry to hide it from the export</span>
+      <button class="np-btn" id="sp-create-png-btn" onclick="spCreatePng()"><i class="fa-solid fa-image"></i> Create PNG</button>
+    </div>
+    <div class="sp-export-scroll">
+      <div class="sp-export-content" id="sp-export-content"></div>
     </div>
   </div>
 </div>
 </main>
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="./js/supabase-init.js"></script>
 <script src="./js/auth.js"></script>
 <script src="./js/discord.js"></script>
 <script src="./js/nav.js"></script>
 <script src="./js/utils.js"></script>
-<script src="./js/ucquiz.js"></script>
+<script src="./js/subpoena.js"></script>
 <script src="./js/presence.js"></script>
 <script src="./js/theme.js"></script>
 </body>
