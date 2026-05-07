@@ -34,8 +34,10 @@ function _initPresence(){
 
   const _presRefresh=()=>{
     const state=channel.presenceState();
-    const users=Object.values(state).flat();
-    _updateOnlineBar(users,session.uid);
+    const all=Object.values(state).flat();
+    const seen=new Map();
+    for(const u of all)seen.set(u.uid,u);
+    _updateOnlineBar([...seen.values()],session.uid);
   };
 
   channel

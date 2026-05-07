@@ -751,11 +751,13 @@ function _npFlushSave(){
   const note=_npActiveNote();if(!note)return;
   const ta=document.getElementById('np-area');if(!ta)return;
   note.content=ta.value;note.modified=Date.now();
+  let _npNameChanged=false;
   if(!note.name){
     const first=ta.value.split('\n').map(l=>l.replace(/^#+\s*/,'')).find(l=>l.trim());
-    if(first){note.name=first.trim().slice(0,40);const t=document.getElementById('np-note-title');if(t&&!t.value)t.placeholder=note.name;}
+    if(first){const derived=first.trim().slice(0,40);if(derived!==note.name){note.name=derived;_npNameChanged=true;}const t=document.getElementById('np-note-title');if(t&&!t.value)t.placeholder=note.name;}
   }
-  _npWrite();_npRenderSidebar();
+  _npWrite();
+  if(_npNameChanged)_npRenderSidebar();
   // Save version snapshot
   _npSaveVersion(note.id,note.content);
   const ind=document.getElementById('np-saved-indicator');
