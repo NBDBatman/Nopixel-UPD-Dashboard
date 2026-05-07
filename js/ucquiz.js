@@ -10,9 +10,10 @@ const UNIT_CAPS=[
   {scenario:'Powerplant Disruption',    cap:'10 units + Air 1'},
 ];
 
-let _ucQueue=[],_ucIdx=0,_ucCorrect=0,_ucStreak=0,_ucResults=[],_ucAnswered=false;
+const UC_STORE='upd-uc-scores';
+let _ucQueue=[],_ucIdx=0,_ucCorrect=0,_ucStreak=0,_ucMaxStreak=0,_ucResults=[],_ucAnswered=false;
 let _ucTimer=null,_ucTick=null;
-const _UC_DELAY=5;
+const _UC_DELAY=5,_UC_ROUND=7;
 
 function _ucStartTimer(){
   const next=document.getElementById('uc-next');
@@ -42,8 +43,8 @@ function ucStart(){
   if(_ucTimer){clearTimeout(_ucTimer);_ucTimer=null;}
   if(_ucTick){clearInterval(_ucTick);_ucTick=null;}
   const bar=document.getElementById('uc-timer-bar');if(bar)bar.remove();
-  _ucQueue=[...UNIT_CAPS].sort(()=>Math.random()-.5);
-  _ucIdx=0;_ucCorrect=0;_ucStreak=0;_ucResults=[];_ucAnswered=false;
+  _ucQueue=[...UNIT_CAPS].sort(()=>Math.random()-.5).slice(0,_UC_ROUND);
+  _ucIdx=0;_ucCorrect=0;_ucStreak=0;_ucMaxStreak=0;_ucResults=[];_ucAnswered=false;
   document.getElementById('uc-game').style.display='';
   document.getElementById('uc-result').style.display='none';
   document.getElementById('uc-next').style.display='none';
@@ -81,7 +82,7 @@ function ucSelect(selected){
     document.getElementById('uc-card').className='tc-card tc-card-correct';
     fb.innerHTML='<i class="fa-solid fa-circle-check"></i> Correct!';
     fb.className='tc-feedback tc-fb-ok';
-    _ucCorrect++;_ucStreak++;
+    _ucCorrect++;_ucStreak++;if(_ucStreak>_ucMaxStreak)_ucMaxStreak=_ucStreak;
   }else{
     document.getElementById('uc-card').className='tc-card tc-card-wrong';
     fb.innerHTML=`<i class="fa-solid fa-circle-xmark"></i> Incorrect — <strong>${escapeHtml(q.cap)}</strong>`;
@@ -119,10 +120,43 @@ function _ucRenderProgress(){
   }).join('');
 }
 
+function _ucSaveScore(pct){
+  let s={};try{s=JSON.parse(localStorage.getItem(UC_STORE))||{};}catch(e){}
+  const newBest=pct>(s.bestPct||0)||_ucMaxStreak>(s.bestStreak||0);
+  s.bestPct=Math.max(pct,s.bestPct||0);
+  s.bestStreak=Math.max(_ucMaxStreak,s.bestStreak||0);
+  s.gamesPlayed=(s.gamesPlayed||0)+1;
+  try{localStorage.setItem(UC_STORE,JSON.stringify(s));}catch(e){}
+  return{s,newBest};
+}
+
+let _ucReviewList=[],_ucReviewIdx=0;
+function _ucStartReview(){
+  _ucReviewList=_ucResults.filter(r=>!r.ok);
+  _ucReviewIdx=0;
+  _ucRenderReview();
+}
+function _ucRenderReview(){
+  const item=_ucReviewList[_ucReviewIdx];
+  const res=document.getElementById('uc-result');
+  const isLast=_ucReviewIdx>=_ucReviewList.length-1;
+  res.innerHTML=`
+    <div class="qz-review-hd">Review <span class="qz-review-prog">${_ucReviewIdx+1} / ${_ucReviewList.length}</span></div>
+    <div class="qz-review-card">
+      <div class="qz-review-q">${escapeHtml(item.scenario)}</div>
+      <div class="qz-review-a">${escapeHtml(item.cap)}</div>
+    </div>
+    <button class="qz-restart-btn" onclick="${isLast?'ucStart()':'_ucReviewNext()'}">
+      ${isLast?'<i class="fa-solid fa-rotate-right"></i> Try Again':'Next <i class="fa-solid fa-arrow-right"></i>'}
+    </button>`;
+}
+function _ucReviewNext(){_ucReviewIdx++;_ucRenderReview();}
+
 function _ucShowResult(){
   const pct=Math.round(_ucCorrect/_ucQueue.length*100);
   const label=pct===100?'Perfect!':pct>=80?'Nice work!':pct>=60?'Getting there!':'Keep practising!';
   const wrong=_ucResults.filter(r=>!r.ok);
+  const {s,newBest}=_ucSaveScore(pct);
   document.getElementById('uc-game').style.display='none';
   const res=document.getElementById('uc-result');
   res.style.display='';
@@ -130,11 +164,15 @@ function _ucShowResult(){
     <div class="qz-res-pct">${pct}%</div>
     <div class="qz-res-label">${escapeHtml(label)}</div>
     <div class="qz-res-sub">${_ucCorrect} of ${_ucQueue.length} correct</div>
+    <div class="qz-pb-row">${newBest?'<span class="qz-pb-badge"><i class="fa-solid fa-trophy"></i> Personal Best!</span>':''}<span class="qz-pb-stats">Best: ${s.bestPct}% · Streak: ${s.bestStreak} · Games: ${s.gamesPlayed}</span></div>
     ${wrong.length?`<div class="tc-missed">
       <div class="tc-missed-title">Missed</div>
       ${wrong.map(r=>`<div class="tc-missed-row"><span class="tc-missed-code">${escapeHtml(r.scenario)}</span><span class="tc-missed-desc">${escapeHtml(r.cap)}</span></div>`).join('')}
     </div>`:''}
-    <button class="qz-restart-btn" onclick="ucStart()"><i class="fa-solid fa-rotate-right"></i> Try Again</button>`;
+    <div class="qz-result-btns">
+      <button class="qz-restart-btn" onclick="ucStart()"><i class="fa-solid fa-rotate-right"></i> Try Again</button>
+      ${wrong.length?`<button class="qz-review-btn" onclick="_ucStartReview()"><i class="fa-solid fa-eye"></i> Review Missed</button>`:''}
+    </div>`;
 }
 
 document.addEventListener('keydown',e=>{

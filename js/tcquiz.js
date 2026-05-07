@@ -1,5 +1,6 @@
 // Requires CODES array from codes.js
-let _tcMode='code',_tcQueue=[],_tcIdx=0,_tcCorrect=0,_tcStreak=0,_tcResults=[],_tcAnswered=false;
+const TC_STORE='upd-tc-scores';
+let _tcMode='code',_tcFilter='all',_tcQueue=[],_tcIdx=0,_tcCorrect=0,_tcStreak=0,_tcMaxStreak=0,_tcResults=[],_tcAnswered=false;
 let _tcTimer=null,_tcTick=null;
 const _TC_ROUND=20,_TC_DELAY=5;
 
@@ -28,8 +29,17 @@ function _tcStartTimer(){
 }
 
 function tcSetMode(mode,el){
-  _tcMode=mode;
+  _tcMode=mode;_tcFilter='all';
   document.querySelectorAll('.tc-mode-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.tc-filter-btn').forEach(b=>b.classList.remove('active'));
+  const allBtn=document.querySelector('.tc-filter-btn');if(allBtn)allBtn.classList.add('active');
+  tcStart();
+}
+
+function tcSetFilter(f,el){
+  _tcFilter=f;
+  document.querySelectorAll('.tc-filter-btn').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
   tcStart();
 }
@@ -38,8 +48,9 @@ function tcStart(){
   if(_tcTimer){clearTimeout(_tcTimer);_tcTimer=null;}
   if(_tcTick){clearInterval(_tcTick);_tcTick=null;}
   const bar=document.getElementById('tc-timer-bar');if(bar)bar.remove();
-  _tcQueue=[...CODES].sort(()=>Math.random()-.5).slice(0,Math.min(_TC_ROUND,CODES.length));
-  _tcIdx=0;_tcCorrect=0;_tcStreak=0;_tcResults=[];_tcAnswered=false;
+  const _tcPool=_tcFilter==='all'?CODES:CODES.filter(c=>c.prio===_tcFilter);
+  _tcQueue=[..._tcPool].sort(()=>Math.random()-.5).slice(0,Math.min(_TC_ROUND,_tcPool.length));
+  _tcIdx=0;_tcCorrect=0;_tcStreak=0;_tcMaxStreak=0;_tcResults=[];_tcAnswered=false;
   document.getElementById('tc-game').style.display='';
   document.getElementById('tc-result').style.display='none';
   document.getElementById('tc-next').style.display='none';
@@ -85,7 +96,7 @@ function tcSelect(selected){
     card.className='tc-card tc-card-correct';
     fb.innerHTML='<i class="fa-solid fa-circle-check"></i> Correct!';
     fb.className='tc-feedback tc-fb-ok';
-    _tcCorrect++;_tcStreak++;
+    _tcCorrect++;_tcStreak++;if(_tcStreak>_tcMaxStreak)_tcMaxStreak=_tcStreak;
   }else{
     card.className='tc-card tc-card-wrong';
     const ans=_tcMode==='code'?q.desc:q.code;
@@ -125,10 +136,43 @@ function _tcRenderProgress(){
   }).join('');
 }
 
+function _tcSaveScore(pct){
+  let s={};try{s=JSON.parse(localStorage.getItem(TC_STORE))||{};}catch(e){}
+  const newBest=pct>(s.bestPct||0)||_tcMaxStreak>(s.bestStreak||0);
+  s.bestPct=Math.max(pct,s.bestPct||0);
+  s.bestStreak=Math.max(_tcMaxStreak,s.bestStreak||0);
+  s.gamesPlayed=(s.gamesPlayed||0)+1;
+  try{localStorage.setItem(TC_STORE,JSON.stringify(s));}catch(e){}
+  return{s,newBest};
+}
+
+let _tcReviewList=[],_tcReviewIdx=0;
+function _tcStartReview(){
+  _tcReviewList=_tcResults.filter(r=>!r.ok);
+  _tcReviewIdx=0;
+  _tcRenderReview();
+}
+function _tcRenderReview(){
+  const item=_tcReviewList[_tcReviewIdx];
+  const res=document.getElementById('tc-result');
+  const isLast=_tcReviewIdx>=_tcReviewList.length-1;
+  res.innerHTML=`
+    <div class="qz-review-hd">Review <span class="qz-review-prog">${_tcReviewIdx+1} / ${_tcReviewList.length}</span></div>
+    <div class="qz-review-card">
+      <div class="qz-review-q">${escapeHtml(item.code)}</div>
+      <div class="qz-review-a">${escapeHtml(item.desc)}</div>
+    </div>
+    <button class="qz-restart-btn" onclick="${isLast?'tcStart()':'_tcReviewNext()'}">
+      ${isLast?'<i class="fa-solid fa-rotate-right"></i> Try Again':'Next <i class="fa-solid fa-arrow-right"></i>'}
+    </button>`;
+}
+function _tcReviewNext(){_tcReviewIdx++;_tcRenderReview();}
+
 function _tcShowResult(){
   const pct=Math.round(_tcCorrect/_tcQueue.length*100);
   const label=pct===100?'Perfect!':pct>=80?'Nice work!':pct>=60?'Getting there!':'Keep practising!';
   const wrong=_tcResults.filter(r=>!r.ok);
+  const {s,newBest}=_tcSaveScore(pct);
   document.getElementById('tc-game').style.display='none';
   const res=document.getElementById('tc-result');
   res.style.display='';
@@ -136,11 +180,15 @@ function _tcShowResult(){
     <div class="qz-res-pct">${pct}%</div>
     <div class="qz-res-label">${escapeHtml(label)}</div>
     <div class="qz-res-sub">${_tcCorrect} of ${_tcQueue.length} correct</div>
+    <div class="qz-pb-row">${newBest?'<span class="qz-pb-badge"><i class="fa-solid fa-trophy"></i> Personal Best!</span>':''}<span class="qz-pb-stats">Best: ${s.bestPct}% · Streak: ${s.bestStreak} · Games: ${s.gamesPlayed}</span></div>
     ${wrong.length?`<div class="tc-missed">
       <div class="tc-missed-title">Missed</div>
       ${wrong.map(r=>`<div class="tc-missed-row"><span class="tc-missed-code">${escapeHtml(r.code)}</span><span class="tc-missed-desc">${escapeHtml(r.desc)}</span></div>`).join('')}
     </div>`:''}
-    <button class="qz-restart-btn" onclick="tcStart()"><i class="fa-solid fa-rotate-right"></i> Try Again</button>`;
+    <div class="qz-result-btns">
+      <button class="qz-restart-btn" onclick="tcStart()"><i class="fa-solid fa-rotate-right"></i> Try Again</button>
+      ${wrong.length?`<button class="qz-review-btn" onclick="_tcStartReview()"><i class="fa-solid fa-eye"></i> Review Missed</button>`:''}
+    </div>`;
 }
 
 document.addEventListener('keydown',e=>{

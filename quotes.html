@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UPD Dashboard — Templates</title>
+<title>UPD Dashboard — Quote Board</title>
 <meta name="theme-color" content="#0f1623">
 <link rel="icon" href="./assets/UPD_Placeholder.webp" type="image/webp">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -62,9 +62,31 @@
 </aside>
 <main id="main">
 <div class="page active">
-  <div class="page-header"><h1><i class="fa-solid fa-file-lines"></i> Templates</h1><span class="ph-sub" id="tmpl-count">Report Templates</span></div>
+  <div class="page-header">
+    <h1><i class="fa-solid fa-quote-left"></i> Quote Board</h1>
+    <span class="ph-sub">On-duty moments worth remembering</span>
+    <span class="ph-storage-notice ph-storage-db"><i class="fa-solid fa-database"></i> Quotes are shared and stored in the database</span>
+  </div>
   <div class="page-content">
-    <div class="tmpl-grid" id="tmpl-container"></div>
+    <div class="qb-form" id="qb-form">
+      <div class="qb-form-label"><i class="fa-solid fa-plus"></i> Submit Quote</div>
+      <textarea id="qb-text" class="qb-textarea" placeholder="What was said? (Ctrl+Enter to submit)" rows="3"></textarea>
+      <div class="qb-form-row">
+        <input id="qb-said-by" class="qb-input" placeholder="Who said it?">
+        <input id="qb-context" class="qb-input" placeholder="Context (optional — what was happening)">
+        <button class="qb-submit-btn" onclick="qbSubmit()"><i class="fa-solid fa-paper-plane"></i> Submit</button>
+      </div>
+    </div>
+    <div class="qb-controls">
+      <div class="qb-tabs">
+        <button class="qb-tab active" onclick="qbSetSort('top',this)"><i class="fa-solid fa-fire"></i> Top</button>
+        <button class="qb-tab" onclick="qbSetSort('new',this)"><i class="fa-solid fa-clock"></i> New</button>
+      </div>
+      <input class="qb-search" id="qb-search" placeholder="Search quotes…" oninput="qbSearch(this.value)">
+    </div>
+    <div class="qb-list" id="qb-list">
+      <div class="qb-empty"><i class="fa-solid fa-quote-left"></i><span>Loading quotes…</span></div>
+    </div>
   </div>
 </div>
 </main>
@@ -74,7 +96,7 @@
 <script src="./js/discord.js"></script>
 <script src="./js/nav.js"></script>
 <script src="./js/utils.js"></script>
-<script src="./js/templates.js"></script>
+<script src="./js/quotes.js"></script>
 <script src="./js/presence.js"></script>
 <script src="./js/theme.js"></script>
 </body>

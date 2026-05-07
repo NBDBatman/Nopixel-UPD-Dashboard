@@ -29,7 +29,7 @@ function _mapBolo(row){
 async function _boloFetch(){
   if(!window._sb)return;
   const{data,error}=await _sb.from('bolos').select('*').order('created_at',{ascending:false});
-  if(!error&&data){_bolos=data.map(_mapBolo);_boloAutoExpire();boloRender();}
+  if(!error&&data){_bolos=data.map(_mapBolo);_boloAutoExpire();boloRender();_boloCheckDeepLink();}
 }
 
 async function _boloAutoExpire(){
@@ -188,6 +188,30 @@ async function boloSaveInline(){
   _boloFetch();
 }
 
+// ── Deep Link ─────────────────────────────────────────────────────────────────
+
+function boloCopyLink(id){
+  const url=location.href.split('?')[0]+'?bolo='+id;
+  navigator.clipboard.writeText(url).then(()=>{
+    const btn=document.querySelector(`.bolo-btn-link[data-id="${id}"]`);
+    if(btn){const orig=btn.innerHTML;btn.innerHTML='<i class="fa-solid fa-check"></i>';setTimeout(()=>{btn.innerHTML=orig;},1800);}
+  });
+}
+
+function _boloCheckDeepLink(){
+  const id=new URLSearchParams(location.search).get('bolo');
+  if(!id)return;
+  history.replaceState(null,'',location.pathname);
+  const b=_bolos.find(e=>e.id===id);
+  if(!b)return;
+  if(b.resolved&&_boloFilter==='active'){boloSetFilter('resolved',null);}
+  else if(!b.resolved&&_boloFilter==='resolved'){boloSetFilter('active',null);}
+  requestAnimationFrame(()=>{
+    const card=document.querySelector(`.bolo-card[data-bolo-id="${id}"]`);
+    if(card){card.scrollIntoView({behavior:'smooth',block:'center'});card.classList.add('dl-highlight');setTimeout(()=>card.classList.remove('dl-highlight'),2500);}
+  });
+}
+
 // ── Copy for 311 ─────────────────────────────────────────────────────────────
 
 function boloCopy311(id){
@@ -326,7 +350,7 @@ function _boloCardNormal(b){
       expireHtml=`<span class="bolo-expire${mins<=15?' bolo-expire-soon':''}" data-tip="${tip}">⏱ ${label}</span>`;
     }
   }
-  return`<div class="bolo-card bolo-prio-${prio}${b.resolved?' bolo-resolved':''}">
+  return`<div class="bolo-card bolo-prio-${prio}${b.resolved?' bolo-resolved':''}" data-bolo-id="${b.id}">
     <div class="bolo-card-head">
       <span class="bolo-prio-pill bolo-pp-${prio}">${prioLabel}</span>
       <span class="bolo-ts">${escapeHtml(b.ts)}</span>
@@ -339,6 +363,7 @@ function _boloCardNormal(b){
       <button class="bolo-btn bolo-btn-res" onclick="boloResolve('${b.id}')">${b.resolved?'<i class="fa-solid fa-rotate-left"></i> Reopen':'<i class="fa-solid fa-check"></i> Resolve'}</button>
       <button class="bolo-btn bolo-btn-edit" onclick="boloEdit('${b.id}')"><i class="fa-solid fa-pen"></i> Edit</button>
       <button class="bolo-copy-btn bolo-btn" data-id="${b.id}" onclick="boloCopy311('${b.id}')"><i class="fa-solid fa-copy"></i> 311</button>
+      <button class="bolo-btn bolo-btn-link" data-id="${b.id}" onclick="boloCopyLink('${b.id}')" data-tip="Copy deep link"><i class="fa-solid fa-link"></i></button>
       <button class="bolo-btn bolo-btn-del" onclick="boloDelete('${b.id}')"><i class="fa-solid fa-trash"></i></button>
     </div>
   </div>`;

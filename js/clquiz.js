@@ -1,5 +1,6 @@
 // Requires LAWS array from laws.js
-let _clMode='name',_clQueue=[],_clIdx=0,_clCorrect=0,_clStreak=0,_clResults=[],_clAnswered=false;
+const CL_STORE='upd-cl-scores';
+let _clMode='name',_clFilter='all',_clQueue=[],_clIdx=0,_clCorrect=0,_clStreak=0,_clMaxStreak=0,_clResults=[],_clAnswered=false;
 let _clTimer=null,_clTick=null;
 const _CL_DELAY=5;
 
@@ -28,8 +29,17 @@ function _clStartTimer(){
 }
 
 function clSetMode(mode,el){
-  _clMode=mode;
+  _clMode=mode;_clFilter='all';
   document.querySelectorAll('.tc-mode-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.cl-filter-btn').forEach(b=>b.classList.remove('active'));
+  const allBtn=document.querySelector('.cl-filter-btn');if(allBtn)allBtn.classList.add('active');
+  clStart();
+}
+
+function clSetFilter(f,el){
+  _clFilter=f;
+  document.querySelectorAll('.cl-filter-btn').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
   clStart();
 }
@@ -38,8 +48,9 @@ function clStart(){
   if(_clTimer){clearTimeout(_clTimer);_clTimer=null;}
   if(_clTick){clearInterval(_clTick);_clTick=null;}
   const bar=document.getElementById('cl-timer-bar');if(bar)bar.remove();
-  _clQueue=[...LAWS].sort(()=>Math.random()-.5);
-  _clIdx=0;_clCorrect=0;_clStreak=0;_clResults=[];_clAnswered=false;
+  const _clPool=_clFilter==='all'?LAWS:LAWS.filter(l=>l.cat===_clFilter);
+  _clQueue=[..._clPool].sort(()=>Math.random()-.5);
+  _clIdx=0;_clCorrect=0;_clStreak=0;_clMaxStreak=0;_clResults=[];_clAnswered=false;
   document.getElementById('cl-game').style.display='';
   document.getElementById('cl-result').style.display='none';
   document.getElementById('cl-next').style.display='none';
@@ -98,7 +109,7 @@ function clSelect(idx){
     card.className='tc-card tc-card-correct';
     fb.innerHTML='<i class="fa-solid fa-circle-check"></i> Correct!';
     fb.className='tc-feedback tc-fb-ok';
-    _clCorrect++;_clStreak++;
+    _clCorrect++;_clStreak++;if(_clStreak>_clMaxStreak)_clMaxStreak=_clStreak;
   }else{
     card.className='tc-card tc-card-wrong';
     const ans=_clMode==='name'?_clTrunc(q.sections[0].text,90):q.title;
@@ -138,10 +149,45 @@ function _clRenderProgress(){
   }).join('');
 }
 
+function _clSaveScore(pct){
+  let s={};try{s=JSON.parse(localStorage.getItem(CL_STORE))||{};}catch(e){}
+  const newBest=pct>(s.bestPct||0)||_clMaxStreak>(s.bestStreak||0);
+  s.bestPct=Math.max(pct,s.bestPct||0);
+  s.bestStreak=Math.max(_clMaxStreak,s.bestStreak||0);
+  s.gamesPlayed=(s.gamesPlayed||0)+1;
+  try{localStorage.setItem(CL_STORE,JSON.stringify(s));}catch(e){}
+  return{s,newBest};
+}
+
+let _clReviewList=[],_clReviewIdx=0;
+function _clStartReview(){
+  _clReviewList=_clResults.filter(r=>!r.ok);
+  _clReviewIdx=0;
+  _clRenderReview();
+}
+function _clRenderReview(){
+  const item=_clReviewList[_clReviewIdx];
+  const law=LAWS.find(l=>l.title===item.title);
+  const res=document.getElementById('cl-result');
+  const isLast=_clReviewIdx>=_clReviewList.length-1;
+  res.innerHTML=`
+    <div class="qz-review-hd">Review <span class="qz-review-prog">${_clReviewIdx+1} / ${_clReviewList.length}</span></div>
+    <div class="qz-review-card">
+      <div class="qz-review-q">${escapeHtml(item.title)}</div>
+      <div class="qz-review-cat">${escapeHtml(item.cat)}</div>
+      <div class="qz-review-a">${law?escapeHtml(_clTrunc(law.sections[0].text,200)):''}</div>
+    </div>
+    <button class="qz-restart-btn" onclick="${isLast?'clStart()':'_clReviewNext()'}">
+      ${isLast?'<i class="fa-solid fa-rotate-right"></i> Try Again':'Next <i class="fa-solid fa-arrow-right"></i>'}
+    </button>`;
+}
+function _clReviewNext(){_clReviewIdx++;_clRenderReview();}
+
 function _clShowResult(){
   const pct=Math.round(_clCorrect/_clQueue.length*100);
   const label=pct===100?'Perfect!':pct>=80?'Nice work!':pct>=60?'Getting there!':'Keep practising!';
   const wrong=_clResults.filter(r=>!r.ok);
+  const {s,newBest}=_clSaveScore(pct);
   document.getElementById('cl-game').style.display='none';
   const res=document.getElementById('cl-result');
   res.style.display='';
@@ -149,11 +195,15 @@ function _clShowResult(){
     <div class="qz-res-pct">${pct}%</div>
     <div class="qz-res-label">${escapeHtml(label)}</div>
     <div class="qz-res-sub">${_clCorrect} of ${_clQueue.length} correct</div>
+    <div class="qz-pb-row">${newBest?'<span class="qz-pb-badge"><i class="fa-solid fa-trophy"></i> Personal Best!</span>':''}<span class="qz-pb-stats">Best: ${s.bestPct}% · Streak: ${s.bestStreak} · Games: ${s.gamesPlayed}</span></div>
     ${wrong.length?`<div class="tc-missed cl-missed">
       <div class="tc-missed-title">Missed</div>
       ${wrong.map(r=>`<div class="tc-missed-row"><span class="tc-missed-code">${escapeHtml(r.title)}</span><span class="tc-missed-desc">${escapeHtml(r.cat)}</span></div>`).join('')}
     </div>`:''}
-    <button class="qz-restart-btn" onclick="clStart()"><i class="fa-solid fa-rotate-right"></i> Try Again</button>`;
+    <div class="qz-result-btns">
+      <button class="qz-restart-btn" onclick="clStart()"><i class="fa-solid fa-rotate-right"></i> Try Again</button>
+      ${wrong.length?`<button class="qz-review-btn" onclick="_clStartReview()"><i class="fa-solid fa-eye"></i> Review Missed</button>`:''}
+    </div>`;
 }
 
 document.addEventListener('keydown',e=>{

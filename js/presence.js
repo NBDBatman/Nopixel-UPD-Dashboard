@@ -1,5 +1,29 @@
 function _esc(s){return(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 
+const _OB_PAGE_LABELS={
+  index:'Home',codes:'10-Codes',phonetics:'Phonetics',laws:'Case Laws',
+  constitution:'Constitution',jurisdiction:'Map',court:'Court',
+  templates:'Templates',roster:'Roster',bolo:'BOLO',notepad:'Notepad',
+  subpoena:'Subpoena',guesser:'Street Guesser',quiz:'Phonetics Quiz',
+  tcquiz:'10-Codes Quiz',ucquiz:'Unit Caps Quiz',clquiz:'Case Law Quiz',
+  changelog:'Changelog',credits:'Credits',quotes:'Quote Board'
+};
+
+let _lastPresPage='';
+
+function _currentPage(){
+  return document.querySelector('.nav-item.active[data-page]')?.dataset?.page||'';
+}
+
+function _trackPage(){
+  const page=_currentPage();
+  if(page===_lastPresPage)return;
+  _lastPresPage=page;
+  const session=_getSession();
+  if(session&&window._presChannel)
+    window._presChannel.track({callsign:session.callsign,name:session.name,uid:session.uid,page});
+}
+
 function _initPresence(){
   const session=_getSession();
   if(!session||!window._sb)return;
@@ -20,11 +44,18 @@ function _initPresence(){
     .on('presence',{event:'leave'},_presRefresh)
     .subscribe(async status=>{
       if(status==='SUBSCRIBED'){
-        await channel.track({callsign:session.callsign,name:session.name,uid:session.uid});
+        const page=_currentPage();
+        _lastPresPage=page;
+        await channel.track({callsign:session.callsign,name:session.name,uid:session.uid,page});
       }
     });
 
   window._presChannel=channel;
+
+  // Watch nav for page changes and re-track immediately
+  const nav=document.querySelector('.sb-nav');
+  if(nav)new MutationObserver(_trackPage).observe(nav,{subtree:true,attributeFilter:['class']});
+
   _tickClock();
   setInterval(_tickClock,30000);
 }
@@ -57,7 +88,26 @@ function _updateOnlineBar(users,myUid){
   const el=document.getElementById('ob-users');
   if(!el)return;
   const others=users.filter(u=>u.uid!==myUid);
-  el.innerHTML=others.map(u=>`<span class="ob-pill"><span class="ob-u-dot"></span>${_esc(u.callsign)} · ${_esc(u.name)}</span>`).join('');
+  if(!others.length){el.innerHTML='';return;}
+
+  const pillHtml=u=>{
+    const pageLabel=u.page?(_OB_PAGE_LABELS[u.page]||''):'';
+    return`<span class="ob-pill"><span class="ob-u-dot"></span>${_esc(u.callsign)} · ${_esc(u.name)}${pageLabel?` <span class="ob-page-badge">${_esc(pageLabel)}</span>`:''}</span>`;
+  };
+
+  const pills=others.map(pillHtml).join('');
+  el.innerHTML=`<div class="ob-users-inner" id="ob-users-inner">${pills}</div>`;
+
+  // Enable marquee scroll if pills overflow the container
+  requestAnimationFrame(()=>{
+    const inner=document.getElementById('ob-users-inner');
+    if(!inner)return;
+    if(inner.scrollWidth>el.clientWidth+4){
+      inner.innerHTML=pills+pills; // duplicate for seamless loop
+      const dur=Math.max(8,(inner.scrollWidth/2)/35); // ~35px/s
+      inner.style.animation=`ob-scroll ${dur}s linear infinite`;
+    }
+  });
 }
 
 function _tickClock(){

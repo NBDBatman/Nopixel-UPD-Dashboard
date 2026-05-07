@@ -256,6 +256,12 @@ class SGEngine{
     }
     return false;
   }
+  _saveHistory(key,mode,correct,total,ms){
+    let h=[];try{h=JSON.parse(localStorage.getItem('upd-sg-history'))||[];}catch(e){}
+    h.unshift({date:new Date().toLocaleDateString('en-AU',{day:'2-digit',month:'short',year:'numeric'}),time:new Date().toLocaleTimeString('en-AU',{hour:'2-digit',minute:'2-digit',hour12:false}),key,mode,correct,total,pct:Math.round(correct/total*100),ms,streak:this.maxStreak});
+    if(h.length>50)h=h.slice(0,50);
+    try{localStorage.setItem('upd-sg-history',JSON.stringify(h));}catch(e){}
+  }
   start(){
     if(this.started||!this.data)return;
     this.started=true;
@@ -344,6 +350,7 @@ class SGEngine{
     const total=Object.keys(this.data).length;
     const d=new Date()-this.t0;
     const m=Math.floor(d/60000),s=Math.floor((d%60000)/1000).toString().padStart(2,'0');
+    this._saveHistory(this.currentKey,this.mode,this.correct,total,d);
     const isNewBest=this._saveBest(this.currentKey+'-'+this.mode,this.correct,total,d);
     document.getElementById('sg-result-pct').textContent=Math.round(this.correct/total*100)+'%';
     document.getElementById('sg-result-score').textContent=this.correct+'/'+total;
@@ -392,3 +399,27 @@ function _initGuesser(){
 window.__pageInits=window.__pageInits||{};
 window.__pageInits.guesser=_initGuesser;
 window.addEventListener('load',_initGuesser);
+
+function sgShowHistory(){
+  document.getElementById('sg-history-overlay')?.remove();
+  let h=[];try{h=JSON.parse(localStorage.getItem('upd-sg-history'))||[];}catch(e){}
+  const ov=document.createElement('div');
+  ov.id='sg-history-overlay';ov.className='sg-history-overlay';
+  const LABELS={Streets:'All Streets',Vinewood:'Vinewood',MirrorPark:'Mirror Park',Sandy:'Sandy Shores',Grapeseed:'Grapeseed',Paleto:'Paleto',InnerCityRoads:'Inner City'};
+  ov.innerHTML=`<div class="sg-history-panel">
+    <div class="sg-history-hd"><span><i class="fa-solid fa-clock-rotate-left"></i> Session History</span><button onclick="document.getElementById('sg-history-overlay').remove()"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="sg-history-list">${h.length?h.map(s=>`<div class="sg-history-item">
+      <div class="sg-history-meta"><span class="sg-history-map">${LABELS[s.key]||s.key}</span><span class="sg-history-mode">${s.mode}</span></div>
+      <div class="sg-history-score ${s.pct>=80?'sg-hs-good':s.pct>=50?'sg-hs-mid':'sg-hs-bad'}">${s.pct}%</div>
+      <div class="sg-history-detail">${s.correct}/${s.total} · ${s.date} ${s.time}</div>
+    </div>`).join(''):'<div class="sg-history-empty">No sessions yet</div>'}</div>
+    ${h.length?`<div class="sg-history-footer"><button class="sg-history-clear" onclick="sgClearHistory()"><i class="fa-solid fa-trash"></i> Clear History</button></div>`:''}
+  </div>`;
+  document.body.appendChild(ov);
+  ov.addEventListener('click',e=>{if(e.target===ov)ov.remove();});
+}
+
+function sgClearHistory(){
+  localStorage.removeItem('upd-sg-history');
+  document.getElementById('sg-history-overlay')?.remove();
+}

@@ -1,7 +1,8 @@
 const QZ_NATO={A:'Alpha',B:'Bravo',C:'Charlie',D:'Delta',E:'Echo',F:'Foxtrot',G:'Golf',H:'Hotel',I:'India',J:'Juliet',K:'Kilo',L:'Lima',M:'Mike',N:'November',O:'Oscar',P:'Papa',Q:'Quebec',R:'Romeo',S:'Sierra',T:'Tango',U:'Uniform',V:'Victor',W:'Whiskey',X:'X-Ray',Y:'Yankee',Z:'Zulu'};
 const QZ_AMER={A:'Adam',B:'Boy',C:'Charles',D:'David',E:'Edward',F:'Frank',G:'George',H:'Henry',I:'Ida',J:'John',K:'King',L:'Lincoln',M:'Mary',N:'Nora',O:'Ocean',P:'Paul',Q:'Queen',R:'Robert',S:'Sam',T:'Tom',U:'Union',V:'Victor',W:'William',X:'X-Ray',Y:'Young',Z:'Zebra'};
 
-let _qzMode='nato',_qzQueue=[],_qzIdx=0,_qzCorrect=0,_qzStreak=0,_qzResults={},_qzAnswered=false;
+const QZ_STORE='upd-qz-scores';
+let _qzMode='nato',_qzQueue=[],_qzIdx=0,_qzCorrect=0,_qzStreak=0,_qzMaxStreak=0,_qzResults={},_qzAnswered=false;
 let _qzTimer=null,_qzTick=null;
 const _QZ_DELAY=5;
 
@@ -46,7 +47,7 @@ function qzSetMode(mode,el){
 function qzStart(){
   _qzClearTimer();
   _qzQueue=Object.keys(_qzAlpha()).sort(()=>Math.random()-.5);
-  _qzIdx=0;_qzCorrect=0;_qzStreak=0;_qzResults={};_qzAnswered=false;
+  _qzIdx=0;_qzCorrect=0;_qzStreak=0;_qzMaxStreak=0;_qzResults={};_qzAnswered=false;
   document.getElementById('qz-game').style.display='';
   document.getElementById('qz-result').style.display='none';
   _qzShowQuestion();
@@ -85,7 +86,7 @@ function qzSubmit(){
     card.className='qz-card qz-correct';
     fb.innerHTML='<i class="fa-solid fa-circle-check"></i> Correct!';
     fb.className='qz-feedback qz-fb-ok';
-    _qzCorrect++;_qzStreak++;
+    _qzCorrect++;_qzStreak++;if(_qzStreak>_qzMaxStreak)_qzMaxStreak=_qzStreak;
   }else{
     card.className='qz-card qz-incorrect';
     fb.innerHTML=`<i class="fa-solid fa-circle-xmark"></i> Incorrect — <strong>${escapeHtml(letter)}</strong> is <strong>${escapeHtml(correct)}</strong>`;
@@ -122,11 +123,45 @@ function _qzRenderProgress(){
   }).join('');
 }
 
+function _qzSaveScore(pct){
+  let s={};try{s=JSON.parse(localStorage.getItem(QZ_STORE))||{};}catch(e){}
+  const newBest=pct>(s.bestPct||0)||_qzMaxStreak>(s.bestStreak||0);
+  s.bestPct=Math.max(pct,s.bestPct||0);
+  s.bestStreak=Math.max(_qzMaxStreak,s.bestStreak||0);
+  s.gamesPlayed=(s.gamesPlayed||0)+1;
+  try{localStorage.setItem(QZ_STORE,JSON.stringify(s));}catch(e){}
+  return{s,newBest};
+}
+
+let _qzReviewList=[],_qzReviewIdx=0;
+function _qzStartReview(){
+  _qzReviewList=Object.entries(_qzResults).filter(([,v])=>!v).map(([k])=>k);
+  _qzReviewIdx=0;
+  _qzRenderReview();
+}
+function _qzRenderReview(){
+  const letter=_qzReviewList[_qzReviewIdx];
+  const res=document.getElementById('qz-result');
+  const isLast=_qzReviewIdx>=_qzReviewList.length-1;
+  res.innerHTML=`
+    <div class="qz-review-hd">Review <span class="qz-review-prog">${_qzReviewIdx+1} / ${_qzReviewList.length}</span></div>
+    <div class="qz-review-card">
+      <div class="qz-review-q">${escapeHtml(letter)}</div>
+      <div class="qz-review-a">${escapeHtml(_qzAlpha()[letter])}</div>
+    </div>
+    <button class="qz-restart-btn" onclick="${isLast?'qzStart()':'_qzReviewNext()'}">
+      ${isLast?'<i class="fa-solid fa-rotate-right"></i> Try Again':'Next <i class="fa-solid fa-arrow-right"></i>'}
+    </button>`;
+}
+function _qzReviewNext(){_qzReviewIdx++;_qzRenderReview();}
+
 function _qzShowResult(){
   const total=_qzQueue.length;
   const pct=Math.round(_qzCorrect/total*100);
   const label=pct===100?'Perfect!':pct>=80?'Nice work!':pct>=60?'Getting there!':'Keep practising!';
-  const wrong=Object.entries(_qzResults).filter(([,v])=>!v).map(([k])=>`${k} = ${_qzAlpha()[k]}`).sort();
+  const wrongEntries=Object.entries(_qzResults).filter(([,v])=>!v);
+  const wrong=wrongEntries.map(([k])=>`${k} = ${_qzAlpha()[k]}`).sort();
+  const {s,newBest}=_qzSaveScore(pct);
   document.getElementById('qz-game').style.display='none';
   const res=document.getElementById('qz-result');
   res.style.display='';
@@ -134,8 +169,12 @@ function _qzShowResult(){
     <div class="qz-res-pct">${pct}%</div>
     <div class="qz-res-label">${escapeHtml(label)}</div>
     <div class="qz-res-sub">${_qzCorrect} of ${total} correct</div>
+    <div class="qz-pb-row">${newBest?'<span class="qz-pb-badge"><i class="fa-solid fa-trophy"></i> Personal Best!</span>':''}<span class="qz-pb-stats">Best: ${s.bestPct}% · Streak: ${s.bestStreak} · Games: ${s.gamesPlayed}</span></div>
     ${wrong.length?`<div class="qz-res-missed"><div class="qz-res-missed-title">Missed</div>${wrong.map(w=>`<span class="qz-missed-pill">${escapeHtml(w)}</span>`).join('')}</div>`:''}
-    <button class="qz-restart-btn" onclick="qzStart()"><i class="fa-solid fa-rotate-right"></i> Try Again</button>`;
+    <div class="qz-result-btns">
+      <button class="qz-restart-btn" onclick="qzStart()"><i class="fa-solid fa-rotate-right"></i> Try Again</button>
+      ${wrongEntries.length?`<button class="qz-review-btn" onclick="_qzStartReview()"><i class="fa-solid fa-eye"></i> Review Missed</button>`:''}
+    </div>`;
 }
 
 document.addEventListener('keydown',e=>{

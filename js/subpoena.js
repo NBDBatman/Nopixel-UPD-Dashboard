@@ -1,3 +1,4 @@
+let _spCases=[],_spActiveCaseId=null;
 let _spPhoneRecords=[],_spBankRecords=[],_spContacts={};
 let _spActiveConvo=null,_spConvos={},_spPhoneSearch='';
 let _spBankFilters={type:'',dir:'',search:''},_spSelectedAccount=null,_spBankCols={};
@@ -50,19 +51,14 @@ function _spLoadContacts(){
 function _spSaveContacts(){localStorage.setItem('upd-sp-contacts',JSON.stringify(_spContacts));}
 function _spGetName(num){return _spContacts[String(num)]||String(num);}
 
-function _spSavePhone(){
-  try{localStorage.setItem('upd-sp-phone',JSON.stringify(_spPhoneRecords));}
-  catch(e){console.warn('Phone records too large for localStorage — data will not persist:',e);}
+function _spActiveCase(){return _spCases.find(c=>c.id===_spActiveCaseId)||null;}
+function _spSyncActiveCase(){const c=_spActiveCase();if(c){c.phone=_spPhoneRecords;c.bank=_spBankRecords;}}
+function _spSaveCases(){
+  _spSyncActiveCase();
+  try{localStorage.setItem('upd-sp-cases',JSON.stringify(_spCases));}catch(e){}
 }
-function _spLoadPhone(){
-  try{_spPhoneRecords=JSON.parse(localStorage.getItem('upd-sp-phone'))||[];}catch(e){_spPhoneRecords=[];}
-}
-function _spSaveBank(){
-  try{localStorage.setItem('upd-sp-bank',JSON.stringify(_spBankRecords));}
-  catch(e){console.warn('Bank records too large for localStorage — data will not persist:',e);}
-}
-function _spLoadBank(){
-  try{_spBankRecords=JSON.parse(localStorage.getItem('upd-sp-bank'))||[];}catch(e){_spBankRecords=[];}
+function _spLoadCases(){
+  try{_spCases=JSON.parse(localStorage.getItem('upd-sp-cases'))||[];}catch(e){_spCases=[];}
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -103,8 +99,10 @@ function _spParsePhone(wb){
   }
   if(!records.length)return;
   _spPhoneRecords=[..._spPhoneRecords,...records].sort((a,b)=>a.timestamp-b.timestamp);
-  _spSavePhone();
+  const _ppc=_spActiveCase();if(_ppc)_ppc.phone=_spPhoneRecords;
+  _spSaveCases();
   _spBuildConvos();_spRenderConvoList();_spRenderStats();_spShowSplit();
+  _spRenderCasesList();
 }
 
 // ── Phonebook import / export ─────────────────────────────────────────────────
@@ -141,6 +139,99 @@ function spExportContacts(){
   const url=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
   const a=document.createElement('a');a.href=url;a.download='subpoena-contacts.csv';a.click();
   URL.revokeObjectURL(url);
+}
+
+function spShowBulkNaming(){
+  document.getElementById('sp-bulk-overlay')?.remove();
+  // Collect all unique numbers from current case
+  const counts={};
+  for(const r of _spPhoneRecords){
+    const add=n=>{if(!n)return;if(!counts[n])counts[n]={sms:0,calls:0};if(r.type==='sms')counts[n].sms++;else counts[n].calls++;};
+    add(r.from);add(r.to);
+  }
+  if(!Object.keys(counts).length){alert('No phone records loaded.');return;}
+  const sorted=Object.keys(counts).sort((a,b)=>(counts[b].sms+counts[b].calls)-(counts[a].sms+counts[a].calls));
+  const ov=document.createElement('div');ov.id='sp-bulk-overlay';ov.className='sp-bulk-overlay';
+  ov.innerHTML=`<div class="sp-bulk-panel">
+    <div class="sp-bulk-hd"><span><i class="fa-solid fa-users-gear"></i> Name All Contacts</span><button onclick="document.getElementById('sp-bulk-overlay').remove()"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="sp-bulk-hint">${sorted.length} contacts — type names then click Save All</div>
+    <div class="sp-bulk-list">${sorted.map(num=>{
+      const c=counts[num];
+      return`<div class="sp-bulk-row">
+        <div class="sp-bulk-num">${escapeHtml(num)}</div>
+        <div class="sp-bulk-meta">${c.sms?`<span>${c.sms} msg</span>`:''}${c.calls?`<span>${c.calls} call</span>`:''}</div>
+        <input class="sp-bulk-inp" data-num="${escapeHtml(num)}" placeholder="Enter name…" value="${escapeHtml(_spContacts[num]||'')}">
+      </div>`;
+    }).join('')}</div>
+    <div class="sp-bulk-footer">
+      <button class="np-btn" onclick="spSaveBulkNames()"><i class="fa-solid fa-check"></i> Save All</button>
+      <button class="np-btn" onclick="document.getElementById('sp-bulk-overlay').remove()">Cancel</button>
+    </div>
+  </div>`;
+  document.body.appendChild(ov);
+  ov.addEventListener('click',e=>{if(e.target===ov)ov.remove();});
+  // Enter moves to next input
+  ov.querySelectorAll('.sp-bulk-inp').forEach((inp,i,all)=>{
+    inp.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();all[i+1]?all[i+1].focus():spSaveBulkNames();}});
+  });
+}
+
+function spSaveBulkNames(){
+  document.querySelectorAll('#sp-bulk-overlay .sp-bulk-inp').forEach(inp=>{
+    const num=inp.dataset.num;const name=inp.value.trim();
+    if(name)_spContacts[num]=name;else delete _spContacts[num];
+  });
+  _spSaveContacts();_spBuildConvos();_spRenderConvoList();_spRenderStats();
+  if(_spActiveConvo)_spRenderMessages();
+  document.getElementById('sp-bulk-overlay')?.remove();
+}
+
+function spShowSharedContacts(){
+  document.getElementById('sp-shared-overlay')?.remove();
+  // Scan all non-deleted cases for phone numbers and bank account IDs
+  const numMap={};  // num -> Set of case names
+  const acctMap={}; // acctId -> Set of case names
+  for(const c of _spCases){
+    if(c.deleted)continue;
+    const cname=c.name||'Unnamed';
+    const phone=c.id===_spActiveCaseId?_spPhoneRecords:(c.phone||[]);
+    const bank=c.id===_spActiveCaseId?_spBankRecords:(c.bank||[]);
+    const nums=new Set();
+    for(const r of phone){if(r.from)nums.add(r.from);if(r.to)nums.add(r.to);}
+    for(const n of nums){if(!numMap[n])numMap[n]=new Set();numMap[n].add(cname);}
+    const accts=new Set();
+    for(const r of bank){if(r.fromId)accts.add(r.fromId);if(r.toId)accts.add(r.toId);}
+    for(const a of accts){if(!acctMap[a])acctMap[a]=new Set();acctMap[a].add(cname);}
+  }
+  const sharedNums=Object.entries(numMap).filter(([,s])=>s.size>1).sort((a,b)=>b[1].size-a[1].size);
+  const sharedAccts=Object.entries(acctMap).filter(([,s])=>s.size>1).sort((a,b)=>b[1].size-a[1].size);
+  if(!sharedNums.length&&!sharedAccts.length){
+    const msg=document.createElement('div');msg.className='sp-toast';msg.textContent='No shared contacts or accounts found across cases.';
+    document.body.appendChild(msg);setTimeout(()=>msg.remove(),3000);return;
+  }
+  const pills=cases=>[...cases].map(n=>`<span class="sp-shared-pill">${escapeHtml(n)}</span>`).join('');
+  const ov=document.createElement('div');ov.id='sp-shared-overlay';ov.className='sp-bulk-overlay';
+  ov.innerHTML=`<div class="sp-bulk-panel">
+    <div class="sp-bulk-hd"><span><i class="fa-solid fa-link"></i> Shared Across Cases</span><button onclick="document.getElementById('sp-shared-overlay').remove()"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="sp-bulk-list">
+      ${sharedNums.length?`<div class="sp-shared-section-hd">Phone Numbers (${sharedNums.length})</div>
+        ${sharedNums.map(([num,cases])=>`<div class="sp-shared-row">
+          <div class="sp-shared-id">${escapeHtml(_spContacts[num]||num)}${_spContacts[num]?`<span class="sp-shared-raw"> ${escapeHtml(num)}</span>`:''}</div>
+          <div class="sp-shared-cases">${pills(cases)}</div>
+        </div>`).join('')}`:''}
+      ${sharedAccts.length?`<div class="sp-shared-section-hd">Bank Accounts (${sharedAccts.length})</div>
+        ${sharedAccts.map(([id,cases])=>{
+          const a=_spBankAccounts.get(id);
+          const label=a?_spAccountLabel(a):id;
+          return`<div class="sp-shared-row">
+            <div class="sp-shared-id">${escapeHtml(label)}</div>
+            <div class="sp-shared-cases">${pills(cases)}</div>
+          </div>`;
+        }).join('')}`:''}
+    </div>
+  </div>`;
+  document.body.appendChild(ov);
+  ov.addEventListener('click',e=>{if(e.target===ov)ov.remove();});
 }
 
 // ── Conversations ─────────────────────────────────────────────────────────────
@@ -329,9 +420,11 @@ function spPhoneSearch(){
 
 function spClearPhone(){
   _spPhoneRecords=[];_spConvos={};_spActiveConvo=null;_spPhoneSearch='';
-  localStorage.removeItem('upd-sp-phone');
+  const c=_spActiveCase();if(c)c.phone=[];
+  _spSaveCases();
   const si=document.getElementById('sp-phone-search');if(si)si.value='';
   _spRenderConvoList();_spRenderStats();_spShowSplit();
+  _spRenderCasesList();
 }
 
 function _spShowSplit(){
@@ -382,13 +475,16 @@ function _spParseBank(wb){
         amount,comment:g('comment')||g('description'),
         date:_spFormatBankDate(g('date')||g('timestamp')),
         taxPct:g('tax_percentage'),taxType:g('tax_type'),
+        _ts:_spParseTs(g('date')||g('timestamp')),
       });
     }
   }
   if(!records.length)return;
   _spBankRecords=[..._spBankRecords,...records];
-  _spSaveBank();
+  const _bpc=_spActiveCase();if(_bpc)_bpc.bank=_spBankRecords;
+  _spSaveCases();
   _spBuildBankAccounts();_spUpdateBankFilters();_spRenderAccountSidebar();_spRenderBank();_spShowBankContent();
+  _spRenderCasesList();
 }
 
 const _SP_SYSTEM_ACCOUNTS={
@@ -420,6 +516,30 @@ function _spBuildBankAccounts(){
   }
 }
 
+function _spDetectRecurring(){
+  // Group by fromId+toId+amount (exact match)
+  const groups={};
+  _spBankRecords.forEach((r,i)=>{
+    if(!r.fromId||!r.toId||!r.amount)return;
+    const key=`${r.fromId}|${r.toId}|${r.amount}`;
+    if(!groups[key])groups[key]=[];
+    groups[key].push({i,ts:r._ts||0});
+  });
+  const recurring=new Set();
+  for(const entries of Object.values(groups)){
+    if(entries.length<3)continue;
+    const timed=entries.filter(e=>e.ts>0).sort((a,b)=>a.ts-b.ts);
+    if(timed.length<3)continue;
+    const gaps=[];for(let i=1;i<timed.length;i++)gaps.push(timed[i].ts-timed[i-1].ts);
+    const mean=gaps.reduce((s,g)=>s+g,0)/gaps.length;
+    const std=Math.sqrt(gaps.reduce((s,g)=>s+(g-mean)**2,0)/gaps.length);
+    const cv=std/mean;
+    const meanDays=mean/(864e5);
+    if(cv<0.3&&meanDays>=3&&meanDays<=95)timed.forEach(e=>recurring.add(e.i));
+  }
+  return recurring;
+}
+
 function _spAccountLabel(a){
   if(!a)return'Unknown';
   const sys=_spSystemName(a.id);
@@ -440,21 +560,36 @@ function _spAccountSub(a){
 
 function _spRenderAccountSidebar(){
   const el=document.getElementById('sp-account-list');if(!el)return;
+  const isIn=r=>(r.direction||'').toLowerCase()==='in';
+  const fmt=n=>'$'+n.toLocaleString('en-AU',{minimumFractionDigits:2,maximumFractionDigits:2});
   const sorted=[..._spBankAccounts.values()].sort((a,b)=>{
     const ca=_spBankRecords.filter(r=>r.fromId===b.id||r.toId===b.id).length;
     const cb=_spBankRecords.filter(r=>r.fromId===a.id||r.toId===a.id).length;
     return cb-ca;
   });
+  const totIn=_spBankRecords.filter(isIn).reduce((s,r)=>s+r.amount,0);
+  const totOut=_spBankRecords.filter(r=>!isIn(r)).reduce((s,r)=>s+r.amount,0);
   el.innerHTML=
     `<div class="sp-account-item sp-account-all-item${_spSelectedAccount===null?' active':''}" onclick="spSelectAccount(null,this)">
       <div class="sp-account-name">All Transactions</div>
       <div class="sp-account-sub">${_spBankRecords.length} transactions</div>
+      <div class="sp-account-flow"><span class="sp-amt-in">+${fmt(totIn)}</span><span class="sp-amt-out">-${fmt(totOut)}</span></div>
     </div>`+
     sorted.map(a=>{
       const txCount=_spBankRecords.filter(r=>r.fromId===a.id||r.toId===a.id).length;
+      // Money received by subject FROM this account (they sent to subject)
+      const received=_spBankRecords.filter(r=>r.fromId===a.id&&isIn(r)).reduce((s,r)=>s+r.amount,0);
+      // Money sent by subject TO this account
+      const sent=_spBankRecords.filter(r=>r.toId===a.id&&!isIn(r)).reduce((s,r)=>s+r.amount,0);
+      const net=received-sent;
       return`<div class="sp-account-item${_spSelectedAccount===a.id?' active':''}" onclick="spSelectAccount('${a.id.replace(/'/g,"\\'")}',this)">
         <div class="sp-account-name">${escapeHtml(_spAccountLabel(a))}</div>
         <div class="sp-account-sub">${escapeHtml(_spAccountSub(a))} · ${txCount} tx</div>
+        <div class="sp-account-flow">
+          ${received?`<span class="sp-amt-in" title="Received from">+${fmt(received)}</span>`:''}
+          ${sent?`<span class="sp-amt-out" title="Sent to">-${fmt(sent)}</span>`:''}
+          ${received&&sent?`<span class="sp-account-net ${net>=0?'sp-amt-in':'sp-amt-out'}" title="Net">=${fmt(Math.abs(net))}</span>`:''}
+        </div>
       </div>`;
     }).join('');
 }
@@ -520,6 +655,7 @@ function _spRenderBank(){
     <div class="sp-stat"><div class="sp-stat-lbl">Money In</div><div class="sp-stat-val sp-amt-in">${fmt(totalIn)}</div></div>
     <div class="sp-stat"><div class="sp-stat-lbl">Money Out</div><div class="sp-stat-val sp-amt-out">${fmt(totalOut)}</div></div>
     <div class="sp-stat"><div class="sp-stat-lbl">Net</div><div class="sp-stat-val ${net>=0?'sp-amt-in':'sp-amt-out'}">${fmt(Math.abs(net))}</div></div>`;
+  const _recurringSet=_spDetectRecurring();
   const visCols=_SP_BANK_COL_DEFS.filter(c=>_spBankCols[c.k]);
   const headEl=document.getElementById('sp-bank-head');
   if(headEl)headEl.innerHTML=visCols.map(c=>`<th>${c.l}</th>`).join('');
@@ -542,7 +678,7 @@ function _spRenderBank(){
     const cell=k=>{switch(k){
       case'date':return`<td class="sp-ts-cell">${escapeHtml(r.date||'—')}</td>`;
       case'txId':return`<td style="font-family:var(--mono);font-size:11px">${escapeHtml(r.id||'—')}</td>`;
-      case'type':return`<td>${typePill}</td>`;
+      case'type':return`<td>${typePill}${_recurringSet.has(_spBankRecords.indexOf(r))?'<span class="sp-recurring-badge" title="Recurring transaction">↻</span>':''}</td>`;
       case'dir':return`<td><span class="sp-dir-${inbound?'in':'out'}">${escapeHtml(r.direction||'—')}</span></td>`;
       case'fromName':return`<td>${acctCell(r.fromId)}</td>`;
       case'fromId':return`<td style="font-family:var(--mono);font-size:11px">${escapeHtml(r.fromId||'—')}</td>`;
@@ -558,15 +694,17 @@ function _spRenderBank(){
       case'comment':return`<td class="sp-comment-cell">${escapeHtml(r.comment||'—')}</td>`;
       default:return'<td>—</td>';
     }};
-    return`<tr>${visCols.map(c=>cell(c.k)).join('')}</tr>`;
+    return`<tr${_recurringSet.has(_spBankRecords.indexOf(r))?' class="sp-recurring-row"':''}>${visCols.map(c=>cell(c.k)).join('')}</tr>`;
   }).join('');
 }
 
 function spClearBank(){
   _spBankRecords=[];_spBankAccounts=new Map();_spBankFilters={type:'',dir:'',search:''};_spSelectedAccount=null;
-  localStorage.removeItem('upd-sp-bank');
+  const c=_spActiveCase();if(c)c.bank=[];
+  _spSaveCases();
   const si=document.getElementById('sp-bank-search');if(si)si.value='';
   _spRenderAccountSidebar();_spRenderBank();_spShowBankContent();
+  _spRenderCasesList();
 }
 
 function _spShowBankContent(){
@@ -687,16 +825,305 @@ function spCreatePng(){
     });
 }
 
+// ── Case colour picker ────────────────────────────────────────────────────────
+
+let _spCpH=0,_spCpS=1,_spCpV=1,_spCpDrag=null,_spCpCaseId=null;
+
+function _spHsvToRgb(h,s,v){const f=n=>{const k=(n+h/60)%6;return v-v*s*Math.max(0,Math.min(k,4-k,1));};return{r:Math.round(f(5)*255),g:Math.round(f(3)*255),b:Math.round(f(1)*255)};}
+function _spRgbToHsv(r,g,b){r/=255;g/=255;b/=255;const max=Math.max(r,g,b),min=Math.min(r,g,b),d=max-min;let h=0;if(d){if(max===r)h=((g-b)/d)%6;else if(max===g)h=(b-r)/d+2;else h=(r-g)/d+4;h=h*60;if(h<0)h+=360;}return{h,s:max?d/max:0,v:max};}
+function _spRgbToHex(r,g,b){return'#'+[r,g,b].map(x=>x.toString(16).padStart(2,'0')).join('');}
+function _spCpHexToRgb(hex){if(!/^#[0-9a-fA-F]{6}$/.test(hex))return null;return{r:parseInt(hex.slice(1,3),16),g:parseInt(hex.slice(3,5),16),b:parseInt(hex.slice(5,7),16)};}
+function _spCpCurrentHex(){const{r,g,b}=_spHsvToRgb(_spCpH,_spCpS,_spCpV);return _spRgbToHex(r,g,b);}
+
+function _spCpDrawSV(){
+  const cv=document.getElementById('sp-cpick-sv');if(!cv)return;
+  const ctx=cv.getContext('2d'),w=cv.width,h=cv.height;
+  const{r,g,b}=_spHsvToRgb(_spCpH,1,1);
+  ctx.fillStyle=`rgb(${r},${g},${b})`;ctx.fillRect(0,0,w,h);
+  const wg=ctx.createLinearGradient(0,0,w,0);wg.addColorStop(0,'rgba(255,255,255,1)');wg.addColorStop(1,'rgba(255,255,255,0)');
+  ctx.fillStyle=wg;ctx.fillRect(0,0,w,h);
+  const bg=ctx.createLinearGradient(0,0,0,h);bg.addColorStop(0,'rgba(0,0,0,0)');bg.addColorStop(1,'rgba(0,0,0,1)');
+  ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
+  const cx=_spCpS*w,cy=(1-_spCpV)*h;
+  ctx.beginPath();ctx.arc(cx,cy,7,0,2*Math.PI);ctx.strokeStyle='rgba(0,0,0,.5)';ctx.lineWidth=3;ctx.stroke();
+  ctx.beginPath();ctx.arc(cx,cy,7,0,2*Math.PI);ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();
+}
+function _spCpDrawHue(){
+  const cv=document.getElementById('sp-cpick-hue');if(!cv)return;
+  const ctx=cv.getContext('2d'),w=cv.width,h=cv.height;
+  const g=ctx.createLinearGradient(0,0,w,0);
+  for(let i=0;i<=12;i++)g.addColorStop(i/12,`hsl(${i*30},100%,50%)`);
+  ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
+  const x=(_spCpH/360)*w,tx=Math.max(0,Math.min(w-8,x-4));
+  ctx.fillStyle='rgba(255,255,255,.9)';ctx.fillRect(tx,0,8,h);
+  ctx.strokeStyle='rgba(0,0,0,.35)';ctx.lineWidth=1;ctx.strokeRect(tx,0,8,h);
+}
+function _spCpRedraw(){
+  _spCpDrawSV();_spCpDrawHue();
+  const hex=_spCpCurrentHex();
+  const prev=document.getElementById('sp-cpick-preview');const hexEl=document.getElementById('sp-cpick-hex');
+  if(prev)prev.style.background=hex;
+  if(hexEl&&document.activeElement!==hexEl)hexEl.value=hex;
+}
+
+function spOpenCaseColorPicker(caseId,btn){
+  const ex=document.getElementById('sp-case-cpicker');
+  if(ex){if(_spCpCaseId===caseId){ex._cleanup?.();ex.remove();return;}ex._cleanup?.();ex.remove();}
+  _spCpCaseId=caseId;
+  const c=_spCases.find(c=>c.id===caseId);
+  const cur=(c?.color)||'#3b82f6';
+  const rgb=_spCpHexToRgb(cur);
+  if(rgb){const hsv=_spRgbToHsv(rgb.r,rgb.g,rgb.b);_spCpH=hsv.h;_spCpS=hsv.s;_spCpV=hsv.v;}
+  const panel=document.createElement('div');
+  panel.id='sp-case-cpicker';panel.className='np-cpicker-panel';
+  panel.innerHTML=`
+    <div class="np-cpicker-label">Case Colour</div>
+    <canvas id="sp-cpick-sv" class="np-cp-sv" width="182" height="130"></canvas>
+    <canvas id="sp-cpick-hue" class="np-cp-hue" width="182" height="12"></canvas>
+    <div class="np-cpicker-top">
+      <div class="np-cpicker-preview-box" id="sp-cpick-preview" style="background:${cur}"></div>
+      <input type="text" class="np-cpicker-hex" id="sp-cpick-hex" value="${cur}" maxlength="7" placeholder="#rrggbb" spellcheck="false">
+    </div>
+    <div class="np-cpicker-actions">
+      <button class="np-btn" style="flex:1;justify-content:center" onclick="spCaseColorApply()"><i class="fa-solid fa-check"></i> Apply</button>
+      ${c?.color?`<button class="np-btn" onclick="spSetCaseColor(${caseId},'');document.getElementById('sp-case-cpicker')?._cleanup?.();document.getElementById('sp-case-cpicker')?.remove()"><i class="fa-solid fa-xmark"></i> Clear</button>`:''}
+    </div>`;
+  document.body.appendChild(panel);
+  const rect=btn.getBoundingClientRect();
+  const pw=202,ph=390;
+  let left=rect.right+6,top=rect.top;
+  if(left+pw>window.innerWidth-8)left=rect.left-pw-6;
+  if(top+ph>window.innerHeight-8)top=window.innerHeight-ph-8;
+  panel.style.top=Math.max(4,top)+'px';panel.style.left=Math.max(4,left)+'px';
+  _spCpRedraw();
+  const svCv=document.getElementById('sp-cpick-sv'),hueCv=document.getElementById('sp-cpick-hue');
+  function svPick(e){const r=svCv.getBoundingClientRect();_spCpS=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width));_spCpV=Math.max(0,Math.min(1,1-(e.clientY-r.top)/r.height));_spCpRedraw();}
+  function huePick(e){const r=hueCv.getBoundingClientRect();_spCpH=Math.max(0,Math.min(359.9,((e.clientX-r.left)/r.width)*360));_spCpRedraw();}
+  svCv.addEventListener('mousedown',e=>{_spCpDrag='sv';svPick(e);e.preventDefault();});
+  hueCv.addEventListener('mousedown',e=>{_spCpDrag='hue';huePick(e);e.preventDefault();});
+  const onMove=e=>{if(_spCpDrag==='sv')svPick(e);else if(_spCpDrag==='hue')huePick(e);};
+  const onUp=()=>{_spCpDrag=null;};
+  document.addEventListener('mousemove',onMove);document.addEventListener('mouseup',onUp);
+  const hexEl=document.getElementById('sp-cpick-hex');
+  hexEl.addEventListener('input',()=>{
+    const v=hexEl.value.trim();
+    if(/^#[0-9a-fA-F]{6}$/.test(v)){const rgb=_spCpHexToRgb(v);if(!rgb)return;const hsv=_spRgbToHsv(rgb.r,rgb.g,rgb.b);_spCpH=hsv.h;_spCpS=hsv.s;_spCpV=hsv.v;_spCpDrawSV();_spCpDrawHue();document.getElementById('sp-cpick-preview').style.background=v;}
+  });
+  hexEl.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();spCaseColorApply();}if(e.key==='Escape'){panel._cleanup?.();panel.remove();}});
+  panel._cleanup=()=>{document.removeEventListener('mousemove',onMove);document.removeEventListener('mouseup',onUp);};
+  setTimeout(()=>document.addEventListener('click',function h(e){
+    if(!panel.contains(e.target)&&!btn.contains(e.target)){panel._cleanup?.();panel.remove();document.removeEventListener('click',h,true);}
+  },true),0);
+}
+
+function spCaseColorApply(){
+  const v=(document.getElementById('sp-cpick-hex')?.value||'').trim();
+  spSetCaseColor(_spCpCaseId,/^#[0-9a-fA-F]{6}$/.test(v)?v:_spCpCurrentHex());
+  const p=document.getElementById('sp-case-cpicker');p?._cleanup?.();p?.remove();
+}
+
+function spSetCaseColor(id,color){
+  const c=_spCases.find(c=>c.id===id);if(!c)return;
+  c.color=color||null;_spSaveCases();_spRenderCasesList();
+}
+
+// ── Cases management ──────────────────────────────────────────────────────────
+
+let _spCaseView='active',_spCaseSearch='';
+
+function _spSwitchAwayFrom(id){
+  const next=_spCases.find(c=>!c.archived&&!c.deleted&&c.id!==id);
+  if(next){spSelectCase(next.id);}
+  else{
+    const nc={id:Date.now(),name:'New Case',phone:[],bank:[],archived:false,deleted:false,deletedAt:null};
+    _spCases.unshift(nc);_spActiveCaseId=nc.id;
+    _spPhoneRecords=[];_spBankRecords=[];
+    _spConvos={};_spActiveConvo=null;_spBankAccounts=new Map();_spBankFilters={type:'',dir:'',search:''};_spSelectedAccount=null;
+    _spSaveCases();_spRenderCasesList();_spShowSplit();_spShowBankContent();_spRenderConvoList();_spRenderStats();_spRenderAccountSidebar();_spRenderBank();
+  }
+}
+
+function spNewCase(){
+  _spSyncActiveCase();
+  const c={id:Date.now(),name:'New Case',phone:[],bank:[],archived:false,deleted:false,deletedAt:null};
+  _spCases.unshift(c);_spActiveCaseId=c.id;
+  _spPhoneRecords=[];_spBankRecords=[];
+  _spConvos={};_spActiveConvo=null;_spBankAccounts=new Map();_spBankFilters={type:'',dir:'',search:''};_spSelectedAccount=null;
+  _spCaseView='active';_spUpdateCaseTabs();
+  _spSaveCases();_spRenderCasesList();_spShowSplit();_spShowBankContent();_spRenderConvoList();_spRenderStats();_spRenderAccountSidebar();_spRenderBank();
+}
+
+function spSelectCase(id){
+  if(id===_spActiveCaseId)return;
+  _spSyncActiveCase();_spActiveCaseId=id;
+  const c=_spActiveCase();if(!c)return;
+  _spPhoneRecords=c.phone||[];_spBankRecords=c.bank||[];
+  _spConvos={};_spActiveConvo=null;_spPhoneSearch='';
+  _spBankAccounts=new Map();_spBankFilters={type:'',dir:'',search:''};_spSelectedAccount=null;
+  const si=document.getElementById('sp-phone-search');if(si)si.value='';
+  _spBuildConvos();_spBuildBankAccounts();_spUpdateBankFilters();
+  _spRenderCasesList();_spRenderConvoList();_spRenderStats();_spRenderAccountSidebar();_spRenderBank();_spShowSplit();_spShowBankContent();
+}
+
+function spArchiveCase(id,e){
+  e.stopPropagation();
+  const c=_spCases.find(c=>c.id===id);if(!c)return;
+  c.archived=true;
+  if(_spActiveCaseId===id)_spSwitchAwayFrom(id);
+  else{_spSaveCases();_spRenderCasesList();}
+}
+
+function spTrashCase(id,e){
+  e.stopPropagation();
+  const c=_spCases.find(c=>c.id===id);if(!c)return;
+  c.deleted=true;c.deletedAt=Date.now();c.archived=false;
+  if(_spActiveCaseId===id)_spSwitchAwayFrom(id);
+  else{_spSaveCases();_spRenderCasesList();}
+}
+
+function spRestoreCase(id,e){
+  e.stopPropagation();
+  const c=_spCases.find(c=>c.id===id);if(!c)return;
+  c.archived=false;c.deleted=false;c.deletedAt=null;
+  _spSaveCases();_spRenderCasesList();
+}
+
+function spPermanentDeleteCase(id,e){
+  e.stopPropagation();
+  _spCases=_spCases.filter(c=>c.id!==id);
+  _spSaveCases();_spRenderCasesList();
+}
+
+function spEmptySpTrash(){
+  _spCases=_spCases.filter(c=>!c.deleted);
+  _spSaveCases();_spRenderCasesList();
+}
+
+function spSetCaseView(view,el){
+  _spCaseView=view;_spUpdateCaseTabs(el);
+  const footer=document.getElementById('sp-cases-trash-footer');
+  if(footer)footer.style.display=view==='trash'?'':'none';
+  _spRenderCasesList();
+}
+
+function _spUpdateCaseTabs(activeEl){
+  document.querySelectorAll('.sp-cases-tab').forEach((b,i)=>{
+    const views=['active','archived','trash'];
+    b.classList.toggle('active',b===activeEl||(activeEl===undefined&&views[i]===_spCaseView));
+  });
+}
+
+function spSearchCases(q){_spCaseSearch=q.toLowerCase();_spRenderCasesList();}
+
+function spRenameCase(id,name){
+  const c=_spCases.find(c=>c.id===id);
+  if(c){c.name=name.trim()||'Unnamed';_spSaveCases();_spRenderCasesList();}
+}
+
+function _spRenderCasesList(){
+  const el=document.getElementById('sp-cases-list');if(!el)return;
+  const q=_spCaseSearch;
+  let list=_spCases.filter(c=>{
+    if(_spCaseView==='archived')return c.archived&&!c.deleted;
+    if(_spCaseView==='trash')return c.deleted;
+    return!c.archived&&!c.deleted;
+  });
+  if(q)list=list.filter(c=>(c.name||'').toLowerCase().includes(q));
+  if(!list.length){
+    const msg=_spCaseView==='trash'?'Trash is empty':_spCaseView==='archived'?'No archived cases':q?'No matching cases':'No cases yet';
+    el.innerHTML=`<div class="sp-case-empty">${msg}</div>`;return;
+  }
+  const phn=c=>c.id===_spActiveCaseId?_spPhoneRecords:c.phone||[];
+  const bnk=c=>c.id===_spActiveCaseId?_spBankRecords:c.bank||[];
+  el.innerHTML=list.map(c=>{
+    const pc=phn(c).length,bc=bnk(c).length;
+    const badges=`<div class="sp-case-badges">
+      ${pc?`<span class="sp-case-badge sp-cb-phone"><i class="fa-solid fa-mobile-screen-button"></i> ${pc}</span>`:''}
+      ${bc?`<span class="sp-case-badge sp-cb-bank"><i class="fa-solid fa-building-columns"></i> ${bc}</span>`:''}
+      ${!pc&&!bc?'<span class="sp-case-badge sp-cb-empty">Empty</span>':''}
+    </div>`;
+    if(_spCaseView==='trash'){
+      return`<div class="sp-case-item">
+        <div class="sp-case-item-top"><span class="sp-case-name-txt">${escapeHtml(c.name||'Unnamed')}</span></div>
+        ${badges}
+        <div class="sp-case-item-actions">
+          <button class="sp-case-action-btn" onclick="spRestoreCase(${c.id},event)"><i class="fa-solid fa-rotate-left"></i> Restore</button>
+          <button class="sp-case-action-btn sp-case-action-red" onclick="spPermanentDeleteCase(${c.id},event)"><i class="fa-solid fa-trash"></i></button>
+        </div>
+      </div>`;
+    }
+    if(_spCaseView==='archived'){
+      return`<div class="sp-case-item">
+        <div class="sp-case-item-top"><span class="sp-case-name-txt">${escapeHtml(c.name||'Unnamed')}</span></div>
+        ${badges}
+        <div class="sp-case-item-actions">
+          <button class="sp-case-action-btn" onclick="spRestoreCase(${c.id},event)"><i class="fa-solid fa-rotate-left"></i> Restore</button>
+          <button class="sp-case-action-btn sp-case-action-red" onclick="spTrashCase(${c.id},event)"><i class="fa-solid fa-trash"></i></button>
+        </div>
+      </div>`;
+    }
+    const active=c.id===_spActiveCaseId;
+    return`<div class="sp-case-item${active?' active':''}" style="${c.color?'border-left-color:'+c.color:''}" onclick="spSelectCase(${c.id})">
+      <div class="sp-case-item-top">
+        <input class="sp-case-name-inp" value="${escapeHtml(c.name||'')}"
+          onclick="event.stopPropagation()"
+          onchange="spRenameCase(${c.id},this.value)"
+          onkeydown="if(event.key==='Enter')this.blur()">
+        <div class="sp-case-item-btns">
+          <button class="sp-case-del" onclick="spCopyDeepLink(${c.id},event)" data-tip-js="Copy deep link"><i class="fa-solid fa-link"></i></button>
+          <button class="sp-case-del sp-case-palette-btn" onclick="spOpenCaseColorPicker(${c.id},this);event.stopPropagation()" data-tip-js="Set colour"><i class="fa-solid fa-palette" style="${c.color?'color:'+c.color:''}"></i></button>
+          <button class="sp-case-del" onclick="spArchiveCase(${c.id},event)" data-tip-js="Archive"><i class="fa-solid fa-box-archive"></i></button>
+          <button class="sp-case-del sp-case-del-red" onclick="spTrashCase(${c.id},event)" data-tip-js="Move to trash"><i class="fa-solid fa-trash"></i></button>
+        </div>
+      </div>
+      ${badges}
+    </div>`;
+  }).join('');
+}
+
+function spCopyDeepLink(id,e){
+  e.stopPropagation();
+  const url=location.href.split('?')[0]+'?case='+id;
+  navigator.clipboard.writeText(url).then(()=>{
+    const btn=e.target.closest('button');
+    if(btn){const orig=btn.innerHTML;btn.innerHTML='<i class="fa-solid fa-check"></i>';setTimeout(()=>{btn.innerHTML=orig;},1800);}
+  });
+}
+
 // ── Init ──────────────────────────────────────────────────────────────────────
 
 function _initSubpoena(){
   _spLoadContacts();
-  _spLoadPhone();
-  _spLoadBank();
+  _spLoadCases();
   _spLoadBankCols();
+
+  // Migrate old per-key storage to cases system
+  if(!_spCases.length){
+    const defaultCase={id:Date.now(),name:'Case 1',phone:[],bank:[]};
+    try{const old=localStorage.getItem('upd-sp-phone');if(old){defaultCase.phone=JSON.parse(old)||[];localStorage.removeItem('upd-sp-phone');}}catch(e){}
+    try{const old=localStorage.getItem('upd-sp-bank');if(old){defaultCase.bank=JSON.parse(old)||[];localStorage.removeItem('upd-sp-bank');}}catch(e){}
+    _spCases=[defaultCase];
+    localStorage.setItem('upd-sp-cases',JSON.stringify(_spCases));
+  }
+
+  // Normalise cases that predate archived/deleted fields, clean old trash
+  const thirtyDays=30*24*60*60*1000;
+  _spCases=_spCases.filter(c=>!c.deleted||!c.deletedAt||(Date.now()-c.deletedAt)<thirtyDays);
+  _spCases.forEach(c=>{if(c.archived===undefined)c.archived=false;if(c.deleted===undefined){c.deleted=false;c.deletedAt=null;}});
+  // Activate first non-deleted, non-archived case; fall back to first case
+  const firstActive=_spCases.find(c=>!c.archived&&!c.deleted)||_spCases[0];
+  _spActiveCaseId=firstActive?.id||null;
+  _spPhoneRecords=firstActive?.phone||[];
+  _spBankRecords=firstActive?.bank||[];
+
   if(_spPhoneRecords.length){_spBuildConvos();_spRenderConvoList();_spRenderStats();}
   if(_spBankRecords.length){_spBuildBankAccounts();_spUpdateBankFilters();_spRenderAccountSidebar();_spRenderBank();}
   _spShowSplit();_spShowBankContent();
+  _spRenderCasesList();
+  const _pending=sessionStorage.getItem('upd-sp-pending-case');
+  if(_pending){sessionStorage.removeItem('upd-sp-pending-case');const _pid=parseInt(_pending);if(_spCases.find(c=>c.id===_pid))spSelectCase(_pid);}
+  const _deepCase=new URLSearchParams(location.search).get('case');
+  if(_deepCase&&!_pending){history.replaceState(null,'',location.pathname);const _dci=parseInt(_deepCase);if(_spCases.find(c=>c.id===_dci))spSelectCase(_dci);}
 }
 
 window.__pageInits=window.__pageInits||{};

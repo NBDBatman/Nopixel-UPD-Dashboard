@@ -164,6 +164,8 @@ async function loadRoster(){
     rosterLoaded=true;
     rosterFilterState={};rosterSort={col:'',dir:1};
     buildRosterFilters();renderRoster();
+    const stampEl=document.getElementById('roster-stamp');
+    if(stampEl){const t=new Date().toLocaleTimeString('en-AU',{hour:'2-digit',minute:'2-digit',hour12:false});stampEl.textContent='Updated '+t;}
   }catch(err){
     if(container)container.innerHTML=`<div class="roster-status error">Failed to load roster.<small>${escapeHtml(err.message)}</small></div>`;
     console.error('Roster load failed:',err);
