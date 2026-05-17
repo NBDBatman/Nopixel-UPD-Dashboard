@@ -1,0 +1,275 @@
+{
+  "contact": "Anything to add? Contact 723 Nathan Barr - @MercuryHQ",
+  "entries": [
+    {
+      "date": "10/02/26",
+      "author": "Remi",
+      "change": "Arrest Warrant Template removed — no longer needed."
+    },
+    {
+      "date": "18/02/26",
+      "author": "Remi",
+      "change": "More report templates added."
+    },
+    {
+      "date": "27/02/26",
+      "author": "Remi",
+      "change": "Blunt Standard added."
+    },
+    {
+      "date": "25/04/26",
+      "author": "Barr",
+      "change": "UPD Dashboard created — all reference material including 10-Codes, Case Laws, Constitution, Phonetics, Templates, and Street Guesser brought together in one place."
+    },
+    {
+      "date": "26/04/26",
+      "author": "Barr",
+      "change": "Constitution expanded — full Jurisdictions & Administration section added, complete SAMA definition, and Article III rights corrected to match source wording."
+    },
+    {
+      "date": "26/04/26",
+      "author": "Barr",
+      "change": "Home page expanded — Miranda Rights, Clown Rights, and Chain of Command added. Missing unit caps, keybinds, and radio Channel 15 (DOC) filled in."
+    },
+    {
+      "date": "26/04/26",
+      "author": "Barr",
+      "change": "Templates tab redesigned — report templates now display in a clean structured layout."
+    },
+    {
+      "date": "26/04/26",
+      "author": "Barr",
+      "change": "Jurisdiction Map tab added — dedicated page for the San Andreas law enforcement boundary map."
+    },
+    {
+      "date": "26/04/26",
+      "author": "Barr",
+      "change": "Case Laws updated — Rhodes Rule expanded and court custody note updated."
+    },
+    {
+      "date": "26/04/26",
+      "author": "Barr",
+      "change": "10-Codes redesigned — codes grouped into Emergency, Urgent, and Standard sections with colour-coded priority headers."
+    },
+    {
+      "date": "26/04/26",
+      "author": "Barr",
+      "change": "Quick Links made collapsible — hidden by default to keep the sidebar clean."
+    },
+    {
+      "date": "26/04/26",
+      "author": "Barr",
+      "change": "Prescriptions spreadsheet added to Quick Links."
+    },
+    {
+      "date": "26/04/26",
+      "author": "Barr",
+      "change": "Roster added — pulls live data from Google Sheets with search, sortable columns, and filters for rank, status, department, and shift."
+    },
+    {
+      "date": "26/04/26",
+      "author": "Barr",
+      "change": "Roster badges added — status, department, and shift each have distinct colour-coded pills. Discord and name columns link directly to the sheet."
+    },
+    {
+      "date": "28/04/26",
+      "author": "Barr",
+      "change": "Dashboard restructured — each section is now its own dedicated page for better organisation."
+    },
+    {
+      "date": "28/04/26",
+      "author": "Barr",
+      "change": "Navigation overhauled — switching between pages is now instant with no flashing or reloading."
+    },
+    {
+      "date": "28/04/26",
+      "author": "Barr",
+      "change": "Sidebar reordered — Changelog and Credits moved to an Info section at the bottom of the nav."
+    },
+    {
+      "date": "28/04/26",
+      "author": "Barr",
+      "change": "Use of Force card redesigned — escalation levels are now colour-coded and numbered for quicker reference."
+    },
+    {
+      "date": "28/04/26",
+      "author": "Barr",
+      "change": "Phonetic Alphabets redesigned — NATO and American alphabets now shown side by side as tables."
+    },
+    {
+      "date": "29/04/26",
+      "author": "Barr",
+      "change": "Changelog redesigned — now displayed as a visual timeline with entries grouped by date and colour-coded by author."
+    },
+    {
+      "date": "29/04/26",
+      "author": "Barr",
+      "change": "Credits page redesigned — cleaner layout with contributor profiles, tools used, and license information."
+    },
+    {
+      "date": "29/04/26",
+      "author": "Barr",
+      "change": "Plate / Name Converter added to the Phonetics page — type any plate or name to get the full phonetic readout, with a copy button for quick radio use."
+    },
+    {
+      "date": "29/04/26",
+      "author": "Barr",
+      "change": "Phonetics Quiz added — test your NATO and American alphabets with a randomised quiz that tracks your score, streak, and shows which letters you missed."
+    },
+    {
+      "date": "29/04/26",
+      "author": "Barr",
+      "change": "BOLO Board added — log active lookout notices with vehicle, plate, suspect, and reason. Mark resolved, edit inline, or delete. Copy button formats the BOLO ready for 311 dispatch."
+    },
+    {
+      "date": "29/04/26",
+      "author": "Barr",
+      "change": "10-Codes Quiz added — 20 random questions per round with multiple choice answers. Test code-to-meaning or meaning-to-code, with a recap of anything missed at the end."
+    },
+    {
+      "date": "29/04/26",
+      "author": "Barr",
+      "change": "Sidebar compacted — navigation items are smaller to fit more sections without scrolling."
+    },
+    {
+      "date": "29/04/26",
+      "author": "Barr",
+      "change": "Unit Caps Quiz added — all 9 scenarios per round with multiple choice answers. Tests how many units are allowed at each type of job."
+    },
+    {
+      "date": "30/04/26",
+      "author": "Barr",
+      "change": "Case Law Quiz added — all 17 case laws per round. Test yourself by matching the case name to its ruling or the ruling back to its name."
+    },
+    {
+      "date": "30/04/26",
+      "author": "Barr",
+      "change": "Quiz timer added — all four training quizzes now show a 5-second countdown bar after each answer before moving to the next question."
+    },
+    {
+      "date": "30/04/26",
+      "author": "Barr",
+      "change": "BOLO Board updated — registered owner field added, import and export added so the board can be saved to a file and restored, and plates now show on cards even without a vehicle description."
+    },
+    {
+      "date": "30/04/26",
+      "author": "Barr",
+      "change": "Login system added — officers sign in with their callsign, name, and department access code. All pages are auth-gated and redirect to the login screen if the session is missing or expired."
+    },
+    {
+      "date": "30/04/26",
+      "author": "Barr",
+      "change": "BOLO Board is now shared — the board syncs in real time across all logged-in officers via Supabase. Changes made by one officer appear instantly for everyone else."
+    },
+    {
+      "date": "30/04/26",
+      "author": "Barr",
+      "change": "Online bar added — shows which officers are currently on the dashboard, updated live as people join or leave."
+    },
+    {
+      "date": "30/04/26",
+      "author": "Barr",
+      "change": "Notepad added — on-duty scratch pad with markdown formatting toolbar, auto-save, preview mode, and a saved notes panel for storing multiple notes between sessions."
+    },
+    {
+      "date": "30/04/26",
+      "author": "Barr",
+      "change": "Discord logging added — sign-in, sign-out, and all BOLO actions (add, edit, resolve, reopen, delete, clear) are posted to a Discord channel as colour-coded embeds. Edits show before and after values for each changed field."
+    },
+    {
+      "date": "30/04/26",
+      "author": "Barr",
+      "change": "Audit logs added — all BOLO actions and auth events are recorded to Supabase with officer name, callsign, and timestamp."
+    },
+    {
+      "date": "01/05/26",
+      "author": "Barr",
+      "change": "Light and dark theme added — toggle between them with the sun/moon button in the online bar. Choice is saved across sessions."
+    },
+    {
+      "date": "01/05/26",
+      "author": "Barr",
+      "change": "Session duration extended — logins now stay active for 30 days instead of 8 hours."
+    },
+    {
+      "date": "07/05/26",
+      "author": "Barr",
+      "change": "Subpoena Analyser added — upload phone and bank subpoena Excel files to analyse records. Phone view shows conversations in a chat-style thread with contact naming, search, and activity stats. Bank view shows a filterable transaction table with account sidebar and column picker. Both support PNG export."
+    },
+    {
+      "date": "07/05/26",
+      "author": "Barr",
+      "change": "Notepad completely redesigned — now a full split-panel editor with a sidebar listing all saved notes, tags, pinning, archive, trash with 30-day retention, drag-to-reorder, compact view, multi-select for bulk actions, and auto-save with a visible saved indicator."
+    },
+    {
+      "date": "07/05/26",
+      "author": "Barr",
+      "change": "Notepad formatting expanded — full markdown toolbar with bold, italic, underline, strikethrough, inline code, superscript, subscript, headings H1–H6, bullet/numbered/checklist lists, blockquote, code block, horizontal rule, and table builder. Tab key indents, Shift+Tab outdents."
+    },
+    {
+      "date": "07/05/26",
+      "author": "Barr",
+      "change": "Notepad colour pickers added — custom HSV colour picker for both text colour and highlight colour, with hue slider, saturation/brightness gradient, hex input, and preset swatches. Note accent colours in the sidebar also use the full picker."
+    },
+    {
+      "date": "07/05/26",
+      "author": "Barr",
+      "change": "Notepad advanced features added — split view (edit and preview side by side), typewriter mode, find & replace with regex support, version history (up to 20 snapshots per note), detailed stats panel, word goal, auto-continue lists, auto-pair brackets, and smart typography (em dashes, ellipsis, curly quotes)."
+    },
+    {
+      "date": "07/05/26",
+      "author": "Barr",
+      "change": "Notepad note linking added — insert [[note name]] to link between notes. Links are clickable in preview. A subpoena case link button also lets you link directly to a subpoena case from a note, clicking the link navigates to that case."
+    },
+    {
+      "date": "07/05/26",
+      "author": "Barr",
+      "change": "All four training quizzes updated — persistent high score tracking saved across sessions, personal best badge on new records, review wrong answers mode after each round, and category filters for 10-Codes (Emergency/Urgent/Normal) and Case Laws (Force/Search/Court/Conduct). Unit Caps quiz now randomises which scenarios appear each round."
+    },
+    {
+      "date": "07/05/26",
+      "author": "Barr",
+      "change": "Street Guesser updated — missed streets now listed after each round, full session history saved across sessions with date, score, mode, and region for every completed game."
+    },
+    {
+      "date": "07/05/26",
+      "author": "Barr",
+      "change": "Roster updated — last-refreshed timestamp shown in the header after each data pull."
+    },
+    {
+      "date": "07/05/26",
+      "author": "Barr",
+      "change": "Subpoena Analyser — multi-case system added. Cases sidebar lets you manage multiple investigations side by side with archive, trash, search, colour accents, and inline renaming. Cases are stored locally and persist between sessions."
+    },
+    {
+      "date": "07/05/26",
+      "author": "Barr",
+      "change": "Subpoena Analyser — bank intelligence added. Account sidebar now shows money in, money out, and net flow for each counterparty. Recurring transactions (same parties, same amount, consistent interval) are automatically detected and flagged with a badge."
+    },
+    {
+      "date": "07/05/26",
+      "author": "Barr",
+      "change": "Subpoena Analyser — bulk contact naming added. Name All button opens a panel listing every phone number from the current case sorted by activity, with batch name inputs and Enter-key navigation between fields."
+    },
+    {
+      "date": "07/05/26",
+      "author": "Barr",
+      "change": "Subpoena Analyser — shared contacts panel added. Shared button scans all cases and shows any phone numbers or bank account IDs that appear across multiple investigations, with case-name badges."
+    },
+    {
+      "date": "07/05/26",
+      "author": "Barr",
+      "change": "Online bar updated — each officer's pill now shows which page they are currently on as a small badge, updated instantly as they navigate. Bar scrolls smoothly when more officers are online than fit the available space."
+    },
+    {
+      "date": "07/05/26",
+      "author": "Barr",
+      "change": "Quote Board added — submit memorable on-duty quotes with who said it and optional context. Shared in real time across all officers. Upvote quotes, sort by top or newest, search, and delete your own submissions."
+    },
+    {
+      "date": "07/05/26",
+      "author": "Barr",
+      "change": "Deep links added — BOLOs, notes, and subpoena cases each have a copy-link button that generates a direct URL. Opening the link navigates straight to that item, with the BOLO or quote card highlighted on arrival."
+    }
+  ]
+}

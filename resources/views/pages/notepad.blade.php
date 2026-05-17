@@ -1,0 +1,188 @@
+﻿@extends('layouts.app')
+
+@section('title', 'Notepad')
+
+@section('content')
+<div class="page active" id="page-notepad">
+  <div class="page-header"><h1><i class="fa-solid fa-note-sticky"></i> Notepad</h1><span class="ph-sub">Auto-saved</span><span class="ph-storage-notice ph-storage-local"><i class="fa-solid fa-triangle-exclamation"></i> Notes are stored in your browser only — clearing browser data or cache will permanently delete them</span></div>
+  <div class="np-split">
+    <!-- ── SIDEBAR ── -->
+    <div class="np-sidebar">
+      <div class="np-sidebar-hd">
+        <span>Notes</span>
+        <div class="np-sidebar-hd-controls">
+          <button id="np-gs-btn" class="np-sidebar-icon-btn" onclick="npGlobalSearch()" data-tip-below="Global search"><i class="fa-solid fa-magnifying-glass"></i></button>
+          <button id="np-compact-btn" class="np-sidebar-icon-btn" onclick="npToggleCompact()" data-tip-below="Compact view"><i class="fa-solid fa-list"></i></button>
+          <button id="np-select-btn" class="np-sidebar-icon-btn" onclick="npToggleSelectMode()" data-tip-below="Select notes"><i class="fa-solid fa-check-square"></i></button>
+          <select id="np-sort-sel" class="np-sort-sel" onchange="npSetSort(this.value)">
+            <option value="modified">Modified</option>
+            <option value="created">Created</option>
+            <option value="name">Name</option>
+            <option value="words">Words</option>
+            <option value="manual">Manual</option>
+          </select>
+        </div>
+      </div>
+      <div class="np-sidebar-search">
+        <div class="search-wrap" style="margin-bottom:0">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" placeholder="Search notes…" oninput="npSidebarSearch(this.value)">
+        </div>
+      </div>
+      <div class="np-tag-filter" id="np-tag-filter" style="display:none"></div>
+      <div class="np-view-tabs">
+        <button class="np-view-tab active" data-view="notes" onclick="npSetSidebarView('notes')">Notes</button>
+        <button class="np-view-tab" data-view="archived" onclick="npSetSidebarView('archived')">Archived</button>
+        <button class="np-view-tab" data-view="trash" onclick="npSetSidebarView('trash')">Trash</button>
+      </div>
+      <button class="np-new-note-btn" onclick="npNewNote()"><i class="fa-solid fa-plus"></i> New Note</button>
+      <div class="np-note-list" id="np-note-list"></div>
+      <div class="np-select-bar" id="np-select-bar" style="display:none">
+        <div class="np-select-bar-top">
+          <span id="np-select-count">0 selected</span>
+          <button class="np-sidebar-icon-btn" onclick="npToggleSelectMode()" title="Cancel"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="np-select-bar-btns" id="np-select-bar-btns"></div>
+      </div>
+      <div class="np-sidebar-footer">
+        <button class="np-btn" onclick="npImport()" data-tip-right="Import notes"><i class="fa-solid fa-upload"></i></button>
+        <button class="np-btn" onclick="npExportAll()" data-tip="Export all notes"><i class="fa-solid fa-download"></i></button>
+        <button class="np-btn" onclick="npShowTagManager()" data-tip="Manage tags"><i class="fa-solid fa-tags"></i></button>
+        <button class="np-btn" onclick="npShowVersionHistory()" data-tip="Version history"><i class="fa-solid fa-clock-rotate-left"></i></button>
+        <button class="np-btn" onclick="npShowShortcuts()" data-tip-left="Keyboard shortcuts"><i class="fa-solid fa-keyboard"></i></button>
+        <button class="np-btn np-btn-danger" id="np-empty-trash-btn" onclick="npEmptyTrash()" data-tip="Empty trash" style="display:none"><i class="fa-solid fa-trash"></i></button>
+      </div>
+    </div>
+    <!-- ── MAIN ── -->
+    <div class="np-main">
+      <div class="np-toolbar">
+        <input type="text" class="np-note-title-input" id="np-note-title" placeholder="Untitled note…" oninput="npRenameActive()" maxlength="80">
+        <div class="np-toolbar-actions">
+          <div class="qz-mode-toggle" id="np-mode-toggle">
+            <button class="qz-mode-btn active" onclick="npSetMode('edit',this)">Edit</button>
+            <button class="qz-mode-btn" onclick="npSetMode('preview',this)">Preview</button>
+            <button class="qz-mode-btn" id="np-split-btn" onclick="npToggleSplitView()">Split</button>
+          </div>
+          <button class="np-btn" id="np-typewriter-btn" onclick="npToggleTypewriter()" data-tip-below="Typewriter mode"><i class="fa-solid fa-align-center"></i></button>
+          <button class="np-btn" id="np-lock-btn" onclick="npToggleLock()" data-tip-below="Lock note"><i class="fa-solid fa-lock-open"></i></button>
+          <button class="np-btn" onclick="npToggleFind()" data-tip-below="Find &amp; replace (Ctrl+F)"><i class="fa-solid fa-magnifying-glass"></i></button>
+          <button class="np-btn" id="np-copy-btn" onclick="npCopy()" data-tip-below="Copy note"><i class="fa-solid fa-copy"></i></button>
+          <button class="np-btn" onclick="npMergeNote()" data-tip-below="Merge with another note"><i class="fa-solid fa-code-merge"></i></button>
+          <button class="np-btn" onclick="npExport()" data-tip-below-right="Export note as .md"><i class="fa-solid fa-file-arrow-down"></i></button>
+        </div>
+      </div>
+      <div class="np-find-bar" id="np-find-bar" style="display:none">
+        <div class="search-wrap np-find-search">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" id="np-find-input" placeholder="Find…" oninput="npFindUpdate()">
+        </div>
+        <input type="text" class="np-find-replace-input" id="np-replace-input" placeholder="Replace with…">
+        <button class="np-btn" id="np-regex-btn" onclick="npToggleRegex()" data-tip="Regex mode">.*</button>
+        <button class="np-btn" onclick="npFindPrev()" data-tip="Previous match"><i class="fa-solid fa-chevron-up"></i></button>
+        <button class="np-btn" onclick="npFindNext()" data-tip="Next match"><i class="fa-solid fa-chevron-down"></i></button>
+        <button class="np-btn" onclick="npReplace()">Replace</button>
+        <button class="np-btn" onclick="npReplaceAll()">All</button>
+        <span class="np-find-count" id="np-find-count"></span>
+        <button class="np-btn" onclick="npToggleFind()" data-tip="Close"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="np-format-bar" id="np-format-bar">
+        <div class="np-fmt-group">
+          <button class="np-fmt-btn np-fmt-b" onclick="npBold()" data-tip-right="Bold (Ctrl+B)">B</button>
+          <button class="np-fmt-btn np-fmt-i" onclick="npItalic()" data-tip="Italic (Ctrl+I)">I</button>
+          <button class="np-fmt-btn np-fmt-u" onclick="npUnderline()" data-tip="Underline">U</button>
+          <button class="np-fmt-btn np-fmt-s" onclick="npStrike()" data-tip="Strikethrough">S</button>
+          <button class="np-fmt-btn" onclick="npInlineCode()" data-tip="Inline code"><i class="fa-solid fa-code"></i></button>
+          <button class="np-fmt-btn np-fmt-sup" onclick="npSup()" data-tip="Superscript">x²</button>
+          <button class="np-fmt-btn np-fmt-sub" onclick="npSub()" data-tip="Subscript">x₂</button>
+        </div>
+        <div class="np-fmt-sep"></div>
+        <div class="np-fmt-group">
+          <select class="np-fmt-select" onchange="npHeading(parseInt(this.value));this.value=''" title="Heading">
+            <option value="">Heading</option>
+            <option value="1">H1</option>
+            <option value="2">H2</option>
+            <option value="3">H3</option>
+            <option value="4">H4</option>
+            <option value="5">H5</option>
+            <option value="6">H6</option>
+          </select>
+        </div>
+        <div class="np-fmt-sep"></div>
+        <div class="np-fmt-group">
+          <button class="np-fmt-btn" onclick="npUl()" data-tip="Bullet list"><i class="fa-solid fa-list-ul"></i></button>
+          <button class="np-fmt-btn" onclick="npOl()" data-tip="Numbered list"><i class="fa-solid fa-list-ol"></i></button>
+          <button class="np-fmt-btn" onclick="npChecklist()" data-tip="Checklist"><i class="fa-solid fa-list-check"></i></button>
+          <button class="np-fmt-btn" onclick="npIndent()" data-tip="Indent"><i class="fa-solid fa-indent"></i></button>
+          <button class="np-fmt-btn" onclick="npOutdent()" data-tip="Outdent"><i class="fa-solid fa-outdent"></i></button>
+          <button class="np-fmt-btn" onclick="npQuote()" data-tip="Blockquote"><i class="fa-solid fa-quote-left"></i></button>
+          <button class="np-fmt-btn" onclick="npCodeBlock()" data-tip="Code block"><i class="fa-solid fa-file-code"></i></button>
+          <button class="np-fmt-btn" onclick="npHr()" data-tip="Horizontal divider"><i class="fa-solid fa-minus"></i></button>
+        </div>
+        <div class="np-fmt-sep"></div>
+        <div class="np-fmt-group">
+          <button class="np-fmt-btn np-fmt-color-btn" id="np-color-btn" onclick="npOpenColorPicker('text',this)" data-tip="Text colour"><i class="fa-solid fa-font"></i><span class="np-color-swatch" id="np-color-swatch" style="background:#ffffff"></span></button>
+          <button class="np-fmt-btn np-fmt-color-btn" id="np-hl-btn" onclick="npOpenColorPicker('highlight',this)" data-tip="Highlight colour"><i class="fa-solid fa-highlighter"></i><span class="np-color-swatch" id="np-hl-swatch" style="background:#eab308"></span></button>
+          <select class="np-fmt-select" onchange="npApplySize(this.value);this.value=''" title="Font Size">
+            <option value="">Size</option>
+            <option value="10px">10px</option>
+            <option value="11px">11px</option>
+            <option value="12px">12px</option>
+            <option value="14px">14px</option>
+            <option value="16px">16px</option>
+            <option value="18px">18px</option>
+            <option value="20px">20px</option>
+            <option value="24px">24px</option>
+            <option value="28px">28px</option>
+            <option value="32px">32px</option>
+            <option value="36px">36px</option>
+            <option value="48px">48px</option>
+          </select>
+        </div>
+        <div class="np-fmt-sep"></div>
+        <div class="np-fmt-group">
+          <button class="np-fmt-btn" onclick="npTimestamp()" data-tip="Insert timestamp"><i class="fa-solid fa-clock"></i></button>
+          <button class="np-fmt-btn" onclick="npToggleLinkRow()" data-tip="Insert link"><i class="fa-solid fa-link"></i></button>
+          <button class="np-fmt-btn" onclick="npToggleNoteLinkPicker(this)" data-tip="Link to note"><i class="fa-solid fa-note-sticky"></i></button>
+          <button class="np-fmt-btn" onclick="npToggleSubpoenaLinkPicker(this)" data-tip="Link to subpoena case"><i class="fa-solid fa-magnifying-glass-chart"></i></button>
+          <button class="np-fmt-btn" onclick="npToggleTableBuilder()" data-tip="Insert table"><i class="fa-solid fa-table"></i></button>
+          <button class="np-fmt-btn" onclick="npToggleImgRow()" data-tip="Insert image"><i class="fa-solid fa-image"></i></button>
+        </div>
+      </div>
+      <div class="np-link-row" id="np-link-row" style="display:none">
+        <input type="text" id="np-link-text" class="np-save-input" placeholder="Link text…">
+        <input type="text" id="np-link-url" class="np-save-input" placeholder="URL…">
+        <button class="np-btn" onclick="_npInsertLink()"><i class="fa-solid fa-link"></i> Insert</button>
+        <button class="np-btn" onclick="npToggleLinkRow()">Cancel</button>
+      </div>
+      <div class="np-table-row" id="np-table-row" style="display:none">
+        <label class="np-table-lbl">Rows <input type="number" id="np-table-rows" value="3" min="1" max="20" class="np-num-inp"></label>
+        <label class="np-table-lbl">Cols <input type="number" id="np-table-cols" value="3" min="1" max="10" class="np-num-inp"></label>
+        <button class="np-btn" onclick="npInsertTable()"><i class="fa-solid fa-table"></i> Insert Table</button>
+        <button class="np-btn" onclick="npToggleTableBuilder()">Cancel</button>
+      </div>
+      <div class="np-img-row" id="np-img-row" style="display:none">
+        <input type="text" id="np-img-url" class="np-save-input" placeholder="Paste image URL…">
+        <label class="np-btn" for="np-img-file" title="Upload from file"><i class="fa-solid fa-folder-open"></i> File</label>
+        <input type="file" id="np-img-file" accept="image/*" style="display:none">
+        <input type="text" id="np-img-alt" class="np-img-alt-input" placeholder="Alt text">
+        <button class="np-btn" onclick="_npInsertImage()"><i class="fa-solid fa-image"></i> Insert</button>
+        <button class="np-btn" onclick="npToggleImgRow()">Cancel</button>
+      </div>
+      <div class="np-editor-wrap">
+        <textarea id="np-area" class="np-area" placeholder="Start typing…" spellcheck="false"></textarea>
+        <div id="np-preview" class="np-preview" style="display:none"></div>
+      </div>
+      <div class="np-statusbar">
+        <span id="np-wordcount" onclick="npShowStats()" style="cursor:pointer" title="Click for stats">0 words · 0 chars</span>
+        <button class="np-btn np-scrollsync-btn" id="np-scrollsync-btn" onclick="npToggleScrollSync()" data-tip="Scroll sync" style="display:none;padding:2px 8px;font-size:11px"><i class="fa-solid fa-link"></i></button>
+        <span id="np-saved-indicator"></span>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection
+
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="{{ asset('js/notepad.js') }}"></script>
+@endpush
