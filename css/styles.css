@@ -222,8 +222,8 @@ tbody tr:hover td{background:rgba(255,255,255,.03)}
 .code-card:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.4)}
 .code-card.emergency{border-top-color:var(--red);background:rgba(239,68,68,.06)}
 .code-card.urgent{border-top-color:var(--orange);background:rgba(249,115,22,.06)}
-.code-card.normal{border-top-color:var(--accent)}
-.code-num{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--accent);margin-bottom:2px}
+.code-card.normal{border-top-color:#03c880;background:rgba(3,200,128,.06)}
+.code-num{font-family:var(--mono);font-size:15px;font-weight:700;color:#03c880;margin-bottom:2px}
 .code-card.emergency .code-num{color:var(--red)}
 .code-card.urgent .code-num{color:var(--orange)}
 .code-desc{font-size:11px;color:var(--text2);line-height:1.35}

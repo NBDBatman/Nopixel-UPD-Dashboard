@@ -121,22 +121,7 @@ function renderCodes(){
   const g=document.getElementById('codes-grid');
   g.innerHTML='';
   if(!list.length){g.innerHTML='<div class="code-empty">No codes match your search.</div>';return;}
-  if(codeFilter==='all'&&!q){
-    [{key:'emergency',label:'Emergency',icon:'fa-circle-exclamation'},
-     {key:'urgent',label:'Urgent',icon:'fa-triangle-exclamation'},
-     {key:'normal',label:'Standard Codes',icon:'fa-radio'},
-    ].forEach(({key,label,icon})=>{
-      const items=list.filter(c=>c.prio===key);
-      if(!items.length)return;
-      const h=document.createElement('div');
-      h.className='codes-section-head '+key;
-      h.innerHTML=`<i class="fa-solid ${icon}"></i><span>${label}</span><em>${items.length}</em>`;
-      g.appendChild(h);
-      g.appendChild(_renderCodeGrid(items,q));
-    });
-  }else{
-    g.appendChild(_renderCodeGrid(list,q));
-  }
+  g.appendChild(_renderCodeGrid(list,q));
 }
 
 function setFilter(el,f){
