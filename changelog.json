@@ -270,6 +270,21 @@
       "date": "07/05/26",
       "author": "Barr",
       "change": "Deep links added — BOLOs, notes, and subpoena cases each have a copy-link button that generates a direct URL. Opening the link navigates straight to that item, with the BOLO or quote card highlighted on arrival."
+    },
+    {
+      "date": "08/06/26",
+      "author": "Barr",
+      "change": "10-Codes simplified — Emergency, Urgent, and Standard sections merged into a single list, still colour-coded by priority for quick scanning."
+    },
+    {
+      "date": "08/06/26",
+      "author": "Barr",
+      "change": "10-Codes recoloured — standard codes switched from blue to green, with softened emergency, urgent, and standard card colours for easier reading."
+    },
+    {
+      "date": "08/06/26",
+      "author": "Barr",
+      "change": "Blip Colours card added to Home — quick reference for each department's GPS blip colour, with colour-matched swatches and highlights."
     }
   ]
 }
