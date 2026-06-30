@@ -221,10 +221,19 @@ function renderRoster(){
   const container=document.getElementById('roster-container');
   const countEl=document.getElementById('roster-count');
   if(!container||!rosterLoaded)return;
-  const q=document.getElementById('roster-search').value.toLowerCase().trim();
+  const qRaw=document.getElementById('roster-search').value.trim();
+  const colonMatch=qRaw.match(/^(\w+):\s*(.*)$/);
+  let searchCol=null,q=qRaw.toLowerCase();
+  if(colonMatch){
+    const col=ROSTER_COLS.find(c=>c.key===colonMatch[1].toLowerCase()||c.label.toLowerCase()===colonMatch[1].toLowerCase());
+    if(col){searchCol=col.key;q=colonMatch[2].toLowerCase().trim();}
+  }
   let list=rosterData.filter(row=>{
     for(const[k,v]of Object.entries(rosterFilterState)){if(v&&row[k]!==v)return false;}
-    if(q){if(!Object.values(row).join(' ').toLowerCase().includes(q))return false;}
+    if(q){
+      if(searchCol){if(!(row[searchCol]||'').toLowerCase().includes(q))return false;}
+      else if(!Object.values(row).join(' ').toLowerCase().includes(q))return false;
+    }
     return true;
   });
   if(rosterSort.col){

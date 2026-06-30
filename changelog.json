@@ -1,5 +1,5 @@
 {
-  "contact": "Anything to add? Contact 723 Nathan Barr - @MercuryHQ",
+  "contact": "Anything to add? Contact 523 Nathan Barr - @MercuryHQ",
   "entries": [
     {
       "date": "10/02/26",
@@ -285,6 +285,31 @@
       "date": "08/06/26",
       "author": "Barr",
       "change": "Blip Colours card added to Home — quick reference for each department's GPS blip colour, with colour-matched swatches and highlights."
+    },
+    {
+      "date": "27/06/26",
+      "author": "Barr",
+      "change": "Derek Drives a Plane Decree removed from Case Laws."
+    },
+    {
+      "date": "27/06/26",
+      "author": "Barr",
+      "change": "VAF & Contract template added to Templates."
+    },
+    {
+      "date": "27/06/26",
+      "author": "Barr",
+      "change": "Prescriptions Quick Link updated — now points to the San Andreas Medical Group portal. Password stored as a hover tooltip on the link."
+    },
+    {
+      "date": "27/06/26",
+      "author": "Barr",
+      "change": "Blip colours updated — corrected hex values for LSPD, BCSO, SASM, EMS, Dispatch, and DOC."
+    },
+    {
+      "date": "27/06/26",
+      "author": "Barr",
+      "change": "Roster callsign search added — prefix any search with column:value (e.g. callsign:523) to filter by a specific column."
     }
   ]
 }

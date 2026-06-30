@@ -1,10 +1,11 @@
 const TEMPLATE_FILES=[
   '01-Standard-Report.md','02-Search-Warrant.md','03-Subpoena.md',
   '04-Bail-Conditions.md','05-Criminal-Docket.md','06-DOA.md',
+  '07-VAF.md','08-Contract.md',
 ];
 const TMPL_ICONS=[
   'fa-file-pen','fa-magnifying-glass','fa-database',
-  'fa-handcuffs','fa-gavel','fa-skull',
+  'fa-handcuffs','fa-gavel','fa-skull','fa-file-signature','fa-file-contract',
 ];
 let TMPLS=[];
 
