@@ -310,6 +310,26 @@
       "date": "27/06/26",
       "author": "Barr",
       "change": "Roster callsign search added — prefix any search with column:value (e.g. callsign:523) to filter by a specific column."
+    },
+    {
+      "date": "27/06/26",
+      "author": "Barr",
+      "change": "Callsign updated — Nathan Barr updated from 723 to 523 across credits and changelog."
+    },
+    {
+      "date": "08/07/26",
+      "author": "Barr",
+      "change": "BOLO Board removed from the dashboard entirely."
+    },
+    {
+      "date": "08/07/26",
+      "author": "Barr",
+      "change": "Legal Standards page added — the previous Legal Standards card on the home page contained dummy placeholder data accidentally left in and has been removed. A dedicated Legal Standards page now exists with the correct Reasonable Suspicion, Probable Cause, and Search & Seizure standards sourced from the resource sheet."
+    },
+    {
+      "date": "08/07/26",
+      "author": "Barr",
+      "change": "Home page layout fixed — Reports card now correctly placed as a full-width reference row at the bottom of the home board."
     }
   ]
 }

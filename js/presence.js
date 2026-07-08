@@ -2,8 +2,8 @@ function _esc(s){return(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>
 
 const _OB_PAGE_LABELS={
   index:'Home',codes:'10-Codes',phonetics:'Phonetics',laws:'Case Laws',
-  constitution:'Constitution',jurisdiction:'Map',court:'Court',
-  templates:'Templates',roster:'Roster',bolo:'BOLO',notepad:'Notepad',
+  standards:'Legal Standards',constitution:'Constitution',jurisdiction:'Map',court:'Court',
+  templates:'Templates',roster:'Roster',notepad:'Notepad',
   subpoena:'Subpoena',guesser:'Street Guesser',quiz:'Phonetics Quiz',
   tcquiz:'10-Codes Quiz',ucquiz:'Unit Caps Quiz',clquiz:'Case Law Quiz',
   changelog:'Changelog',credits:'Credits',quotes:'Quote Board'

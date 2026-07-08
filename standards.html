@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UPD Dashboard — BOLO Board</title>
+<title>UPD Dashboard — Legal Standards</title>
 <meta name="theme-color" content="#0f1623">
 <link rel="icon" href="./assets/UPD_Placeholder.webp" type="image/webp">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -21,13 +21,14 @@
   <a href="./codes.html" class="nav-item" data-page="codes"><span class="nav-icon"><i class="fa-solid fa-radio"></i></span>10-Codes</a>
   <a href="./phonetics.html" class="nav-item" data-page="phonetics"><span class="nav-icon"><i class="fa-solid fa-font"></i></span>Phonetic Alphabets</a>
   <a href="./laws.html" class="nav-item" data-page="laws"><span class="nav-icon"><i class="fa-solid fa-scale-balanced"></i></span>Case Laws</a>
+  <a href="./standards.html" class="nav-item" data-page="standards"><span class="nav-icon"><i class="fa-solid fa-list-check"></i></span>Legal Standards</a>
   <a href="./constitution.html" class="nav-item" data-page="constitution"><span class="nav-icon"><i class="fa-solid fa-scroll"></i></span>Constitution</a>
   <a href="./jurisdiction.html" class="nav-item" data-page="jurisdiction"><span class="nav-icon"><i class="fa-solid fa-map"></i></span>Jurisdiction Map</a>
   <a href="./court.html" class="nav-item" data-page="court"><span class="nav-icon"><i class="fa-solid fa-landmark"></i></span>Court</a>
   <a href="./templates.html" class="nav-item" data-page="templates"><span class="nav-icon"><i class="fa-solid fa-file-lines"></i></span>Templates</a>
   <a href="./roster.html" class="nav-item" data-page="roster"><span class="nav-icon"><i class="fa-solid fa-users"></i></span>Roster</a>
   <div class="sb-section">Operations</div>
-  <a href="./bolo.html" class="nav-item" data-page="bolo"><span class="nav-icon"><i class="fa-solid fa-binoculars"></i></span>BOLO Board</a>
+
   <a href="./notepad.html" class="nav-item" data-page="notepad"><span class="nav-icon"><i class="fa-solid fa-note-sticky"></i></span>Notepad</a>
   <a href="./subpoena.html" class="nav-item" data-page="subpoena"><span class="nav-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></span>Subpoena</a>
   <a href="./quotes.html" class="nav-item" data-page="quotes"><span class="nav-icon"><i class="fa-solid fa-quote-left"></i></span>Quote Board</a>
@@ -62,40 +63,53 @@
 </aside>
 <main id="main">
 <div class="page active">
-  <div class="page-header"><h1><i class="fa-solid fa-binoculars"></i> BOLO Board</h1><span class="ph-sub">Be on the lookout</span><span class="ph-storage-notice ph-storage-db"><i class="fa-solid fa-database"></i> BOLOs are logged and stored in the database</span></div>
+  <div class="page-header"><h1><i class="fa-solid fa-list-check"></i> Legal Standards</h1><span class="ph-sub">Search & Evidence Reference</span></div>
   <div class="page-content">
-    <div class="bolo-form" id="bolo-form">
-      <div class="bolo-form-label" id="bolo-form-label"><i class="fa-solid fa-plus"></i> Add BOLO</div>
-      <div class="bolo-form-grid">
-        <input type="text" id="bolo-vehicle" class="bolo-input" placeholder="Vehicle (colour, make, model)">
-        <input type="text" id="bolo-plate" class="bolo-input" placeholder="Plate">
-        <input type="text" id="bolo-suspect" class="bolo-input" placeholder="Suspect description">
-        <select id="bolo-priority" class="bolo-input bolo-select">
-          <option value="high">High Priority</option>
-          <option value="medium">Medium Priority</option>
-          <option value="low">Low Priority</option>
-        </select>
-      </div>
-      <input type="text" id="bolo-owner" class="bolo-input" placeholder="Registered owner" style="margin-bottom:8px">
-      <div class="bolo-form-row">
-        <input type="text" id="bolo-reason" class="bolo-input" placeholder="Reason / offence — press Enter to add">
-        <button class="bolo-add-btn" id="bolo-add-btn" onclick="boloAdd()"><i class="fa-solid fa-plus"></i> Add</button>
+    <div class="std-section">
+      <div class="std-section-title"><i class="fa-solid fa-scale-balanced"></i> Reasonable Suspicion &amp; Probable Cause</div>
+      <div class="std-grid">
+        <div class="std-card">
+          <div class="std-card-head"><i class="fa-solid fa-circle-question"></i> Reasonable Suspicion</div>
+          <p class="std-body">A reasonable presumption that a crime has been, is being, or will be committed. It is a reasonable belief based on facts or circumstances and is informed by a LEO's training and experience. Reasonable suspicion is seen as more than a guess or a hunch but less than probable cause. Having reasonable suspicion is grounds for detainment but not search and seizure.</p>
+        </div>
+        <div class="std-card">
+          <div class="std-card-head"><i class="fa-solid fa-gavel"></i> Probable Cause</div>
+          <p class="std-body">The logical belief, supported by facts and circumstances, that a crime has been, is being, or will be committed. Having probable cause is grounds for arrest and/or search and seizure.</p>
+        </div>
       </div>
     </div>
-    <div class="bolo-board-bar">
-      <div class="bolo-tabs">
-        <button class="bolo-tab active" data-f="active" onclick="boloSetFilter('active',this)">Active</button>
-        <button class="bolo-tab" data-f="resolved" onclick="boloSetFilter('resolved',this)">Resolved</button>
-        <button class="bolo-tab" data-f="all" onclick="boloSetFilter('all',this)">All</button>
-      </div>
-      <div class="bolo-bar-right">
-        <span class="bolo-count" id="bolo-count"></span>
-        <button class="bolo-io-btn" onclick="boloImport()"><i class="fa-solid fa-file-import"></i> Import</button>
-        <button class="bolo-io-btn" onclick="boloExport()"><i class="fa-solid fa-file-export"></i> Export</button>
-        <button class="bolo-clear-btn" id="bolo-clear-btn" onclick="boloClearResolved()" style="display:none"><i class="fa-solid fa-broom"></i> Clear Resolved</button>
+    <div class="std-section">
+      <div class="std-section-title"><i class="fa-solid fa-magnifying-glass"></i> Search &amp; Seizure</div>
+      <div class="std-grid">
+        <div class="std-card">
+          <div class="std-card-head"><i class="fa-solid fa-person"></i> Person Searches</div>
+          <p class="std-body">LEOs may search individuals under the following conditions:</p>
+          <ul class="std-list">
+            <li>Consent has been given by the individual</li>
+            <li>Probable cause to conduct a search</li>
+          </ul>
+        </div>
+        <div class="std-card">
+          <div class="std-card-head"><i class="fa-solid fa-car"></i> Vehicle Searches</div>
+          <p class="std-body">LEOs may search vehicles under the following conditions:</p>
+          <ul class="std-list">
+            <li>Consent has been given by the owner</li>
+            <li>There is probable cause to believe that there is evidence of a crime in the vehicle</li>
+            <li>An arrest has been made and the search is related to the arrest (e.g. search for illegal drugs)</li>
+            <li>The vehicle is being legally impounded</li>
+          </ul>
+        </div>
+        <div class="std-card std-card-full">
+          <div class="std-card-head"><i class="fa-solid fa-house"></i> Property Searches</div>
+          <p class="std-body">LEOs may search the property of an individual under the following conditions:</p>
+          <ul class="std-list">
+            <li>Consent has been given by the owner</li>
+            <li>A search warrant is signed by a Judge</li>
+            <li>Absent probable cause with exigency, searches of real and private property will require a duly issued and executed Search Warrant. Exigent Circumstance shall be defined via a claim of a necessary intervention for emergency medical aid, or a claim of necessary entry to prevent serious physical harm to a citizen/person, or a claim of articulable probable cause that evidence inside the property is at risk of destruction.</li>
+          </ul>
+        </div>
       </div>
     </div>
-    <div id="bolo-list"></div>
   </div>
 </div>
 </main>
@@ -104,8 +118,6 @@
 <script src="./js/auth.js"></script>
 <script src="./js/discord.js"></script>
 <script src="./js/nav.js"></script>
-<script src="./js/utils.js"></script>
-<script src="./js/bolo.js"></script>
 <script src="./js/presence.js"></script>
 <script src="./js/theme.js"></script>
 </body>
