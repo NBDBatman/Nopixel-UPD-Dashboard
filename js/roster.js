@@ -6,9 +6,9 @@ const ROSTER_COLS=[
   {key:'rank',     label:'Rank',    idx:7,  filter:true,  show:true},
   {key:'status',   label:'Status',  idx:19, filter:true,  show:true},
   {key:'division', label:'Dept',    idx:-1, filter:true,  show:true},
-  {key:'shift',    label:'Shift',   idx:21, filter:true,  show:true},
-  {key:'discord',  label:'Discord', idx:22, filter:false, show:true},
-  {key:'joined',   label:'Joined',  idx:24, filter:false, show:true},
+  {key:'shift',    label:'Shift',   idx:20, filter:true,  show:true},
+  {key:'discord',  label:'Discord', idx:21, filter:false, show:true},
+  {key:'joined',   label:'Joined',  idx:23, filter:false, show:true},
 ];
 let rosterData=[],rosterFilterState={},rosterSort={col:'',dir:1},rosterLoaded=false;
 const ROSTER_FILTER_ORDER={
@@ -76,9 +76,10 @@ function getRosterDateSortValueFromString(value){
 }
 
 function getRosterDivision(raw,currentDept){
-  const source=`${normalizeRosterValue(raw)} ${normalizeRosterValue(currentDept)}`.toLowerCase();
-  if(source.includes('blaine')||source.includes('bcso'))return'BCSO';
-  if(source.includes('ocean drive')||source.includes('odpd'))return'ODPD';
+  const deptVal=normalizeRosterValue(raw).toLowerCase();
+  if(deptVal==='odpd'||deptVal.includes('ocean drive'))return'ODPD';
+  const source=`${deptVal} ${normalizeRosterValue(currentDept).toLowerCase()}`;
+  if(source.includes('blaine')||source.includes('bcso')||deptVal==='c')return'BCSO';
   if(source.includes('los santos')||source.includes('lspd'))return'LSPD';
   return'';
 }
@@ -139,8 +140,8 @@ async function loadRoster(){
     for(const [rowIdx,cells] of rows.entries()){
       const getVal=i=>normalizeRosterValue(cells[i]||'');
       const id=getVal(2),name=getVal(3),callsign=getVal(4),deptValue=getVal(5);
-      const suffix=getVal(6),rank=getVal(7),status=getVal(19),joinedRaw=getVal(24);
-      const discord=getVal(22);
+      const suffix=getVal(6),rank=getVal(7),status=getVal(19),joinedRaw=getVal(23);
+      const discord=getVal(21);
       if(id&&!name&&!callsign&&!rank){
         currentDept=id;
         if(id.toLowerCase().includes(STOP_SECTION))break;
